@@ -45,3 +45,10 @@ Table metodo_gastos {
     id int [pk, increment]
     descripcion varchar(150)
 }
+
+Table atributos {
+    id int [pk, increment]
+    codigo varchar(100)
+    descripcion varchar(50)
+    estado boolean
+}

@@ -42,7 +42,17 @@
                             <td class="py-2 text-blue-800 font-medium">{{ $moneda->codigo }}</td>
                             <td class="py-2 text-blue-800 font-medium">{{ $moneda->descripcion }}</td>
                             <td class="py-2 text-blue-800 font-medium">{{ $moneda->simbolo }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $moneda->estado }}</td>
+                            <td class="py-2">
+                                @if($moneda->estado === 'Si')
+                                    <span class="text-green-600 font-semibold">
+                                        Si
+                                    </span>
+                                @else
+                                    <span class="text-red-600 font-semibold">
+                                        No
+                                    </span>
+                                @endif
+                            </td>
                             <td class="py-2">
                                 <div class="flex justify-end gap-2 whitespace-nowrap">
                                     <button type="button"
