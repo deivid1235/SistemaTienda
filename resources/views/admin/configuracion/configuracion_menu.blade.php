@@ -49,8 +49,8 @@
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
                 <li><a href="{{ route('configuracion.atributo') }}" class="text-gray-800 text-sm hover:underline">Listado de Atributos</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Listado de tipos de detracciones</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Listado de unidades</a></li>
+                <li><a href="{{ route('configuracion.detraccion') }}" class="text-gray-800 text-sm hover:underline">Listado de tipos de detracciones</a></li>
+                <li><a href="{{ route('configuracion.unidad') }}" class="text-gray-800 text-sm hover:underline">Listado de unidades</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Tipos de motivos de transferencias</a></li>
             </ul>
         </div>

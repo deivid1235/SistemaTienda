@@ -55,5 +55,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/atributo', [App\Http\Controllers\AtributoController::class, 'store'])->name('configuracion.atributo.store')->middleware('auth');
     Route::put('/configuracion/atributo/{atributo}', [App\Http\Controllers\AtributoController::class, 'update'])->name('configuracion.atributo.update')->middleware('auth');
     Route::delete('/configuracion/atributo/{atributo}', [App\Http\Controllers\AtributoController::class, 'destroy'])->name('configuracion.atributo.destroy')->middleware('auth');
+    //Lista de detracciones
+    Route::get('/configuracion/detraccion', [App\Http\Controllers\DetraccionController::class, 'index'])->name('configuracion.detraccion')->middleware('auth');
+    Route::post('/configuracion/detraccion', [App\Http\Controllers\DetraccionController::class, 'store'])->name('configuracion.detraccion.store')->middleware('auth');
+    Route::put('/configuracion/detraccion/{detraccion}', [App\Http\Controllers\DetraccionController::class, 'update'])->name('configuracion.detraccion.update')->middleware('auth');
+    Route::delete('/configuracion/detraccion/{detraccion}', [App\Http\Controllers\DetraccionController::class, 'destroy'])->name('configuracion.detraccion.destroy')->middleware('auth');
+    //Lista de unidades
+    Route::get('/configuracion/unidad', [App\Http\Controllers\UnidadController::class, 'index'])->name('configuracion.unidad')->middleware('auth');
+    Route::post('/configuracion/unidad', [App\Http\Controllers\UnidadController::class, 'store'])->name('configuracion.unidad.store')->middleware('auth');
+    Route::put('/configuracion/unidad/{unidad}', [App\Http\Controllers\UnidadController::class, 'update'])->name('configuracion.unidad.update')->middleware('auth');
+    Route::delete('/configuracion/unidad/{unidad}', [App\Http\Controllers\UnidadController::class, 'destroy'])->name('configuracion.unidad.destroy')->middleware('auth');
 
 });

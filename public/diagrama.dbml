@@ -52,3 +52,20 @@ Table atributos {
     descripcion varchar(50)
     estado boolean
 }
+
+Table detraccions{
+    id int [pk, increment]
+    tipo_operacion varchar(10)
+    codigo varchar(10)
+    descripcion varchar(150)
+    porcentaje decimal(5,2)
+    activo boolean [default: true]
+}
+
+Table unidades {
+    id int [pk, increment]
+    codigo varchar(10)
+    descripcion varchar(100)
+    simbolo varchar(10)
+    estado enum('Si', 'No') [default: 'Si']
+}
