@@ -69,3 +69,22 @@ Table unidades {
     simbolo varchar(10)
     estado enum('Si', 'No') [default: 'Si']
 }
+
+Table traslados {
+    id int [pk, increment]
+    codigo varchar(20)
+    descripcion varchar(100)
+    descuenta_stock enum('SI', 'NO') [default: 'NO']
+}
+
+Table logins {
+    id int [pk, increment]
+    imagen varchar(255) [null]
+    posicion_formulario enum('IZQUIERDA', 'DERECHA') [default: 'DERECHA']
+    mostrar_logo boolean [default: true]
+    posicion_logo enum('SUPERIOR_IZQUIERDA', 'SUPERIOR_CENTRO', 'SUPERIOR_DERECHA') [default: 'SUPERIOR_IZQUIERDA']
+    mostrar_facebook boolean [default: false]
+    mostrar_twitter boolean [default: false]
+    mostrar_instagram boolean [default: false]
+    mostrar_linkedin boolean [default: false]
+}

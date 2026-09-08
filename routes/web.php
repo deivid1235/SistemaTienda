@@ -65,5 +65,40 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/unidad', [App\Http\Controllers\UnidadController::class, 'store'])->name('configuracion.unidad.store')->middleware('auth');
     Route::put('/configuracion/unidad/{unidad}', [App\Http\Controllers\UnidadController::class, 'update'])->name('configuracion.unidad.update')->middleware('auth');
     Route::delete('/configuracion/unidad/{unidad}', [App\Http\Controllers\UnidadController::class, 'destroy'])->name('configuracion.unidad.destroy')->middleware('auth');
+    //Lista de traslados
+    Route::get('/configuracion/traslado', [App\Http\Controllers\TrasladoController::class, 'index'])->name('configuracion.traslado')->middleware('auth');
+    Route::post('/configuracion/traslado', [App\Http\Controllers\TrasladoController::class, 'store'])->name('configuracion.traslado.store')->middleware('auth');
+    Route::put('/configuracion/traslado/{traslado}', [App\Http\Controllers\TrasladoController::class, 'update'])->name('configuracion.traslado.update')->middleware('auth');
+    Route::delete('/configuracion/traslado/{traslado}', [App\Http\Controllers\TrasladoController::class, 'destroy'])->name('configuracion.traslado.destroy')->middleware('auth');
+    // ==========================================
+// CONFIGURACIÓN DEL LOGIN
+// ==========================================
+
+// Lista de login
+Route::get('/configuracion/login', [App\Http\Controllers\LoginController::class, 'index'])
+    ->name('configuracion.login')
+    ->middleware('auth');
+
+// Actualizar configuración del login
+Route::put('/configuracion/login', [App\Http\Controllers\LoginController::class, 'update'])
+    ->name('configuracion.login.update')
+    ->middleware('auth');
+
+
+// ==========================================
+// IMÁGENES DEL LOGIN
+// ==========================================
+
+Route::post('/configuracion/login/imagenes', [App\Http\Controllers\LoginImagenController::class, 'store'])
+    ->name('configuracion.login.imagenes.store')
+    ->middleware('auth');
+
+Route::put('/configuracion/login/imagenes/{loginImagen}', [App\Http\Controllers\LoginImagenController::class, 'update'])
+    ->name('configuracion.login.imagenes.update')
+    ->middleware('auth');
+
+Route::delete('/configuracion/login/imagenes/{loginImagen}', [App\Http\Controllers\LoginImagenController::class, 'destroy'])
+    ->name('configuracion.login.imagenes.destroy')
+    ->middleware('auth');
 
 });

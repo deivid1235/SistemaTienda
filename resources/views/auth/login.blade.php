@@ -84,84 +84,53 @@
 <div class="login-container">
 
     <div class="login-card">
-
         <div class="text-center">
-
-            <img src="{{ asset('logo/logo.png') }}"
-                 alt="Logo"
-                 class="logo">
-
+            <img src="{{ asset('image/logo.jpeg') }}" alt="Logo" class="logo">
             <div class="login-title">
                 SistemaTienda
             </div>
-
             <div class="login-subtitle">
                 Inicia sesión para continuar
             </div>
-
         </div>
-
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
-
         @if($errors->any())
             <div class="alert alert-danger">
                 {{ $errors->first() }}
             </div>
         @endif
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <div class="mb-3">
                 <label class="form-label">
                     Correo electrónico
                 </label>
 
-                <input type="email"
-                       name="email"
-                       class="form-control"
-                       value="{{ old('email') }}"
-                       placeholder="Ingrese su correo"
-                       required
-                       autofocus>
+                <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Ingrese su correo" required autofocus>
             </div>
-
             <div class="mb-3">
                 <label class="form-label">
                     Contraseña
                 </label>
-
-                <input type="password"
-                       name="password"
-                       class="form-control"
-                       placeholder="Ingrese su contraseña"
-                       required>
+                <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña" required>
             </div>
 
             <div class="form-check mb-3">
-                <input class="form-check-input"
-                       type="checkbox"
-                       name="remember"
-                       id="remember">
-
+                <input class="form-check-input" type="checkbox" name="remember" id="remember">
                 <label class="form-check-label" for="remember">
                     Recordarme
                 </label>
             </div>
-
             <button type="submit"
                     class="btn btn-login w-100">
                 Iniciar sesión
             </button>
-
         </form>
-
     </div>
-
 </div>
 
 </body>
