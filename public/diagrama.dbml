@@ -79,7 +79,6 @@ Table traslados {
 
 Table logins {
     id int [pk, increment]
-    imagen varchar(255) [null]
     posicion_formulario enum('IZQUIERDA', 'DERECHA') [default: 'DERECHA']
     mostrar_logo boolean [default: true]
     posicion_logo enum('SUPERIOR_IZQUIERDA', 'SUPERIOR_CENTRO', 'SUPERIOR_DERECHA') [default: 'SUPERIOR_IZQUIERDA']
@@ -87,4 +86,61 @@ Table logins {
     mostrar_twitter boolean [default: false]
     mostrar_instagram boolean [default: false]
     mostrar_linkedin boolean [default: false]
+}
+
+Table login_imagens{
+    id int [pk, increment]
+    imagen varchar(255)
+    estado boolean [default: true]
+}
+
+
+
+Table companias{
+    id int [pk, increment]
+    // Datos de la empresa
+    ruc varchar(11)
+    nombre varchar(255)
+    nombre_comercial varchar(255)
+    // Personalización
+    logo varchar(255)
+    cuenta_detraccion varchar(255)
+    rubrica varchar(255)
+    titulo_web varchar(255)
+    logo_app varchar(255)
+    // Entorno del sistema
+    soap_tipo enum('demo','produccion')
+    soap_envio enum('sunat','ose','osesendfact')
+    soap_usuario varchar(255)
+    soap_password varchar(255)
+
+    // Consulta integrada de CPE
+    cpe_client_id varchar(255)
+    cpe_client_secret varchar(255)
+
+    // SIRE
+    sire_client_id varchar(255)
+    sire_client_secret varchar(255)
+    sire_usuario varchar(255)
+    sire_password varchar(255)
+
+    // QR API
+    qr_api boolean [default: false]
+
+    // Certificado QZ Tray
+    digital_certificate_qztray varchar(255)
+    private_certificate_qztray varchar(255)
+
+    // Servicio PSE
+    pse_habilitado boolean [default: false]
+    pse_proveedor_id int
+    pse_usuario varchar(255)
+    pse_password varchar(255)
+
+    // Configuración de pagos
+    yape_habilitado boolean [default: false]
+    mercado_pago_habilitado boolean [default: false]
+
+    created_at timestamp
+    updated_at timestamp
 }

@@ -31,7 +31,7 @@
         </div>
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Empresa</a></li>
+                <li><a href="{{ route('configuracion.compania') }}" class="text-gray-800 text-sm hover:underline">Empresa</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Giro de negocio</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Estilos y temas</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Avanzado</a></li>
