@@ -77,8 +77,15 @@ Table traslados {
     descuenta_stock enum('SI', 'NO') [default: 'NO']
 }
 
+Table login_imagens{
+    id int [pk, increment]
+    imagen varchar(255)
+    estado boolean [default: true]
+}
+
 Table logins {
     id int [pk, increment]
+    compania_id int [not null, ref: > companias.id]
     posicion_formulario enum('IZQUIERDA', 'DERECHA') [default: 'DERECHA']
     mostrar_logo boolean [default: true]
     posicion_logo enum('SUPERIOR_IZQUIERDA', 'SUPERIOR_CENTRO', 'SUPERIOR_DERECHA') [default: 'SUPERIOR_IZQUIERDA']
@@ -87,14 +94,6 @@ Table logins {
     mostrar_instagram boolean [default: false]
     mostrar_linkedin boolean [default: false]
 }
-
-Table login_imagens{
-    id int [pk, increment]
-    imagen varchar(255)
-    estado boolean [default: true]
-}
-
-
 
 Table companias{
     id int [pk, increment]

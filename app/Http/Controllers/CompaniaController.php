@@ -117,7 +117,7 @@ class CompaniaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int  $id)
     {
         $compania = Compania::findOrFail($id);
 
@@ -226,5 +226,13 @@ class CompaniaController extends Controller
     public function destroy(Compania $compania)
     {
         //
+    }
+
+    public function eliminarLogo(int  $id)
+    {
+        $compania = Compania::findOrFail($id);
+        $compania->logo = null;
+        $compania->save();
+        return redirect()->back()->with('success', 'Logo eliminado correctamente.');
     }
 }

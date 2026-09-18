@@ -3,15 +3,28 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Compania;
+use App\Models\Login;
+use App\Models\LoginImagen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function showLoginForm()
-    {
-        return view('auth.login');
-    }
+{
+    $login = Login::with('compania')->first();
+
+    $compania = $login?->compania ?? Compania::find(1);
+
+    $imagenes = LoginImagen::where('estado', true)->get();
+
+    return view('auth.login', compact(
+        'login',
+        'compania',
+        'imagenes'
+    ));
+}
 
     public function login(Request $request)
     {
@@ -40,4 +53,6 @@ class LoginController extends Controller
 
         return redirect()->route('login');
     }
+
+   
 }

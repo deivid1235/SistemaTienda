@@ -1,6 +1,5 @@
 @extends('layouts.admin.app')
 @section('title', 'Compañía o Empresa')
-
 @section('js')
 @endsection
 
@@ -52,10 +51,12 @@
                                         <input type="text" readonly value="{{ $compania->logo ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
                                         <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
                                             <i class="fa-solid fa-cloud-arrow-up"></i>
-                                            <input type="file" name="logo" class="hidden">
+                                            <input type="file" name="logo" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'" >
                                         </label>
                                     </div>
-                                    <button type="button" class="border border-red-200 bg-red-50 text-red-500 hover:bg-red-100 px-3 py-2 rounded-md flex items-center justify-center transition">
+                                    <button 
+                                        type="button" onclick="confirmarEliminar('{{ $compania ? route('configuracion.compania.eliminar-logo', $compania->id) : '' }}')"
+                                        class="border border-red-200 bg-red-50 text-red-500 hover:bg-red-100 px-3 py-2 rounded-md flex items-center justify-center transition">
                                         <i class="fa-solid fa-trash-can text-xs"></i>
                                     </button>
                                 </div>
@@ -67,7 +68,7 @@
                                     <input type="text" readonly value="{{ $compania->logo_oscuro ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
                                     <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                                        <input type="file" name="logo_oscuro" class="hidden">
+                                        <input type="file" name="logo_oscuro" class="hidden"  onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'" >
                                     </label>
                                 </div>
                                 <p class="text-[11px] text-slate-400 mt-1">Se recomienda resoluciones 700x300</p>
@@ -82,7 +83,7 @@
                                     <input type="text" readonly value="{{ $compania->rubrica ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
                                     <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                                        <input type="file" name="rubrica" class="hidden">
+                                        <input type="file" name="rubrica" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                     </label>
                                 </div>
                                 <p class="text-[11px] text-slate-400 mt-1">Se recomienda resoluciones 700x300</p>
@@ -112,7 +113,7 @@
                                             <input type="text" readonly value="{{ $compania->logo_app ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
                                             <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
                                                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                                                <input type="file" name="logo_app" class="hidden">
+                                                <input type="file" name="logo_app" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                             </label>
                                         </div>
                                         <p class="text-[11px] text-slate-400 mt-1">Se recomienda color blanco</p>
@@ -144,7 +145,7 @@
                     </button>
                 </div>
             </div>
-
+            
            <!-- TARJETA 2: Consulta integrada de CPE - Validador de documentos -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
@@ -257,7 +258,6 @@
                 </div>
             </div>
 
-
            <!-- TARJETA 5: Envío de mensajes a través de QR Api -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
@@ -292,7 +292,6 @@
                     </button>
                 </div>
             </div>
-
 
             <!-- TARJETA 6: Configuración de pagos -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
@@ -365,7 +364,7 @@
                                     <label 
                                         class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                                        <input  type="file"  name="digital_certificate_qztray"  class="hidden">
+                                        <input  type="file"  name="digital_certificate_qztray"  class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                     </label>
                                 </div>
                             </div>
@@ -381,7 +380,7 @@
                                     <label  class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" 
                                         style="background-color: #0407e2;">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                                        <input  type="file" name="private_certificate_qztray" class="hidden">
+                                        <input  type="file" name="private_certificate_qztray" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                     </label>
                                 </div>
                             </div>
@@ -397,38 +396,38 @@
             </div>
 
             <!-- TARJETA 8: Servicio PSE -->
-<div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
-    <div>
-        <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
-            <h1 class="flex items-center gap-2 text-base font-semibold text-white">
-                <i class="fa-solid fa-server"></i>
-                Servicio PSE
-                <i class="fa-solid fa-circle-info text-xs ml-1"></i>
-            </h1>
-        </div>
+            <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                        <h1 class="flex items-center gap-2 text-base font-semibold text-white">
+                            <i class="fa-solid fa-server"></i>
+                            Servicio PSE
+                            <i class="fa-solid fa-circle-info text-xs ml-1"></i>
+                        </h1>
+                    </div>
 
-        <div class="p-6 space-y-6">
-            <!-- Habilitar Switch -->
-            <div class="space-y-2">
-                <label class="block text-xs font-semibold text-slate-600 uppercase">Habilitar</label>
-                <div class="flex items-center gap-3">
-                    <span class="text-xs font-semibold text-slate-600">No</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" name="servicio_pse_habilitado" value="1" class="sr-only peer" {{ old('servicio_pse_habilitado', $compania->pse_habilitado ?? false) ? 'checked' : '' }} >
-                        <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0407e2]"></div>
-                    </label>
-                    <span class="text-xs font-semibold text-slate-600">Sí</span>
+                    <div class="p-6 space-y-6">
+                        <!-- Habilitar Switch -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-slate-600 uppercase">Habilitar</label>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-semibold text-slate-600">No</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" name="servicio_pse_habilitado" value="1" class="sr-only peer" {{ old('servicio_pse_habilitado', $compania->pse_habilitado ?? false) ? 'checked' : '' }} >
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0407e2]"></div>
+                                </label>
+                                <span class="text-xs font-semibold text-slate-600">Sí</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Botón Guardar -->
+                <div class="p-6 pt-0 flex justify-end">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                        Guardar
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Botón Guardar -->
-    <div class="p-6 pt-0 flex justify-end">
-        <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
-            Guardar
-        </button>
-    </div>
-</div>
 
         </div>
     </form>

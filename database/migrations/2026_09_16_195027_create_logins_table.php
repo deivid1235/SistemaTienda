@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('logins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('compania_id')->constrained('companias')->onDelete('cascade');
             $table->enum('posicion_formulario', ['IZQUIERDA', 'DERECHA'])->default('DERECHA');
             $table->boolean('mostrar_logo')->default(true);
             $table->enum('posicion_logo', ['SUPERIOR_IZQUIERDA','SUPERIOR_CENTRO','SUPERIOR_DERECHA'])->default('SUPERIOR_IZQUIERDA');

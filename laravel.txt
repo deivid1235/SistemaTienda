@@ -119,3 +119,6 @@ resources/views/
             'password' => Hash::make('12345678'),
 
         ])
+
+
+npm run start  -->> Ejecutamos  con este 

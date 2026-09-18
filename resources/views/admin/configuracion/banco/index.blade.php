@@ -101,8 +101,6 @@
                                     </div>
 
                                 </div>
-
-
                                 <button type="button"
                                     onclick="confirmarEliminar('{{ route('configuracion.banco.destroy', $banco->id) }}')"
                                     class="px-4 py-1.5 rounded-md text-white text-xs font-semibold"
