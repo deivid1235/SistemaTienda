@@ -13,7 +13,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('dashboard');
-    Route::get('/configuracion/menu', function () { return view('admin.configuracion.configuracion_menu');})->middleware('auth')->name('configuracion.menu');
+    Route::get('/configuracion/menu', function () {
+    $estilos = \App\Models\Estilo::all();$estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
+    return view('admin.configuracion.configuracion_menu', compact('estilos', 'estiloActivo'));})->middleware('auth')->name('configuracion.menu');
     //Ruta general de configuraciones
     Route::view('/configuracion', 'admin.configuracion.configuracion_menu')->name('configuracion.index');
     //Lista de bancos
@@ -84,9 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/configuracion/login/imagenes/{loginImagen}', [App\Http\Controllers\LoginImagenController::class, 'update'])->name('configuracion.login.imagenes.update')->middleware('auth');
     Route::delete('/configuracion/login/imagenes/{loginImagen}', [App\Http\Controllers\LoginImagenController::class, 'destroy'])->name('configuracion.login.imagenes.destroy')->middleware('auth');
     //Estilos
-    Route::get('/configuracion', function () {
-        $estilos = \App\Models\Estilo::all();
-        $estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
+    Route::get('/configuracion', function () {$estilos = \App\Models\Estilo::all();$estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
     return view('admin.configuracion.configuracion_menu', compact('estilos', 'estiloActivo'));})->name('configuracion')->middleware('auth');
     Route::get('/configuracion/estilo', [App\Http\Controllers\EstiloController::class, 'index'])->name('configuracion.estilo')->middleware('auth');
     Route::post('/configuracion/estilo', [App\Http\Controllers\EstiloController::class, 'store'])->name('configuracion.estilo.store')->middleware('auth');

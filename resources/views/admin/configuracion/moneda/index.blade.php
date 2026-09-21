@@ -39,9 +39,9 @@
                     @forelse($monedas as $index => $moneda)
                         <tr class="border-b border-slate-100">
                             <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $moneda->codigo }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $moneda->descripcion }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $moneda->simbolo }}</td>
+                            <td class="py-2 text-black font-medium">{{ $moneda->codigo }}</td>
+                            <td class="py-2 text-black font-medium">{{ $moneda->descripcion }}</td>
+                            <td class="py-2 text-black font-medium">{{ $moneda->simbolo }}</td>
                             <td class="py-2">
                                 @if($moneda->estado === 'Si')
                                     <span class="text-green-600 font-semibold">
@@ -87,7 +87,7 @@
                                                 @method('PUT')
                                                 <div class="flex flex-col md:flex-row gap-4">
                                                     <div class="flex-1">
-                                                        <label for="codigo{{ $moneda->id }}"class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="codigo{{ $moneda->id }}"class="block text-sm font-medium text-black mb-1">
                                                             Código
                                                         </label>
                                                         <input type="text"id="codigo{{ $moneda->id }}" name="codigo" value="{{ $moneda->codigo }}"
@@ -95,7 +95,7 @@
                                                     </div>
                                                     {{-- Descripción --}}
                                                     <div class="flex-1">
-                                                        <label for="descripcion{{ $moneda->id }}"class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="descripcion{{ $moneda->id }}"class="block text-sm font-medium text-black mb-1">
                                                             Descripción
                                                         </label>
                                                         <input type="text"id="descripcion{{ $moneda->id }}" name="descripcion" value="{{ $moneda->descripcion }}"
@@ -103,7 +103,7 @@
                                                     </div>
                                                     {{-- Símbolo --}}
                                                     <div class="flex-1">
-                                                        <label for="simbolo{{ $moneda->id }}"class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="simbolo{{ $moneda->id }}"class="block text-sm font-medium text-black mb-1">
                                                             Símbolo
                                                         </label>
                                                         <input type="text" id="simbolo{{ $moneda->id }}" name="simbolo" value="{{ $moneda->simbolo }}"
@@ -111,7 +111,7 @@
                                                     </div>
                                                     {{-- Estado --}}
                                                     <div class="flex-1">
-                                                        <label class="block text-sm font-medium text-blue-700 mb-2">
+                                                        <label class="block text-sm font-medium text-black mb-2">
                                                             Activo
                                                         </label>
                                                         <label class="inline-flex items-center cursor-pointer gap-3">
@@ -126,9 +126,9 @@
                                                                 after:absolute after:top-[2px] after:left-[2px]
                                                                 after:bg-white after:border-slate-300 after:border
                                                                 after:rounded-full after:h-5 after:w-5
-                                                                after:transition-all peer-checked:bg-[#0407e2]">
+                                                                after:transition-all peer-checked:bg-[#269ad5]">
                                                             </div>
-                                                            <span class="text-sm font-medium text-[#0407e2]">
+                                                            <span class="text-sm font-medium text-[#000000]">
                                                                 Sí
                                                             </span>
                                                         </label>
@@ -141,8 +141,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                    style="background-color: var(--active-pink);" >
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -171,7 +171,8 @@
 
         <button type="button"
             onclick="document.getElementById('modalNuevoMoneda').classList.remove('hidden')"
-            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+             style="background-color: var(--active-pink);" >
             <i class="fa-solid fa-circle-plus"></i>
             Nuevo
         </button>
@@ -202,7 +203,7 @@
                 @csrf
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="flex-1">
-                        <label for="codigo" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="codigo" class="block text-sm font-medium text-black mb-1">
                             Código
                         </label>
                         <input type="text" id="codigo" name="codigo"
@@ -210,7 +211,7 @@
                     </div>
                     {{-- Descripción --}}
                     <div class="flex-1">
-                        <label for="descripcion" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="descripcion" class="block text-sm font-medium text-black mb-1">
                             Descripción
                         </label>
                         <input type="text" id="descripcion" name="descripcion"
@@ -219,7 +220,7 @@
                     {{-- Símbolo --}}
                     <div class="flex-1">
                         <label for="simbolo"
-                            class="block text-sm font-medium text-blue-700 mb-1">
+                            class="block text-sm font-medium text-black mb-1">
                             Símbolo
                         </label>
                         <input type="text" id="simbolo" name="simbolo"
@@ -227,7 +228,7 @@
                     </div>
                     {{-- Estado --}}
                     <div class="flex-1">
-                        <label class="block text-sm font-medium text-blue-700 mb-2">
+                        <label class="block text-sm font-medium text-black mb-2">
                             Activo
                         </label>
                         <label class="inline-flex items-center cursor-pointer gap-3">
@@ -242,9 +243,9 @@
                                 after:absolute after:top-[2px] after:left-[2px]
                                 after:bg-white after:border-slate-300 after:border
                                 after:rounded-full after:h-5 after:w-5
-                                after:transition-all peer-checked:bg-[#0407e2]">
+                                after:transition-all peer-checked:bg-[#269ad5]">
                             </div>
-                            <span class="text-sm font-medium text-[#0407e2]">
+                            <span class="text-sm font-medium text-[#000000]">
                                 Sí
                             </span>
                         </label>
@@ -258,8 +259,8 @@
                         Cancelar
                     </button>
 
-                    <button type="submit"
-                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                     style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>

@@ -43,7 +43,7 @@
                     @forelse($metodosGasto as $index => $metodo)
                         <tr class="border-b border-slate-100">
                             <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $metodo->descripcion }}</td>
+                            <td class="py-2 text-black font-medium">{{ $metodo->descripcion }}</td>
                             <td class="py-2">
                                 <div class="flex justify-end gap-2">
                                     <button type="button"
@@ -77,7 +77,7 @@
                                                 @method('PUT')
                                                 {{-- Descripción --}}
                                                 <label for="descripcion{{ $metodo->id }}"
-                                                    class="block text-sm font-medium text-blue-700 mb-1">
+                                                    class="block text-sm font-medium text-black mb-1">
                                                     Descripción
                                                 </label>
                                                 <input type="text" id="descripcion{{ $metodo->id }}" name="descripcion" value="{{ $metodo->descripcion }}" maxlength="150"
@@ -88,8 +88,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                    style="background-color: var(--active-pink);">
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -120,7 +120,8 @@
 
         <button type="button"
             onclick="document.getElementById('modalNuevoMetodoGasto').classList.remove('hidden')"
-            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+             style="background-color: var(--active-pink);" >
             <i class="fa-solid fa-circle-plus"></i>
             Nuevo
         </button>
@@ -146,7 +147,7 @@
                 method="POST">
                 @csrf
                 {{-- Descripción --}}
-                <label for="descripcion" class="block text-sm font-medium text-blue-700 mb-1">
+                <label for="descripcion" class="block text-sm font-medium text-black mb-1">
                     Descripción
                 </label>
                 <input type="text" id="descripcion" name="descripcion" maxlength="150"
@@ -158,7 +159,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit"class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                     style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>
@@ -192,9 +194,9 @@
                     @forelse($metodosPago as $index => $metodo)
                         <tr class="border-b border-slate-100">
                             <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $metodo->codigo }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $metodo->descripcion }}</td>
-                            <td class="py-2 text-slate-600">{{ $metodo->condicion_pago }}</td>
+                            <td class="py-2 text-black font-medium">{{ $metodo->codigo }}</td>
+                            <td class="py-2 text-black font-medium">{{ $metodo->descripcion }}</td>
+                            <td class="py-2 text-black">{{ $metodo->condicion_pago }}</td>
                             <td class="py-2">
                                 <div class="flex justify-end gap-2">
                                     <button type="button"
@@ -228,20 +230,20 @@
                                                 @csrf
                                                 @method('PUT')
                                                 {{-- codigo --}}
-                                                <label for="codigo{{ $metodo->id }}"class="block text-sm font-medium text-blue-700 mb-1">
+                                                <label for="codigo{{ $metodo->id }}"class="block text-sm font-medium text-black mb-1">
                                                     Código
                                                 </label>
                                                 <input type="text" id="codigo{{ $metodo->id }}" name="codigo" value="{{ $metodo->codigo }}" maxlength="10"
                                                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4">
                                                 {{-- Descripción --}}
                                                 <label for="descripcion{{ $metodo->id }}"
-                                                    class="block text-sm font-medium text-blue-700 mb-1">
+                                                    class="block text-sm font-medium text-black mb-1">
                                                     Descripción
                                                 </label>
                                                 <input type="text"id="descripcion{{ $metodo->id }}"name="descripcion" value="{{ $metodo->descripcion }}" maxlength="150"
                                                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4">
                                                 {{-- Condición de pago --}}
-                                                <label for="condicion_pago{{ $metodo->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                <label for="condicion_pago{{ $metodo->id }}" class="block text-sm font-medium text-black mb-1">
                                                     Condición de pago
                                                 </label>
                                                 <select name="condicion_pago" id="condicion_pago{{ $metodo->id }}"
@@ -261,8 +263,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                    style="background-color: var(--active-pink);">
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -300,7 +302,8 @@
 
         <button type="button"
             onclick="document.getElementById('modalNuevoMetodoPago').classList.remove('hidden')"
-            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+             style="background-color: var(--active-pink);">
             <i class="fa-solid fa-circle-plus"></i>
             Nuevo
         </button>
@@ -325,19 +328,19 @@
                 method="POST">
                 @csrf
                 {{-- Código --}}
-                <label for="codigo" class="block text-sm font-medium text-blue-700 mb-1">
+                <label for="codigo" class="block text-sm font-medium text-black mb-1">
                     Código
                 </label>
                 <input type="text" id="codigo" name="codigo" maxlength="10"
                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4">
                 {{-- Descripción --}}
-                <label for="descripcion" class="block text-sm font-medium text-blue-700 mb-1">
+                <label for="descripcion" class="block text-sm font-medium text-black mb-1">
                     Descripción
                 </label>
                 <input type="text" id="descripcion" name="descripcion" maxlength="150"
                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-4">
                 {{-- Condición de pago --}}
-                <label for="condicion_pago"class="block text-sm font-medium text-blue-700 mb-1">
+                <label for="condicion_pago"class="block text-sm font-medium text-black mb-1">
                     Condición de pago
                 </label>
                 <select name="condicion_pago" id="condicion_pago"
@@ -351,7 +354,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit"class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"  
+                    style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>

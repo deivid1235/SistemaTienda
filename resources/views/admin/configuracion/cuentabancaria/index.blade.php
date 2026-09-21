@@ -43,12 +43,12 @@
                     @forelse($cuentasBancarias as $index => $cuenta)
                         <tr class="border-b border-slate-100">
                             <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $cuenta->banco->descripcion }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $cuenta->descripcion }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $cuenta->numero }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $cuenta->moneda->descripcion }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $cuenta->cci }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ number_format($cuenta->saldo_inicial, 2) }}</td>
+                            <td class="py-2 text-black font-medium">{{ $cuenta->banco->descripcion }}</td>
+                            <td class="py-2 text-black font-medium">{{ $cuenta->descripcion }}</td>
+                            <td class="py-2 text-black font-medium">{{ $cuenta->numero }}</td>
+                            <td class="py-2 text-black font-medium">{{ $cuenta->moneda->descripcion }}</td>
+                            <td class="py-2 text-black font-medium">{{ $cuenta->cci }}</td>
+                            <td class="py-2 text-black font-medium">{{ number_format($cuenta->saldo_inicial, 2) }}</td>
                             <td class="py-2">
                                 @if($cuenta->mostrar_comprobante == 'Si')
                                     <span class="text-green-600 font-semibold">Sí</span>
@@ -88,7 +88,7 @@
                                                 @method('PUT')
                                                 <div class="flex flex-col md:flex-row gap-4">
                                                     <div class="flex-1">
-                                                        <label for="banco_id{{ $cuenta->id }}"class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="banco_id{{ $cuenta->id }}"class="block text-sm font-medium text-black mb-1">
                                                             Banco
                                                         </label>
                                                         <select id="banco_id{{ $cuenta->id }}"
@@ -105,7 +105,7 @@
 
                                                     {{-- Descripción --}}
                                                     <div class="flex-1">
-                                                        <label for="descripcion{{ $cuenta->id }}"class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="descripcion{{ $cuenta->id }}"class="block text-sm font-medium text-black mb-1">
                                                             Descripción
                                                         </label>
                                                         <input type="text" id="descripcion{{ $cuenta->id }}" name="descripcion" value="{{ $cuenta->descripcion }}"
@@ -115,7 +115,7 @@
                                                 {{-- Número y moneda --}}
                                                 <div class="flex flex-col md:flex-row gap-4 mt-4">
                                                     <div class="flex-1">
-                                                        <label for="numero{{ $cuenta->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="numero{{ $cuenta->id }}" class="block text-sm font-medium text-black mb-1">
                                                         Número
                                                         </label>
                                                         <input type="number" id="numero{{ $cuenta->id }}" name="numero" value="{{ $cuenta->numero }}"
@@ -123,7 +123,7 @@
                                                     </div>
                                                     {{-- Moneda --}}
                                                     <div class="flex-1">
-                                                        <label for="moneda_id{{ $cuenta->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="moneda_id{{ $cuenta->id }}" class="block text-sm font-medium text-black mb-1">
                                                         Moneda
                                                         </label>
                                                         <select id="moneda_id{{ $cuenta->id }}"
@@ -140,7 +140,7 @@
                                                 <div class="flex flex-col md:flex-row gap-4 mt-4">
                                                     {{-- CCI --}}
                                                     <div class="flex-1">
-                                                        <label for="cci{{ $cuenta->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="cci{{ $cuenta->id }}" class="block text-sm font-medium text-black mb-1">
                                                             CCI
                                                         </label>
                                                         <input type="number" id="cci{{ $cuenta->id }}" name="cci" value="{{ $cuenta->cci }}"
@@ -148,7 +148,7 @@
                                                     </div>
                                                     {{-- Saldo inicial --}}
                                                     <div class="flex-1">
-                                                        <label for="saldo_inicial{{ $cuenta->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="saldo_inicial{{ $cuenta->id }}" class="block text-sm font-medium text-black mb-1">
                                                             Saldo inicial
                                                         </label>
                                                         <input type="number" step="0.01" id="saldo_inicial{{ $cuenta->id }}" name="saldo_inicial" value="{{ $cuenta->saldo_inicial }}"
@@ -156,7 +156,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-4">
-                                                    <label class="block text-sm font-medium text-blue-700 mb-2">
+                                                    <label class="block text-sm font-medium text-black mb-2">
                                                         Mostrar en comprobante
                                                     </label>
                                                     <label class="inline-flex items-center cursor-pointer gap-3">
@@ -172,9 +172,9 @@
                                                             after:border-slate-300 after:border
                                                             after:rounded-full after:h-5
                                                             after:w-5 after:transition-all
-                                                            peer-checked:bg-[#0407e2]">
+                                                            peer-checked:bg-[#269ad5]">
                                                         </div>
-                                                        <span class="text-sm font-medium text-[#0407e2]">
+                                                        <span class="text-sm font-medium text-[#269ad5]">
                                                             Sí
                                                         </span>
                                                     </label>
@@ -187,8 +187,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                    style="background-color: var(--active-pink);" >
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -218,7 +218,8 @@
 
         <button type="button"
             onclick="document.getElementById('modalNuevoCuentaBanco').classList.remove('hidden')"
-            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+            style="background-color: var(--active-pink);" >
             <i class="fa-solid fa-circle-plus"></i>
             Nuevo
         </button>
@@ -247,11 +248,10 @@
                 <div class="flex flex-col md:flex-row gap-4">
                     <!-- Banco -->
                     <div class="flex-1">
-                        <label for="banco_id"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="banco_id"class="block text-sm font-medium text-black mb-1">
                             Banco
                         </label>
-                        <select id="banco_id" name="banco_id"
-                            class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                        <select id="banco_id" name="banco_id" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
                             <option value="">Seleccione un banco</option>
                             @foreach($bancos as $banco)
                                 <option value="{{ $banco->id }}">{{ $banco->descripcion }}</option>
@@ -261,7 +261,7 @@
                     <!-- Descripción -->
                     <div class="flex-1">
                         <label for="descripcion"
-                            class="block text-sm font-medium text-blue-700 mb-1">
+                            class="block text-sm font-medium text-black mb-1">
                             Descripción
                         </label>
                         <input type="text"id="descripcion"name="descripcion"
@@ -271,7 +271,7 @@
                 <!-- Número / Moneda -->
                 <div class="flex flex-col md:flex-row gap-4 mt-4">
                     <div class="flex-1">
-                        <label for="numero"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="numero"class="block text-sm font-medium text-black mb-1">
                             Número de cuenta
                         </label>
                         <input type="text"id="numero"name="numero"
@@ -280,7 +280,7 @@
 
                     <!-- Moneda -->
                     <div class="flex-1">
-                        <label for="moneda_id"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="moneda_id"class="block text-sm font-medium text-black mb-1">
                             Moneda
                         </label>
                         <select id="moneda_id" name="moneda_id"
@@ -297,7 +297,7 @@
                 <div class="flex flex-col md:flex-row gap-4 mt-4">
                     <!-- CCI -->
                     <div class="flex-1">
-                        <label for="cci"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="cci"class="block text-sm font-medium text-black mb-1">
                             CCI
                         </label>
                         <input type="text"id="cci"name="cci"
@@ -306,7 +306,7 @@
 
                     <!-- Saldo inicial -->
                     <div class="flex-1">
-                        <label for="saldo_inicial"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="saldo_inicial"class="block text-sm font-medium text-black mb-1">
                             Saldo inicial
                         </label>
                         <input type="number"id="saldo_inicial"name="saldo_inicial"step="0.01"min="0"
@@ -317,13 +317,15 @@
 
                 <!-- Mostrar comprobante -->
                 <div class="mt-4">
-                    <label class="block text-sm font-medium text-blue-700 mb-2">
-                        Mostrar en comprobante
+                    <label class="block text-sm font-medium text-black mb-2">
+                        Mostrar en comprobante  U
                     </label>
-                    <label class="inline-flex items-center cursor-pointer gap-3">
-                        <input type="hidden"name="mostrar_comprobante"value="No">
-                        <input type="checkbox"name="mostrar_comprobante"value="Si"class="sr-only peer"checked>
-                        <span class="text-sm font-medium text-slate-700">
+                    <label class="inline-flex items-center cursor-pointer gap-3.5">
+                        <input type="hidden" name="mostrar_comprobante" value="No">
+                        <input type="checkbox" name="mostrar_comprobante" value="Si" class="sr-only peer"
+                            {{ (old('mostrar_comprobante', $estiloEditar->mostrar_comprobante ?? 'Si') === 'Si') ? 'checked' : '' }}>
+                        
+                        <span class="text-sm font-medium text-gray-700 mr-0.5">
                             No
                         </span>
                         <div class="relative w-11 h-6 bg-slate-300 rounded-full
@@ -333,9 +335,10 @@
                             after:bg-white after:border-slate-300 after:border
                             after:rounded-full after:h-5 after:w-5
                             after:transition-all
-                            peer-checked:bg-[#0407e2]">
+                            peer-checked:bg-[#269ad5]">
                         </div>
-                        <span class="text-sm font-medium text-[#0407e2]">
+                        
+                        <span class="text-sm font-medium text-black ml-0.5">
                             Sí
                         </span>
                     </label>
@@ -346,8 +349,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"
-                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit"  class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                    style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>

@@ -23,7 +23,8 @@
         <div class="flex justify-end">
             <button type="button"
                 onclick="document.getElementById('modalNuevoAtributo').classList.remove('hidden')"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                style="background-color: var(--active-pink);" >
                 <i class="fa-solid fa-circle-plus"></i>
                 Nuevo
             </button>
@@ -44,8 +45,8 @@
                     @forelse($atributos as $index => $atributo)
                         <tr class="border-b border-slate-100">
                             <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $atributo->codigo }}</td>
-                            <td class="py-2 text-blue-800 font-medium">{{ $atributo->descripcion }}</td>
+                            <td class="py-2 text-black font-medium">{{ $atributo->codigo }}</td>
+                            <td class="py-2 text-black font-medium">{{ $atributo->descripcion }}</td>
                             <td class="py-2">
                                 @if($atributo->estado === 'Si')
                                     <span class="text-green-600 font-semibold">
@@ -90,7 +91,7 @@
                                                 <div class="flex flex-col md:flex-row gap-4">
                                                     {{-- codigo --}}
                                                     <div class="w-40">
-                                                        <label for="codigo_atributo{{ $atributo->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="codigo_atributo{{ $atributo->id }}" class="block text-sm font-medium text-black mb-1">
                                                             Código
                                                         </label>
                                                         <input type="text" id="codigo_atributo{{ $atributo->id }}" name="codigo" value="{{ $atributo->codigo }}" maxlength="20" required
@@ -98,7 +99,7 @@
                                                     </div>
                                                     {{-- Descripción --}}
                                                     <div class="flex-1">
-                                                        <label for="descripcion_atributo{{ $atributo->id }}" class="block text-sm font-medium text-blue-700 mb-1">
+                                                        <label for="descripcion_atributo{{ $atributo->id }}" class="block text-sm font-medium text-black mb-1">
                                                             Descripción
                                                         </label>
                                                         <input type="text" id="descripcion_atributo{{ $atributo->id }}" name="descripcion" value="{{ $atributo->descripcion }}" maxlength="150" required
@@ -108,7 +109,7 @@
 
                                                 {{-- Estado --}}
                                                 <div class="mt-4">
-                                                    <label class="block text-sm font-medium text-blue-700 mb-2">
+                                                    <label class="block text-sm font-medium text-black mb-2">
                                                         Estado
                                                     </label>
                                                     <label class="inline-flex items-center cursor-pointer gap-3">
@@ -118,8 +119,7 @@
                                                         <span class="text-sm font-medium text-slate-700">
                                                             No
                                                         </span>
-                                                        <div class="relative w-11 h-6 bg-slate-300 rounded-full
-                                                            peer
+                                                        <div class="relative w-11 h-6 bg-slate-300 rounded-full peer
                                                             peer-checked:after:translate-x-full
                                                             after:content-['']
                                                             after:absolute
@@ -132,9 +132,9 @@
                                                             after:h-5
                                                             after:w-5
                                                             after:transition-all
-                                                            peer-checked:bg-[#0407e2]">
+                                                            peer-checked:bg-[#269ad5]">
                                                         </div>
-                                                        <span class="text-sm font-medium text-[#0407e2]">
+                                                        <span class="text-sm font-medium text-[#000000]">
                                                             Sí
                                                         </span>
                                                     </label>
@@ -145,8 +145,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                     style="background-color: var(--active-pink);" >
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -198,7 +198,7 @@
                 <div class="flex flex-col md:flex-row gap-4">
                     {{--codigo --}}
                     <div class="w-48">
-                        <label for="codigo_atributo" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="codigo_atributo" class="block text-sm font-medium text-black mb-1">
                             Código
                         </label>
                         <input type="text" id="codigo_atributo" name="codigo" maxlength="20"required
@@ -207,7 +207,7 @@
 
                     {{--Descripción --}}
                     <div class="flex-1">
-                        <label for="descripcion_atributo" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="descripcion_atributo" class="block text-sm font-medium text-black mb-1">
                             Descripción
                         </label>
                         <input type="text" id="descripcion_atributo" name="descripcion" maxlength="150" required
@@ -216,7 +216,7 @@
                 </div>
                 {{-- Estado --}}
                 <div class="mt-4">
-                    <label class="block text-sm font-medium text-blue-700 mb-2">
+                    <label class="block text-sm font-medium text-black mb-2">
                         Estado
                     </label>
                     <label class="inline-flex items-center cursor-pointer gap-3">
@@ -238,9 +238,9 @@
                             after:h-5
                             after:w-5
                             after:transition-all
-                            peer-checked:bg-[#0407e2]">
+                            peer-checked:bg-[#269ad5]">
                         </div>
-                        <span class="text-sm font-medium text-[#0407e2]">
+                        <span class="text-sm font-medium text-[#000000]">
                             Sí
                         </span>
                     </label>
@@ -252,8 +252,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"
-                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                    style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>

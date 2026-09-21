@@ -99,6 +99,8 @@ class EstiloController extends Controller
     {
         $estilo = Estilo::findOrFail($id);
         $estilo->delete();
-        return back()->with('success', 'Estilo eliminado correctamente.');
+        return redirect()
+        ->route('configuracion')
+        ->with('success', 'Estilo eliminado correctamente.');
     }
 }

@@ -23,7 +23,8 @@
         <div class="flex justify-end">
             <button type="button"
                 onclick="document.getElementById('modalNuevoTraslado').classList.remove('hidden')"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                 style="background-color: var(--active-pink);" >
                 <i class="fa-solid fa-circle-plus"></i>
                 Nuevo
             </button>
@@ -92,7 +93,7 @@
                                                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                                                     <div class="md:col-span-3">
                                                         <label for="codigo{{ $traslado->id }}"
-                                                            class="block text-sm font-medium text-blue-700 mb-1">
+                                                            class="block text-sm font-medium text-black mb-1">
                                                             Código
                                                         </label>
                                                         <input type="text" id="codigo{{ $traslado->id }}" name="codigo" value="{{ $traslado->codigo }}"  maxlength="20" required
@@ -101,7 +102,7 @@
                                                     {{-- Descripción --}}
                                                     <div class="md:col-span-5">
                                                         <label for="descripcion{{ $traslado->id }}"
-                                                            class="block text-sm font-medium text-blue-700 mb-1">
+                                                            class="block text-sm font-medium text-black mb-1">
                                                             Descripción
                                                         </label>
                                                         <input type="text" id="descripcion{{ $traslado->id }}"  name="descripcion" value="{{ $traslado->descripcion }}" maxlength="100" required
@@ -109,7 +110,7 @@
                                                     </div>
                                                     {{-- Descuenta stock --}}
                                                     <div class="md:col-span-4">
-                                                        <label class="block text-sm font-medium text-blue-700 mb-2">
+                                                        <label class="block text-sm font-medium text-black mb-2">
                                                             Descuenta stock
                                                         </label>
                                                         <label class="inline-flex items-center cursor-pointer gap-3">
@@ -132,9 +133,9 @@
                                                                 after:h-5
                                                                 after:w-5
                                                                 after:transition-all
-                                                                peer-checked:bg-[#0407e2]">
+                                                                peer-checked:bg-[#269ad5]">
                                                             </div>
-                                                            <span class="text-sm font-medium text-[#0407e2]">
+                                                            <span class="text-sm font-medium text-[#000000]">
                                                                 Sí
                                                             </span>
                                                         </label>
@@ -147,8 +148,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                    style="background-color: var(--active-pink);" >
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -197,7 +198,7 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                     <div class="md:col-span-3">
-                        <label for="codigo" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="codigo" class="block text-sm font-medium text-black mb-1">
                             Código
                         </label>
                         <input type="text" id="codigo" name="codigo" maxlength="20" required placeholder="TR001"
@@ -206,7 +207,7 @@
 
                     {{-- Descripción --}}
                     <div class="md:col-span-5">
-                        <label for="descripcion" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="descripcion" class="block text-sm font-medium text-black mb-1">
                             Descripción
                         </label>
                         <input type="text" id="descripcion" name="descripcion" maxlength="100" required placeholder="Ej. Traslado entre almacenes"
@@ -214,7 +215,7 @@
                     </div>
                     {{-- Descuenta stock --}}
                     <div class="md:col-span-4">
-                        <label class="block text-sm font-medium text-blue-700 mb-2">
+                        <label class="block text-sm font-medium text-black mb-2">
                             Descuenta stock
                         </label>
                         <label class="inline-flex items-center cursor-pointer gap-3">
@@ -237,9 +238,9 @@
                                 after:h-5
                                 after:w-5
                                 after:transition-all
-                                peer-checked:bg-[#0407e2]">
+                                peer-checked:bg-[#269ad5]">
                             </div>
-                            <span class="text-sm font-medium text-[#0407e2]">
+                            <span class="text-sm font-medium text-[#000000]">
                                 Sí
                             </span>
                         </label>
@@ -252,8 +253,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"
-                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                     style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>

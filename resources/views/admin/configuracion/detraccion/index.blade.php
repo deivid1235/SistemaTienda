@@ -23,7 +23,8 @@
         <div class="flex justify-end">
             <button type="button"
                 onclick="document.getElementById('modalNuevoDestraccion').classList.remove('hidden')"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                style="background-color: var(--active-pink);" >
                 <i class="fa-solid fa-circle-plus"></i>
                 Nuevo
             </button>
@@ -95,7 +96,7 @@
                                                     {{-- T.operacion --}}
                                                     <div class="md:col-span-4">
                                                         <label for="tipo_operacion{{ $detraccion->id }}"
-                                                            class="block text-sm font-medium text-blue-700 mb-1">
+                                                            class="block text-sm font-medium text-black mb-1">
                                                             T. Operación
                                                         </label>
                                                         <select id="tipo_operacion{{ $detraccion->id }}"
@@ -115,7 +116,7 @@
                                                     {{-- Código --}}
                                                     <div class="md:col-span-3">
                                                         <label for="codigo{{ $detraccion->id }}"
-                                                            class="block text-sm font-medium text-blue-700 mb-1">
+                                                            class="block text-sm font-medium text-black mb-1">
                                                             Código
                                                         </label>
                                                         <input type="text" id="codigo{{ $detraccion->id }}" name="codigo" value="{{ $detraccion->codigo }}" maxlength="10" required
@@ -124,7 +125,7 @@
                                                     {{-- Descripción --}}
                                                     <div class="md:col-span-5">
                                                         <label for="descripcion{{ $detraccion->id }}"
-                                                        class="block text-sm font-medium text-blue-700 mb-1">
+                                                        class="block text-sm font-medium text-black mb-1">
                                                             Descripción
                                                         </label>
                                                         <input type="text" id="descripcion{{ $detraccion->id }}"  name="descripcion" value="{{ $detraccion->descripcion }}" maxlength="150" required
@@ -136,7 +137,7 @@
                                                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
                                                     <div class="md:col-span-4">
                                                         <label for="porcentaje{{ $detraccion->id }}"
-                                                            class="block text-sm font-medium text-blue-700 mb-1">
+                                                            class="block text-sm font-medium text-black mb-1">
                                                             Porcentaje
                                                         </label>
                                                         <input type="number" id="porcentaje{{ $detraccion->id }}" name="porcentaje" value="{{ $detraccion->porcentaje }}" min="0" max="100" step="0.01" required
@@ -144,7 +145,7 @@
                                                     </div>
                                                     {{-- Estado --}}
                                                     <div class="md:col-span-4">
-                                                        <label class="block text-sm font-medium text-blue-700 mb-2">
+                                                        <label class="block text-sm font-medium text-black mb-2">
                                                             Estado
                                                         </label>
                                                         <label class="inline-flex items-center cursor-pointer gap-3">
@@ -168,9 +169,9 @@
                                                                 after:h-5
                                                                 after:w-5
                                                                 after:transition-all
-                                                                peer-checked:bg-[#0407e2]">
+                                                                peer-checked:bg-[#269ad5]">
                                                             </div>
-                                                            <span class="text-sm font-medium text-[#0407e2]">
+                                                            <span class="text-sm font-medium text-[#000000]">
                                                                 Sí
                                                             </span>
                                                         </label>
@@ -183,8 +184,8 @@
                                                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                         Cancelar
                                                     </button>
-                                                    <button type="submit"
-                                                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                    style="background-color: var(--active-pink);" >
                                                         Actualizar
                                                     </button>
                                                 </div>
@@ -235,7 +236,7 @@
 
                     {{-- Tipo de operación --}}
                     <div class="md:col-span-4">
-                        <label for="tipo_operacion"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="tipo_operacion"class="block text-sm font-medium text-black mb-1">
                             T. Operación
                         </label>
                         <select id="tipo_operacion" name="tipo_operacion" required
@@ -252,7 +253,7 @@
 
                     {{-- Código --}}
                     <div class="md:col-span-3">
-                        <label for="codigo" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="codigo" class="block text-sm font-medium text-black mb-1">
                             Código
                         </label>
                         <input type="text" id="codigo" name="codigo" maxlength="10" required placeholder="001"
@@ -261,7 +262,7 @@
 
                     {{-- Descripción --}}
                     <div class="md:col-span-5">
-                        <label for="descripcion" class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="descripcion" class="block text-sm font-medium text-black mb-1">
                             Descripción
                         </label>
                         <input type="text" id="descripcion" name="descripcion" maxlength="150" required placeholder="Ej. Azúcar y melaza de caña"
@@ -272,7 +273,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
                     <div class="md:col-span-4">
                         <label for="porcentaje"
-                            class="block text-sm font-medium text-blue-700 mb-1">
+                            class="block text-sm font-medium text-black mb-1">
                             Porcentaje
                         </label>
                         <input type="number" id="porcentaje" name="porcentaje" min="0" max="100" step="0.01" value="0" required
@@ -280,7 +281,7 @@
                     </div>
                     {{-- Estado --}}
                     <div class="md:col-span-4">
-                        <label class="block text-sm font-medium text-blue-700 mb-2">
+                        <label class="block text-sm font-medium text-black mb-2">
                             Estado
                         </label>
                         <label class="inline-flex items-center cursor-pointer gap-3">
@@ -302,9 +303,9 @@
                                 after:h-5
                                 after:w-5
                                 after:transition-all
-                                peer-checked:bg-[#0407e2]">
+                                peer-checked:bg-[#269ad5]">
                             </div>
-                            <span class="text-sm font-medium text-[#0407e2]">
+                            <span class="text-sm font-medium text-[#000000]">
                                 Sí
                             </span>
                         </label>
@@ -319,8 +320,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"
-                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                     style="background-color: var(--active-pink);" >
                         Guardar
                     </button>
                 </div>

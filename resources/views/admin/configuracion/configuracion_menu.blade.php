@@ -41,7 +41,7 @@
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
                 <li><a href="{{ route('configuracion.compania') }}" class="text-gray-800 text-sm hover:underline">Empresa</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Giro de negocio</a></li>
-                <li><a href="#" id="open-styles" class="text-gray-800 text-sm hover:underline">Estilos y temas</a></li>
+                <li><a href="#" id="open-styles-2" class="text-gray-800 text-sm hover:underline">Estilos y temas</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Avanzado</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Generador de link de pago</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Tienda Virtual/Restaurante</a></li> 
@@ -136,7 +136,7 @@
     $estiloFormulario = $estiloEditar ?? $estiloActivo ?? null;
 @endphp
 <div id="backdrop" class="fixed inset-0 hidden z-40"></div>
-<div id="styles-panel"
+<div id="styles-panel" data-editando="{{ isset($estiloEditar) ? '1' : '0' }}"
     class="fixed top-16 right-0 h-[calc(100vh-4rem)] w-80 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
     <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-white flex-shrink-0">
         <h2 class="text-base font-bold text-gray-800">
@@ -193,25 +193,6 @@
                         Selecciona un color o escribe su código hexadecimal.
                     </span>
                 </div>
-                <script>
-                    const colorPicker = document.getElementById('color_picker');
-                    const colorHex = document.getElementById('color_hex');
-                    if(colorPicker && colorHex) {
-                        colorPicker.addEventListener('input', function () {
-                            colorHex.value = this.value.toUpperCase();
-                        });
-                        colorHex.addEventListener('input', function () {
-                            let valor = this.value.trim();
-                            if (!valor.startsWith('#')) {
-                                valor = '#' + valor;
-                            }
-                            if (/^#[0-9A-Fa-f]{6}$/.test(valor)) {
-                                colorPicker.value = valor;
-                            }
-                        });
-                    }
-                </script>
-
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Modo</label>
                     <label class="inline-flex items-center cursor-pointer gap-3">
@@ -316,47 +297,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    const openBtn = document.getElementById('open-styles');
-    const closeBtn = document.getElementById('close-styles');
-    const panel = document.getElementById('styles-panel');
-    const backdrop = document.getElementById('backdrop');
-
-    function abrirPanel() {
-        if (panel) panel.classList.remove('translate-x-full');
-        if (backdrop) backdrop.classList.remove('hidden');
-    }
-
-    function cerrarPanel() {
-        if (panel) panel.classList.add('translate-x-full');
-        if (backdrop) backdrop.classList.add('hidden');
-    }
-
-    if (openBtn) {
-        openBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            abrirPanel();
-        });
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function () {
-            cerrarPanel();
-        });
-    }
-
-    if (backdrop) {
-        backdrop.addEventListener('click', function () {
-            cerrarPanel();
-        });
-    }
-
-    @if(isset($estiloEditar))
-        abrirPanel();
-    @endif
-</script>
-
 </div>
 
 

@@ -124,3 +124,6 @@ resources/views/
 npm run start  -->> Ejecutamos  con este 
 
 php artisan storage:link
+
+
+#269ad5 /// COLOR DE AL EMPRESA 

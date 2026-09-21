@@ -29,7 +29,7 @@
                         <div class="flex justify-center mb-3">
                             <div class="bg-white rounded-full p-5 shadow-md">
                                 <i class="fa-solid fa-images text-3xl"
-                                    style="color:#0407e2;"></i>
+                                    style="background-color: var(--active-pink);"></i>
                             </div>
                         </div>
                         <p class="text-sm font-semibold text-slate-600">
@@ -42,7 +42,7 @@
                 @else
                     <div id="contenidoImagen" class="text-center">
                         <div class="flex justify-center mb-3">
-                            <div class="bg-white rounded-full p-5 shadow-md"><i class="fa-solid fa-images text-3xl" style="color:#0407e2;"></i></div>
+                            <div class="bg-white rounded-full p-5 shadow-md"><i class="fa-solid fa-images text-3xl" style="background-color: var(--active-pink);"></i></div>
                         </div>
                         <p class="text-sm font-semibold text-slate-600">Imágenes del carrusel</p>
                         <p class="text-xs text-slate-400 mt-1">Haz clic aquí para seleccionar imágenes</p>
@@ -139,7 +139,7 @@
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="hidden" name="mostrar_logo" value="0">
                                 <input type="checkbox" name="mostrar_logo" value="1" class="sr-only peer" {{ ($login->mostrar_logo ?? true) ? 'checked' : '' }}>
-                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors">
+                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#269ad5] transition-colors">
                                 </div>
                                 <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5">
                                 </div>
@@ -174,7 +174,7 @@
                                     <input type="hidden" name="mostrar_facebook" value="0">
                                     <input type="checkbox" name="mostrar_facebook" value="1" class="sr-only peer"
                                     {{ ($login->mostrar_facebook ?? false) ? 'checked' : '' }}>
-                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#269ad5] transition-colors"></div>
                                     <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
                                 </label>
                                 <input type="text" name="facebook" value="{{ $login->facebook ?? '' }}" placeholder="https://facebook.com/tu-usuario"
@@ -192,7 +192,7 @@
                                         value="1"
                                         class="sr-only peer"
                                         {{ ($login->mostrar_twitter ?? false) ? 'checked' : '' }}>
-                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#269ad5] transition-colors"></div>
                                     <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
                                 </label>
                                 <input type="text" name="twitter" value="{{ $login->twitter ?? '' }}" placeholder="https://twitter.com/tu-usuario"
@@ -206,7 +206,7 @@
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="hidden" name="mostrar_instagram" value="0">
                                     <input type="checkbox" name="mostrar_instagram" value="1" class="sr-only peer" {{ ($login->mostrar_instagram ?? false) ? 'checked' : '' }}>
-                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#269ad5] transition-colors"></div>
                                     <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
                                 </label>
                                 <input type="text" name="instagram" value="{{ $login->instagram ?? '' }}" placeholder="https://instagram.com/tu-usuario"
@@ -219,15 +219,15 @@
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="hidden" name="mostrar_linkedin" value="0">
                                     <input type="checkbox" name="mostrar_linkedin" value="1" class="sr-only peer" {{ ($login->mostrar_linkedin ?? false) ? 'checked' : '' }}>
-                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#269ad5] transition-colors"></div>
                                     <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
                                 </label>
                                 <input type="text" name="linkedin" value="{{ $login->linkedin ?? '' }}" placeholder="https://linkedin.com/in/tu-usuario"
                                 class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
                             </div>
                         </div>
-                        <button type="submit"
-                            class="w-full bg-[#0407e2] text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 transition">
+                        <button type="submit" class="w-full bg-[#0407e2] text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 transition"
+                        style="background-color: var(--active-pink);">
                             GUARDAR
                         </button>
                     </div>

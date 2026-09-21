@@ -33,8 +33,8 @@
                 @forelse($tarjetas as $index => $tarjeta)
                     <tr class="border-b border-slate-100">
                         <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
-                        <td class="py-2 text-blue-800 font-medium">{{ $tarjeta->codigo }}</td>
-                        <td class="py-2 text-blue-800 font-medium">{{ $tarjeta->descripcion }}</td>
+                        <td class="py-2 text-black font-medium">{{ $tarjeta->codigo }}</td>
+                        <td class="py-2 text-black font-medium">{{ $tarjeta->descripcion }}</td>
                         <td class="py-2">
                             <div class="flex justify-end gap-2">
                                 <button type="button"
@@ -91,8 +91,8 @@
                                                     class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                                                     Cancelar
                                                 </button>
-                                                <button type="submit"
-                                                    class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                                                <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                                 style="background-color: var(--active-pink);">
                                                     Actualizar
                                                 </button>
                                             </div>
@@ -121,7 +121,8 @@
 
         <button type="button"
             onclick="document.getElementById('modalNuevoTarjeta').classList.remove('hidden')"
-            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+            class="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+            style="background-color: var(--active-pink);">
             <i class="fa-solid fa-circle-plus"></i>
             Nuevo
         </button>
@@ -151,7 +152,7 @@
                 <div class="flex flex-col md:flex-row gap-4">
                     <!-- Código -->
                     <div class="flex-1">
-                        <label for="codigo"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="codigo"class="block text-sm font-medium text-black  mb-1">
                             Código
                         </label>
                         <input type="text"id="codigo" name="codigo"
@@ -160,7 +161,7 @@
 
                     <!-- Descripción -->
                     <div class="flex-1">
-                        <label for="descripcion"class="block text-sm font-medium text-blue-700 mb-1">
+                        <label for="descripcion"class="block text-sm font-medium text-black  mb-1">
                             Descripción
                         </label>
                         <input type="text"id="descripcion"name="descripcion"
@@ -175,8 +176,8 @@
                         class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"
-                        class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                     style="background-color: var(--active-pink);"  >
                         Guardar
                     </button>
                 </div>

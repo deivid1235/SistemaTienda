@@ -21,7 +21,7 @@
             <!-- TARJETA 1: Datos de la Empresa -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-building"></i>
                             Datos de la Empresa
@@ -49,7 +49,7 @@
                                 <div class="flex gap-2">
                                     <div class="flex flex-grow">
                                         <input type="text" readonly value="{{ $compania->logo ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
-                                        <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
+                                        <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: var(--active-pink);">
                                             <i class="fa-solid fa-cloud-arrow-up"></i>
                                             <input type="file" name="logo" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'" >
                                         </label>
@@ -66,7 +66,7 @@
                                 <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Logo (modo oscuro)</label>
                                 <div class="flex">
                                     <input type="text" readonly value="{{ $compania->logo_oscuro ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
-                                    <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
+                                    <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: var(--active-pink);">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
                                         <input type="file" name="logo_oscuro" class="hidden"  onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'" >
                                     </label>
@@ -81,7 +81,7 @@
                                 <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Rúbrica (Firma digital)</label>
                                 <div class="flex">
                                     <input type="text" readonly value="{{ $compania->rubrica ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
-                                    <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
+                                    <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: var(--active-pink);">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
                                         <input type="file" name="rubrica" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                     </label>
@@ -92,7 +92,7 @@
                                 <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Favicon (icono web)</label>
                                 <div class="flex">
                                     <input type="text" readonly value="{{ $compania->favicon ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
-                                    <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
+                                    <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: var(--active-pink);">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
                                         <input type="file" name="favicon" class="hidden">
                                     </label>
@@ -111,7 +111,7 @@
                                         <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Logo APP</label>
                                         <div class="flex">
                                             <input type="text" readonly value="{{ $compania->logo_app ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
-                                            <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
+                                            <label class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: var(--active-pink);">
                                                 <i class="fa-solid fa-cloud-arrow-up"></i>
                                                 <input type="file" name="logo_app" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                             </label>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -149,7 +149,7 @@
            <!-- TARJETA 2: Consulta integrada de CPE - Validador de documentos -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-circle-info"></i>
                             Consulta integrada de CPE - Validador de documentos
@@ -170,7 +170,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -179,7 +179,7 @@
             <!-- TARJETA 3: Guías electrónicas -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-file-invoice"></i>
                             Guías electrónicas
@@ -211,7 +211,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -220,7 +220,7 @@
             <!-- TARJETA 4: SIRE -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-file-shield"></i>
                             SIRE
@@ -252,7 +252,7 @@
                     </div>
                 </div>
                 <div class="p-6 pt-0 flex justify-start">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -261,7 +261,7 @@
            <!-- TARJETA 5: Envío de mensajes a través de QR Api -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-qrcode"></i>
                             Envio de mensajes a través de QR Api
@@ -287,7 +287,7 @@
                 </div>
                 <!-- Botón Guardar -->
                 <div class="p-6 pt-0 flex justify-start">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -296,7 +296,7 @@
             <!-- TARJETA 6: Configuración de pagos -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-credit-card"></i>
                             Configuración de pagos
@@ -335,7 +335,7 @@
                 </div>
                 <!-- Botón Guardar -->
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -344,7 +344,7 @@
             <!-- TARJETA 7: Certificado Qz Tray -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-certificate"></i>
                             Certificado Qz Tray
@@ -362,7 +362,7 @@
                                 <div class="flex">
                                     <input type="text"  readonly  value="{{ $compania->digital_certificate_qztray ?? 'Ningún archivo cargado' }}" class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
                                     <label 
-                                        class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: #0407e2;">
+                                        class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" style="background-color: var(--active-pink);">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
                                         <input  type="file"  name="digital_certificate_qztray"  class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                     </label>
@@ -378,7 +378,7 @@
                                     <input type="text" readonly  value="{{ $compania->private_certificate_qztray ?? 'Ningún archivo cargado' }}" 
                                         class="w-full text-sm border border-slate-300 rounded-l-md px-3 py-2 bg-slate-50 text-slate-500">
                                     <label  class="cursor-pointer text-white px-4 py-2 rounded-r-md flex items-center justify-center transition hover:opacity-90" 
-                                        style="background-color: #0407e2;">
+                                        style="background-color: var(--active-pink);">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
                                         <input  type="file" name="private_certificate_qztray" class="hidden" onchange="this.parentElement.previousElementSibling.value = this.files[0]?.name || 'Ningún archivo cargado'">
                                     </label>
@@ -389,7 +389,7 @@
                 </div>
                 <!-- Botón Guardar -->
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
@@ -398,7 +398,7 @@
             <!-- TARJETA 8: Servicio PSE -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
-                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: #0407e2;">
+                    <div class="px-6 py-4 flex justify-between items-center" style="background-color: var(--active-pink);">
                         <h1 class="flex items-center gap-2 text-base font-semibold text-white">
                             <i class="fa-solid fa-server"></i>
                             Servicio PSE
@@ -423,7 +423,7 @@
                 </div>
                 <!-- Botón Guardar -->
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: #0407e2;">
+                    <button type="submit" class="text-white px-6 py-2 rounded-md font-medium transition hover:opacity-90" style="background-color: var(--active-pink);">
                         Guardar
                     </button>
                 </div>
