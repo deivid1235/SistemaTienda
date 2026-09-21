@@ -83,8 +83,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/login/imagenes', [App\Http\Controllers\LoginImagenController::class, 'store'])->name('configuracion.login.imagenes.store')->middleware('auth');
     Route::put('/configuracion/login/imagenes/{loginImagen}', [App\Http\Controllers\LoginImagenController::class, 'update'])->name('configuracion.login.imagenes.update')->middleware('auth');
     Route::delete('/configuracion/login/imagenes/{loginImagen}', [App\Http\Controllers\LoginImagenController::class, 'destroy'])->name('configuracion.login.imagenes.destroy')->middleware('auth');
-    
-
-
+    //Estilos
+    Route::get('/configuracion', function () {
+        $estilos = \App\Models\Estilo::all();
+        $estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
+    return view('admin.configuracion.configuracion_menu', compact('estilos', 'estiloActivo'));})->name('configuracion')->middleware('auth');
+    Route::get('/configuracion/estilo', [App\Http\Controllers\EstiloController::class, 'index'])->name('configuracion.estilo')->middleware('auth');
+    Route::post('/configuracion/estilo', [App\Http\Controllers\EstiloController::class, 'store'])->name('configuracion.estilo.store')->middleware('auth');
+    Route::get('/configuracion/estilo/{id}/editar', [App\Http\Controllers\EstiloController::class, 'editar'])->name('configuracion.estilo.editar') ->middleware('auth');
+    Route::put('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'update'])->name('configuracion.estilo.update')->middleware('auth');
+    Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
+    Route::put('/configuracion/estilo/{id}/activar', [App\Http\Controllers\EstiloController::class, 'activar'])->name('configuracion.estilo.activar')->middleware('auth');
+    Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
 
 });

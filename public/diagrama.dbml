@@ -90,9 +90,13 @@ Table logins {
     mostrar_logo boolean [default: true]
     posicion_logo enum('SUPERIOR_IZQUIERDA', 'SUPERIOR_CENTRO', 'SUPERIOR_DERECHA') [default: 'SUPERIOR_IZQUIERDA']
     mostrar_facebook boolean [default: false]
+    facebook varchar(255)
     mostrar_twitter boolean [default: false]
+    twitter varchar(255)
     mostrar_instagram boolean [default: false]
+    instagram varchar(255)
     mostrar_linkedin boolean [default: false]
+    linkedin varchar(255)
 }
 
 Table companias{
@@ -143,3 +147,13 @@ Table companias{
     created_at timestamp
     updated_at timestamp
 }
+
+Table estilos {
+    id int [pk, increment]
+    nombre varchar(50)
+    color varchar(20)
+    modo varchar(20)
+    menu_lateral varchar(20)
+    estado enum("ACTIVO", "INACTIVO") [default: "INACTIVO"]
+}
+

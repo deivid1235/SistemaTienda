@@ -716,16 +716,40 @@
                 <div class="admin-avatar">
                     <i class="fas fa-circle-user"></i>
                 </div>
+                <!-- Menú desplegable -->
                 <div id="logoutMenu" class="d-none"
-                    style="position: absolute; top: 50px; right: 0; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.15); min-width: 160px; z-index: 9999;">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                            style="width: 100%; border: none; background: none; padding: 12px 16px; text-align: left; cursor: pointer;">
-                            <i class="fas fa-right-from-bracket"></i>
-                            Cerrar sesión
-                        </button>
-                    </form>
+                    style="position: absolute; top: 50px; right: 0; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.15); min-width: 220px; z-index: 9999; overflow: hidden; font-family: sans-serif;">
+                    <!-- Opciones superiores -->
+                    <div style="padding: 8px 0;">
+                        <a href="#" style="display: flex; align-items: center; padding: 10px 16px; color: #333; text-decoration: none; font-size: 14px;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">
+                            <i class="fas fa-file-invoice-dollar" style="width: 20px; margin-right: 10px; color: #666;"></i> Mis Pagos
+                        </a>
+                        <a href="#" id="open-styles" style="display: flex; align-items: center; padding: 10px 16px; color: #333; text-decoration: none; font-size: 14px;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">
+                            <i class="fas fa-paint-roller" style="width: 20px; margin-right: 10px; color: #666;"></i> Estilos y temas
+                        </a>
+                    </div>
+
+                    <!-- Sección Cambiar Sucursal -->
+                    <div style="border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea; padding: 12px 16px;">
+                        <span style="display: block; font-size: 12px; color: #666; margin-bottom: 6px;">Cambiar Sucursal:</span>
+                        <select style="width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; background: #fff; font-size: 14px; outline: none; cursor: pointer;">
+                            <option value="principal">Oficina Principal</option>
+                            <!-- Agrega más sucursales aquí si las necesitas -->
+                        </select>
+                    </div>
+
+                    <!-- Cerrar Sesión -->
+                    <div style="padding: 4px 0;">
+                        <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                            @csrf
+                            <button type="submit"
+                                style="width: 100%; border: none; background: none; padding: 10px 16px; text-align: left; cursor: pointer; display: flex; align-items: center; color: #333; font-size: 14px;" onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">
+                                <i class="fas fa-right-from-bracket" style="width: 20px; margin-right: 10px; color: #666;"></i>
+                                Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 

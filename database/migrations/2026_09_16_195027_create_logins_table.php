@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('logins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('compania_id')->constrained('companias')->onDelete('cascade');
-            $table->enum('posicion_formulario', ['IZQUIERDA', 'DERECHA'])->default('DERECHA');
-            $table->boolean('mostrar_logo')->default(true);
-            $table->enum('posicion_logo', ['SUPERIOR_IZQUIERDA','SUPERIOR_CENTRO','SUPERIOR_DERECHA'])->default('SUPERIOR_IZQUIERDA');
-            $table->boolean('mostrar_facebook')->default(false);
-            $table->boolean('mostrar_twitter')->default(false);
-            $table->boolean('mostrar_instagram')->default(false);
-            $table->boolean('mostrar_linkedin')->default(false);
+            $table->foreignId('compania_id') ->constrained('companias') ->onDelete('cascade'); 
+            $table->enum('posicion_formulario', ['IZQUIERDA', 'DERECHA']) ->default('DERECHA'); 
+            $table->boolean('mostrar_logo') ->default(true); 
+            $table->enum('posicion_logo', [ 'SUPERIOR_IZQUIERDA', 'SUPERIOR_CENTRO', 'SUPERIOR_DERECHA' ])->default('SUPERIOR_IZQUIERDA'); 
+            $table->boolean('mostrar_facebook') ->default(false); 
+            $table->string('facebook') ->nullable(); 
+            $table->boolean('mostrar_twitter') ->default(false); 
+            $table->string('twitter') ->nullable(); 
+            $table->boolean('mostrar_instagram') ->default(false); 
+            $table->string('instagram') ->nullable(); 
+            $table->boolean('mostrar_linkedin') ->default(false); 
+            $table->string('linkedin') ->nullable();
             $table->timestamps();
         });
     }

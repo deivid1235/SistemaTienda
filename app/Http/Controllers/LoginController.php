@@ -13,13 +13,21 @@ class LoginController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
+
     public function index()
-     {
+    {
         $compania = Compania::first();
+        if (!$compania) {
+            return redirect()->back()->with('error', 'Primero ingrese los datos de la empresa.');
+        }
         $login = Login::where('compania_id', $compania->id)->first();
         $imagenes = LoginImagen::where('estado', true)->get();
         return view('admin.configuracion.login.index', compact('login', 'imagenes'));
     }
+
+
+
 
 
     /**
@@ -62,9 +70,19 @@ class LoginController extends Controller
         $request->validate([
             'posicion_formulario' => 'required|in:IZQUIERDA,DERECHA',
             'posicion_logo' => 'required|in:SUPERIOR_IZQUIERDA,SUPERIOR_CENTRO,SUPERIOR_DERECHA',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255',
         ]);
 
         $compania = Compania::first();
+
+        if (!$compania) {
+            return redirect()
+                ->back()
+                ->with('error', 'Primero ingrese los datos de la empresa.');
+        }
 
         $login = Login::where('compania_id', $compania->id)->first();
 
@@ -74,12 +92,20 @@ class LoginController extends Controller
         }
 
         $login->posicion_formulario = $request->posicion_formulario;
-        $login->mostrar_logo = $request->has('mostrar_logo');
+        $login->mostrar_logo = (int) $request->input('mostrar_logo', 0);
         $login->posicion_logo = $request->posicion_logo;
-        $login->mostrar_facebook = $request->has('mostrar_facebook');
-        $login->mostrar_twitter = $request->has('mostrar_twitter');
-        $login->mostrar_instagram = $request->has('mostrar_instagram');
-        $login->mostrar_linkedin = $request->has('mostrar_linkedin');
+
+        $login->mostrar_facebook = (int) $request->input('mostrar_facebook', 0);
+        $login->facebook = $request->input('facebook');
+
+        $login->mostrar_twitter = (int) $request->input('mostrar_twitter', 0);
+        $login->twitter = $request->input('twitter');
+
+        $login->mostrar_instagram = (int) $request->input('mostrar_instagram', 0);
+        $login->instagram = $request->input('instagram');
+
+        $login->mostrar_linkedin = (int) $request->input('mostrar_linkedin', 0);
+        $login->linkedin = $request->input('linkedin');
 
         $login->save();
 
@@ -88,6 +114,7 @@ class LoginController extends Controller
             ->with('success', 'Configuración del login actualizada correctamente.');
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
@@ -95,5 +122,23 @@ class LoginController extends Controller
     {
         //
     }
+
+
+public function showLoginForm()
+{
+    $compania = Compania::first();
+
+    $login = null;
+
+    if ($compania) {
+        $login = Login::where('compania_id', $compania->id)->first();
+    }
+
+    $imagenes = LoginImagen::where('estado', true)->get();
+
+    return view('auth.login', compact('compania', 'login', 'imagenes'));
+}
+
+
 
 }

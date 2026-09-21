@@ -19,7 +19,7 @@ html, body {
     width: 100%;
     height: 100vh;
     z-index: 1;
-    background: #111;
+    background: #4A4A4A;
     overflow: hidden;
 }
 
@@ -290,3 +290,72 @@ html, body {
         font-size: 22px;
     }
 }
+
+
+/* Login de los iconos */
+.social-login {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.social-login i {
+    line-height: 1;
+}
+
+.social-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+}
+
+.social-login.facebook {
+    color: #1877F2;
+}
+
+.social-login.facebook:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    color: #ffffff;
+}
+
+.social-login.twitter {
+    color: #111827;
+}
+
+.social-login.twitter:hover {
+    background: #111827;
+    border-color: #111827;
+    color: #ffffff;
+}
+
+.social-login.instagram {
+    color: #E1306C;
+}
+
+.social-login.instagram:hover {
+    background: #E1306C;
+    border-color: #E1306C;
+    color: #ffffff;
+}
+
+.social-login.linkedin {
+    color: #0A66C2;
+}
+
+.social-login.linkedin:hover {
+    background: #0A66C2;
+    border-color: #0A66C2;
+    color: #ffffff;
+}
+
+

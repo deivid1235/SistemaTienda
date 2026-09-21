@@ -102,6 +102,45 @@
                 Iniciar sesión
                 <i class="bi bi-arrow-right ms-1"></i>
             </button>
+            @if($login)
+                @if(
+                    ($login->mostrar_facebook && $login->facebook) ||
+                    ($login->mostrar_twitter && $login->twitter) ||
+                    ($login->mostrar_instagram && $login->instagram) ||
+                    ($login->mostrar_linkedin && $login->linkedin)
+                )
+                    <div class="text-center mt-4">
+                        <div class="d-flex align-items-center justify-content-center gap-3 mb-2">
+                            <div style="height: 1px; width: 45px; background: #e2e8f0;"></div>
+                            <span style="font-size: 12px; color: #94a3b8;"> Síguenos</span>
+                            <div style="height: 1px; width: 45px; background: #e2e8f0;"></div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-3">
+                            @if($login->mostrar_facebook && $login->facebook)
+                                <a href="{{ str_starts_with($login->facebook, 'http') ? $login->facebook : 'https://' . $login->facebook }}"
+                                target="_blank" rel="noopener noreferrer" class="social-login facebook" title="Facebook"><i class="bi bi-facebook"></i>
+                                </a>
+                            @endif
+                            @if($login->mostrar_twitter && $login->twitter)
+                                <a href="{{ str_starts_with($login->twitter, 'http') ? $login->twitter : 'https://' . $login->twitter }}"
+                                target="_blank" rel="noopener noreferrer" class="social-login twitter"
+                                title="X / Twitter"> <i class="bi bi-twitter-x"></i> </a>
+                            @endif
+                            @if($login->mostrar_instagram && $login->instagram)
+                                <a href="{{ str_starts_with($login->instagram, 'http') ? $login->instagram : 'https://' . $login->instagram }}"
+                                target="_blank" rel="noopener noreferrer" class="social-login instagram"
+                                title="Instagram"> <i class="bi bi-instagram"></i> </a>
+                            @endif
+                            @if($login->mostrar_linkedin && $login->linkedin)
+                                <a href="{{ str_starts_with($login->linkedin, 'http') ? $login->linkedin : 'https://' . $login->linkedin }}"
+                                target="_blank" rel="noopener noreferrer"
+                                class="social-login linkedin" title="LinkedIn"> <i class="bi bi-linkedin"></i>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            @endif
         </form>
     </div>
 </div>

@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="flex items-center gap-2 text-sm mb-4">
-        <a href="{{ route('configuracion.index') }}"
+        <a href="{{ route('configuracion') }}"
         class="text-slate-400 hover:text-slate-700 flex items-center gap-1">
             <i class="fa-solid fa-house"></i>Dashboard</a>
         <span class="text-slate-400">/</span>

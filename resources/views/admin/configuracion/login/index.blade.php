@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="flex items-center gap-2 text-sm mb-4">
-    <a href="{{ route('configuracion.index') }}"
+    <a href="{{ route('configuracion') }}"
         class="text-slate-400 hover:text-slate-700 flex items-center gap-1">
         <i class="fa-solid fa-house"></i>
         Dashboard
@@ -101,10 +101,11 @@
                     </p>
                 </div>
             @endif
+
             <button type="button" id="botonGuardarImagen" disabled
                 onclick="document.getElementById('formImagenes').submit();"
-                class="mt-3 block w-full text-center border font-semibold text-sm py-2.5 rounded-lg cursor-pointer text-white transition disabled:opacity-50 disabled:cursor-not-allowed"
-                style="background-color:#0407e2; border-color:#0407e2;">
+                class="mt-3 block w-full text-center border font-semibold text-sm py-2.5 rounded-lg cursor-pointer text-white transition
+                    bg-[#0407e2] border-[#0407e2] disabled:bg-slate-300 disabled:border-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:opacity-100">
                 <i class="fa-solid fa-floppy-disk mr-1"></i>
                 Guardar imágenes
             </button>
@@ -166,44 +167,64 @@
                         </div>
                     </div>
                     <div class="space-y-5">
-                        <div class="flex items-center justify-between">
-                            <label class="text-sm font-medium text-slate-700">
-                                Mostrar botones de redes sociales
-                            </label>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="hidden" name="mostrar_redes" value="0">
-                                <input type="checkbox" name="mostrar_redes" value="1" class="sr-only peer" {{ ($login->mostrar_redes ?? true) ? 'checked' : '' }}>
-                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors">
-                                </div>
-                                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5">
-                                </div>
-                            </label>
-                        </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">
-                                Facebook
-                            </label>
-                            <input type="text" name="facebook" value="{{ $login->facebook ?? '' }}"
-                                placeholder="https://facebook.com/tu-usuario"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Facebook</label>
+                            <div class="flex items-center gap-3">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="hidden" name="mostrar_facebook" value="0">
+                                    <input type="checkbox" name="mostrar_facebook" value="1" class="sr-only peer"
+                                    {{ ($login->mostrar_facebook ?? false) ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+                                </label>
+                                <input type="text" name="facebook" value="{{ $login->facebook ?? '' }}" placeholder="https://facebook.com/tu-usuario"
+                                class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            </div>
                         </div>
+
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1"> Twitter </label>
-                            <input type="text" name="twitter" value="{{ $login->twitter ?? '' }}"
-                            placeholder="https://twitter.com/tu-usuario"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Twitter</label>
+                            <div class="flex items-center gap-3">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="hidden" name="mostrar_twitter" value="0">
+                                    <input type="checkbox"
+                                        name="mostrar_twitter"
+                                        value="1"
+                                        class="sr-only peer"
+                                        {{ ($login->mostrar_twitter ?? false) ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+                                </label>
+                                <input type="text" name="twitter" value="{{ $login->twitter ?? '' }}" placeholder="https://twitter.com/tu-usuario"
+                                class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            </div>
                         </div>
+
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Instagram</label>
-                            <input type="text"
-                                name="instagram" value="{{ $login->instagram ?? '' }}" placeholder="https://instagram.com/tu-usuario"
-                                class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            <div class="flex items-center gap-3">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="hidden" name="mostrar_instagram" value="0">
+                                    <input type="checkbox" name="mostrar_instagram" value="1" class="sr-only peer" {{ ($login->mostrar_instagram ?? false) ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+                                </label>
+                                <input type="text" name="instagram" value="{{ $login->instagram ?? '' }}" placeholder="https://instagram.com/tu-usuario"
+                                class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Linkedin</label>
-                            <input type="text" name="linkedin" value="{{ $login->linkedin ?? '' }}"
-                            placeholder="https://linkedin.com/in/tu-usuario"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">LinkedIn</label>
+                            <div class="flex items-center gap-3">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="hidden" name="mostrar_linkedin" value="0">
+                                    <input type="checkbox" name="mostrar_linkedin" value="1" class="sr-only peer" {{ ($login->mostrar_linkedin ?? false) ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-[#0407e2] transition-colors"></div>
+                                    <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+                                </label>
+                                <input type="text" name="linkedin" value="{{ $login->linkedin ?? '' }}" placeholder="https://linkedin.com/in/tu-usuario"
+                                class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0407e2]">
+                            </div>
                         </div>
                         <button type="submit"
                             class="w-full bg-[#0407e2] text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 transition">
