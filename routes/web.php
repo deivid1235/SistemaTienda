@@ -12,6 +12,12 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    //Ubigeo
+    Route::get('/ubigeo/departamentos', [App\Http\Controllers\UbigeoController::class, 'departamentos'])->name('ubigeo.departamentos') ->middleware('auth');
+    Route::get('/ubigeo/provincias/{codigo}', [App\Http\Controllers\UbigeoController::class, 'provincias'])->name('ubigeo.provincias')->middleware('auth');
+    Route::get('/ubigeo/distritos/{codigo}', [App\Http\Controllers\UbigeoController::class, 'distritos'])->name('ubigeo.distritos')->middleware('auth');
+    Route::get('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursal')->middleware('auth');
+
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('dashboard');
     Route::get('/configuracion/menu', function () {
     $estilos = \App\Models\Estilo::all();$estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
@@ -114,5 +120,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/tipocomprobante/gasto', [App\Http\Controllers\ComprobanteGastoController::class, 'store'])->name('configuracion.comprobantegasto.store')->middleware('auth');
     Route::put('/configuracion/tipocomprobante/gasto/{id}', [App\Http\Controllers\ComprobanteGastoController::class, 'update'])->name('configuracion.comprobantegasto.update')->middleware('auth');
     Route::delete('/configuracion/tipocomprobante/gasto/{id}', [App\Http\Controllers\ComprobanteGastoController::class, 'destroy'])->name('configuracion.comprobantegasto.destroy')->middleware('auth');
+    //Sucursal    
+    Route::get('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursal')->middleware('auth');
+    Route::post('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'store'])->name('sucursal.store')->middleware('auth');
+    Route::put('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'update'])->name('sucursal.update')->middleware('auth');
+    Route::delete('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'destroy'])->name('sucursal.destroy')->middleware('auth');
 
 });

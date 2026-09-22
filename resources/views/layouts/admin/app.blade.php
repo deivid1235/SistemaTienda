@@ -21,659 +21,249 @@
     $estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
 @endphp
 <style>
-    /*Dashboard */
     :root {
         --active-pink: {{ $estiloActivo->color ?? '#269ad5' }};
-        --text-main: #1e2a4a;
-        --text-soft: #56618a;
-        --sidebar-bg: #ffffff;
-        --hover-bg: #f0f6ff;
     }
-
-    * {
-        font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-        margin: 0;
-        background: #f4f6f9;
-    }
-    .sidebar-left {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 270px;
-        height: 100vh;
-        background: var(--sidebar-bg);
-        box-shadow: 2px 0 18px rgba(233, 234, 238, 0.06);
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-    }
-    .sidebar-header {
-        height: 90px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .sidebar-header img {
-        max-width: 56px;
-        max-height: 56px;
-        object-fit: contain;
-    }
-
-    .nano {
-        flex: 1;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nano::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    .nano::-webkit-scrollbar-thumb {
-        background: #e5e7f5;
-        border-radius: 10px;
-    }
-
-    .nano-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nav-main {
-        list-style: none;
-        padding: 6px 14px;
-        margin: 0;
-        flex: 1;
-    }
-
-    .nav-main > li {
-        list-style: none;
-        margin-bottom: 4px;
-    }
-
-    .nav-link {
-        display: flex;
-        align-items: center;
-        gap: 13px;
-        color: var(--text-main);
-        text-decoration: none;
-        padding: 11px 14px;
-        border-radius: 12px;
-        font-size: 14.5px;
-        font-weight: 500;
-        transition: background .15s ease, color .15s ease;
-    }
-
-    .nav-link i {
-        width: 20px;
-        text-align: center;
-        font-size: 16px;
-        color: var(--text-soft);
-        flex-shrink: 0;
-    }
-
-    .nav-link .chevron {
-        margin-left: auto;
-        font-size: 12px;
-        color: #b7bfd9;
-    }
-
-    .nav-link .badge-beta {
-        margin-left: auto;
-        margin-right: 6px;
-        background: #ffb020;
-        color: #fff;
-        font-size: 10px;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 20px;
-        letter-spacing: .3px;
-    }
-
-    .nav-link:hover {
-        background: var(--hover-bg);
-        color: var(--active-pink);
-    }
-
-    .nav-link:hover i,
-    .nav-link:hover .chevron {
-        color: var(--active-pink);
-        
-    }
-
-    /* Active / selected item -> pink */
-    .nav-active > .nav-link,
-    .nav-link.is-active {
-        background: var(--active-pink);
-        color: #fff;
-    }
-
-    .nav-active > .nav-link i,
-    .nav-link.is-active i,
-    .nav-active > .nav-link .chevron,
-    .nav-link.is-active .chevron {
-        color: #fff;
-    }
-
-    .nav-parent > .nav-link {
-        font-weight: 500;
-    }
-
-    .nav-children {
-        display: none;
-        list-style: none;
-        padding-left: 18px;
-        margin: 2px 0 4px 0;
-    }
-
-    .nav-parent:hover > .nav-children {
-        display: block;
-    }
-
-    .nav-children .nav-link {
-        font-size: 13.5px;
-        padding: 8px 14px;
-    }
-
-    .sidebar-footer {
-        border-top: 1px solid #eef0f7;
-        padding: 16px 14px 22px 14px;
-        flex-shrink: 0;
-    }
-
-    .sidebar-footer .nav-link {
-        color: var(--text-white);
-    }
-    .topbar {
-        position: fixed;
-        top: 0;
-        left: 270px;
-        right: 0;
-        height: 70px;
-        background: #fff;
-        box-shadow: 0 2px 12px rgba(30, 42, 74, .05);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 22px;
-        gap: 14px;
-        z-index: 900;
-        transition: left .25s ease;
-    }
-
-    .topbar-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 0;
-    }
-
-    .sidebar-toggle {
-        background: none;
-        border: none;
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-soft);
-        font-size: 16px;
-        cursor: pointer;
-        flex-shrink: 0;
-    }
-
-    .sidebar-toggle:hover {
-        background: var(--hover-bg);
-        color: var(--active-pink);
-    }
-
-    .topbar-shortcuts {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-
-    .topbar-shortcuts::-webkit-scrollbar {
-        display: none;
-    }
-
-    .shortcut-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 3px;
-        min-width: 54px;
-        padding: 6px 10px;
-        border-radius: 10px;
-        background: #f4f5fb;
-        color: var(--text-soft);
-        text-decoration: none;
-        font-size: 10.5px;
-        font-weight: 600;
-        flex-shrink: 0;
-    }
-
-    .shortcut-btn i {
-        font-size: 15px;
-        color: var(--text-main);
-    }
-
-    .shortcut-btn:hover {
-        background: var(--hover-bg);
-        color: var(--active-pink);
-    }
-
-    .shortcut-btn:hover i {
-        color: var(--active-pink);
-    }
-
-    .topbar-right {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-shrink: 0;
-    }
-
-    .demo-badge {
-        background: linear-gradient(135deg, #269ad5);
-        color: #fff;
-        border-radius: 12px;
-        padding: 6px 16px;
-        text-align: center;
-        line-height: 1.25;
-        flex-shrink: 0;
-    }
-
-    .demo-badge strong {
-        display: block;
-        font-size: 12.5px;
-        font-weight: 700;
-    }
-
-    .demo-badge span {
-        display: block;
-        font-size: 10px;
-        opacity: .9;
-    }
-
-    .icon-btn {
-        position: relative;
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-main);
-        font-size: 17px;
-        flex-shrink: 0;
-    }
-
-    .icon-btn:hover {
-        background: var(--hover-bg);
-    }
-
-    .icon-btn .count {
-        position: absolute;
-        top: 2px;
-        right: 2px;
-        min-width: 16px;
-        height: 16px;
-        padding: 0 3px;
-        border-radius: 20px;
-        background: #3f6fff;
-        color: #fff;
-        font-size: 9.5px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .icon-btn.notif .count {
-        background: #1bc405;
-    }
-
-    .admin-block {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
-    }
-
-    .admin-text {
-        text-align: right;
-        line-height: 1.25;
-    }
-
-    .admin-text strong {
-        display: block;
-        font-size: 13px;
-        color: var(--text-main);
-    }
-
-    .admin-text span {
-        display: block;
-        font-size: 11px;
-        color: var(--text-soft);
-    }
-
-    .admin-avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: #eef0f7;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-soft);
-        font-size: 18px;
-        flex-shrink: 0;
-    }
-
-    .sidebar-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(20, 24, 42, .45);
-        z-index: 999;
-    }
-
-    .main-content {
-        margin-left: 270px;
-        margin-top: 70px;
-        min-height: calc(100vh - 70px);
-        padding: 25px;
-        transition: margin-left .25s ease;
-    }
-    body.sidebar-collapsed .sidebar-left {
-        left: -270px;
-    }
-
-    body.sidebar-collapsed .topbar {
-        left: 0;
-    }
-
-    body.sidebar-collapsed .main-content {
-        margin-left: 0;
-    }
-
-    .sidebar-toggle i {
-        transition: transform .25s ease;
-    }
-
-    body.sidebar-collapsed .sidebar-toggle i {
-        transform: rotate(180deg);
-    }
-
-    @media (max-width: 991.98px) {
-        .sidebar-left {
-            box-shadow: 4px 0 24px rgba(20, 24, 42, .18);
-        }
-
-        body:not(.sidebar-collapsed) .sidebar-overlay {
-            display: block;
-        }
-
-        .topbar {
-            left: 0;
-            padding: 0 14px;
-            gap: 8px;
-        }
-
-        .main-content {
-            margin-left: 0;
-            padding: 16px;
-        }
-
-        .topbar-shortcuts {
-            display: none;
-        }
-
-        .admin-text {
-            display: none;
-        }
-
-        .demo-badge span {
-            display: none;
-        }
-
-        .demo-badge {
-            padding: 6px 10px;
-        }
-
-        .demo-badge strong {
-            font-size: 10.5px;
-        }
-    }         
 </style>
 <body>
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
-    <aside id="sidebar-left" class="sidebar-left">
-        <div class="sidebar-header">
-            <a href="{{ route('dashboard') }}" class="logo">
-                <img src="{{ asset('image/logo.jpeg') }}" alt="Logo">
-            </a>
-        </div>
-        <div class="nano">
-            <div class="nano-content">
-                <nav id="menu" class="nav-main-wrapper">
-                    <ul class="nav-main">
-                        <li class="{{ request()->routeIs('dashboard') ? 'nav-active' : '' }}">
-                            <a class="nav-link" href="{{ route('dashboard') }}">
-                                <i class="fa-regular fa-compass"></i>
-                                <span>DASHBOARD</span>
-                            </a>
-                        </li>
-
-                        {{-- PREVENTA --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                                <span>Preventa</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Nueva preventa</a></li>
-                                <li><a class="nav-link" href="#">Preventas</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- VENTAS --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-file-lines"></i>
-                                <span>VENTAS</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Nueva venta</a></li>
-                                <li><a class="nav-link" href="#">Ventas</a></li>
-                                <li><a class="nav-link" href="#">Cotizaciones</a></li>
-                                <li><a class="nav-link" href="#">Punto de venta</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- COMPRAS --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                                <span>Compras</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Nueva compra</a></li>
-                                <li><a class="nav-link" href="#">Compras</a></li>
-                                <li><a class="nav-link" href="#">Proveedores</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- CLIENTES --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-address-card"></i>
-                                <span>Clientes</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Clientes</a></li>
-                                <li><a class="nav-link" href="#">Tipos de clientes</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- PRODUCTOS / SERVICIOS --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-square"></i>
-                                <span>Productos/Servicios</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Productos</a></li>
-                                <li><a class="nav-link" href="#">Categorías</a></li>
-                                <li><a class="nav-link" href="#">Marcas</a></li>
-                                <li><a class="nav-link" href="#">Promociones</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- INVENTARIO --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-solid fa-warehouse"></i>
-                                <span>Inventario</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Stock</a></li>
-                                <li><a class="nav-link" href="#">Movimientos</a></li>
-                                <li><a class="nav-link" href="#">Kardex</a></li>
-                                <li><a class="nav-link" href="#">Ajustes de inventario</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- FINANZAS --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-solid fa-calculator"></i>
-                                <span>Finanzas</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Cuentas por cobrar</a></li>
-                                <li><a class="nav-link" href="#">Cuentas por pagar</a></li>
-                                <li><a class="nav-link" href="#">Caja y bancos</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- GUÍAS DE REMISIÓN --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-solid fa-truck"></i>
-                                <span>Guías de remisión</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Nueva guía</a></li>
-                                <li><a class="nav-link" href="#">Guías emitidas</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- COMPROBANTES PENDIENTES --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-circle-question"></i>
-                                <span>Comprobantes pendientes</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Por enviar</a></li>
-                                <li><a class="nav-link" href="#">Rechazados</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- COMPROBANTES AVANZADOS --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-clipboard"></i>
-                                <span>Comprobantes avanzados</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Facturas</a></li>
-                                <li><a class="nav-link" href="#">Boletas</a></li>
-                                <li><a class="nav-link" href="#">Notas de crédito</a></li>
-                                <li><a class="nav-link" href="#">Notas de débito</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- CONTABILIDAD --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-solid fa-chart-simple"></i>
-                                <span>Contabilidad</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Plan de cuentas</a></li>
-                                <li><a class="nav-link" href="#">Asientos contables</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- REPORTES --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-file"></i>
-                                <span>Reportes</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Reporte de ventas</a></li>
-                                <li><a class="nav-link" href="#">Reporte de compras</a></li>
-                                <li><a class="nav-link" href="#">Reporte de productos</a></li>
-                                <li><a class="nav-link" href="#">Reporte de inventario</a></li>
-                            </ul>
-                        </li>
-
-                        {{-- SUSCRIPCIÓN ESCOLAR (BETA) --}}
-                        <li class="nav-parent">
-                            <a class="nav-link" href="#">
-                                <i class="fa-regular fa-calendar-days"></i>
-                                <span>Suscripción Escolar</span>
-                                <span class="badge-beta">Beta</span>
-                                <i class="fas fa-chevron-down chevron"></i>
-                            </a>
-                            <ul class="nav-children">
-                                <li><a class="nav-link" href="#">Matrículas</a></li>
-                                <li><a class="nav-link" href="#">Pensiones</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-
-                </nav>
-
+        <aside id="sidebar-left" class="sidebar-left">
+            <div class="sidebar-header">
+                <a href="{{ route('dashboard') }}" class="logo">
+                    <img src="{{ asset('image/logo.jpeg') }}" alt="Logo">
+                </a>
             </div>
-        </div>
-        
-        <div class="sidebar-footer">
-            <a class="nav-link {{ request()->routeIs('configuracion.menu') ? 'is-active' : '' }}"
-            href="{{ route('configuracion.menu') }}">
-                <i class="fa-solid fa-gear"></i>
-                <span>Configuración y más</span>
-            </a>
-        </div>
+            <div class="nano">
+                <div class="nano-content">
+                    <nav id="menu" class="nav-main-wrapper">
+                        <ul class="nav-main">
+                            <li class="{{ request()->routeIs('dashboard') ? 'nav-active' : '' }}">
+                                <a class="nav-link" href="{{ route('dashboard') }}">
+                                    <i class="fa-regular fa-compass"></i>
+                                    <span>DASHBOARD</span>
+                                </a>
+                            </li>
 
+                            {{-- PREVENTA --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                    <span>Preventa</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Nueva preventa</a></li>
+                                    <li><a class="nav-link" href="#">Preventas</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- VENTAS --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-file-lines"></i>
+                                    <span>VENTAS</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Nueva venta</a></li>
+                                    <li><a class="nav-link" href="#">Ventas</a></li>
+                                    <li><a class="nav-link" href="#">Cotizaciones</a></li>
+                                    <li><a class="nav-link" href="#">Punto de venta</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- COMPRAS --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                    <span>Compras</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Nueva compra</a></li>
+                                    <li><a class="nav-link" href="#">Compras</a></li>
+                                    <li><a class="nav-link" href="#">Proveedores</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- CLIENTES --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-address-card"></i>
+                                    <span>Clientes</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Clientes</a></li>
+                                    <li><a class="nav-link" href="#">Tipos de clientes</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- PRODUCTOS / SERVICIOS --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-square"></i>
+                                    <span>Productos/Servicios</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Productos</a></li>
+                                    <li><a class="nav-link" href="#">Categorías</a></li>
+                                    <li><a class="nav-link" href="#">Marcas</a></li>
+                                    <li><a class="nav-link" href="#">Promociones</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- INVENTARIO --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-warehouse"></i>
+                                    <span>Inventario</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Stock</a></li>
+                                    <li><a class="nav-link" href="#">Movimientos</a></li>
+                                    <li><a class="nav-link" href="#">Kardex</a></li>
+                                    <li><a class="nav-link" href="#">Ajustes de inventario</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- FINANZAS --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-calculator"></i>
+                                    <span>Finanzas</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Cuentas por cobrar</a></li>
+                                    <li><a class="nav-link" href="#">Cuentas por pagar</a></li>
+                                    <li><a class="nav-link" href="#">Caja y bancos</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- GUÍAS DE REMISIÓN --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-truck"></i>
+                                    <span>Guías de remisión</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Nueva guía</a></li>
+                                    <li><a class="nav-link" href="#">Guías emitidas</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- COMPROBANTES PENDIENTES --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-circle-question"></i>
+                                    <span>Comprobantes pendientes</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Por enviar</a></li>
+                                    <li><a class="nav-link" href="#">Rechazados</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- COMPROBANTES AVANZADOS --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-clipboard"></i>
+                                    <span>Comprobantes avanzados</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Facturas</a></li>
+                                    <li><a class="nav-link" href="#">Boletas</a></li>
+                                    <li><a class="nav-link" href="#">Notas de crédito</a></li>
+                                    <li><a class="nav-link" href="#">Notas de débito</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- CONTABILIDAD --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                    <span>Contabilidad</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Plan de cuentas</a></li>
+                                    <li><a class="nav-link" href="#">Asientos contables</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- REPORTES --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-file"></i>
+                                    <span>Reportes</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Reporte de ventas</a></li>
+                                    <li><a class="nav-link" href="#">Reporte de compras</a></li>
+                                    <li><a class="nav-link" href="#">Reporte de productos</a></li>
+                                    <li><a class="nav-link" href="#">Reporte de inventario</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- SUSCRIPCIÓN ESCOLAR (BETA) --}}
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                    <span>Suscripción Escolar</span>
+                                    <span class="badge-beta">Beta</span>
+                                    <i class="fas fa-chevron-down chevron"></i>
+                                </a>
+                                <ul class="nav-children">
+                                    <li><a class="nav-link" href="#">Matrículas</a></li>
+                                    <li><a class="nav-link" href="#">Pensiones</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+
+                </div>
+            </div>
+        
+            <!-- CONTENEDOR PRINCIPAL -->
+            <div class="relative">
+                <button type="button" onclick="document.getElementById('configuracionMenu').classList.toggle('hidden')"
+                    class="flex items-center gap-3 px-3 py-2 text-gray-700 text-sm font-medium w-full">
+                    <i class="fa-solid fa-gear text-gray-500 text-lg"></i>
+                    <span>Configuración y más</span>
+                </button>
+                <!-- MENÚ DESPLEGABLE -->
+                <div id="configuracionMenu"
+                    class="hidden absolute bottom-full left-0 mb-2 w-72 bg-white rounded-xl shadow-xl border border-gray-200 p-2 z-50">
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                        <i class="fa-solid fa-users text-gray-600 w-5 text-base"></i>
+                        <span>Usuarios</span>
+                    </a>
+                    <a href="{{ route('sucursal') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                        <i class="fa-solid fa-list-ol text-gray-600 w-5 text-base"></i>
+                        <span>Sucursales & Series</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                        <i class="fa-solid fa-mobile-screen-button text-gray-600 w-5 text-base"></i>
+                        <span>APP 3.1</span>
+                    </a>
+
+                    <a href="{{ route('configuracion.menu') }}"class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                        <i class="fa-solid fa-briefcase text-gray-600 w-5 text-base"></i>
+                        <span>Configuraciones Globales</span>
+                    </a>
+                </div>
+            </div>
+
+    </div>
     </aside>
     <header class="topbar">
         <div class="topbar-left">

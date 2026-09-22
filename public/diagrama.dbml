@@ -180,3 +180,20 @@ Table comprobante_gastos {
     descripcion varchar(150)
     estado enum('ACTIVO', 'INACTIVO') [default: 'INACTIVO']
 }
+
+Table sucursals {
+    id int [pk, increment]
+    descripcion varchar(150)
+    pais varchar(100)
+    departamento varchar(100)
+    provincia varchar(100)
+    distrito varchar(100)
+    direccion_fiscal varchar(255)
+    telefono varchar(30)
+    direccion_comercial varchar(255)
+    correo_contacto varchar(150)
+    direccion_web varchar(255)
+    informacion_adicional text
+    codigo_sucursal varchar(20)
+    estado enum
+}
