@@ -95,5 +95,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
     Route::put('/configuracion/estilo/{id}/activar', [App\Http\Controllers\EstiloController::class, 'activar'])->name('configuracion.estilo.activar')->middleware('auth');
     Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
+    //Motivo de gatos 
+    Route::get('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'index'])->name('configuracion.motivogasto')->middleware('auth');
+    Route::post('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'store'])->name('configuracion.motivogasto.store')->middleware('auth');
+    Route::put('/configuracion/motivogasto/{id}', [App\Http\Controllers\MotivoGastoController::class, 'update'])->name('configuracion.motivogasto.update')->middleware('auth');
+    Route::delete('/configuracion/motivogasto/{id}', [App\Http\Controllers\MotivoGastoController::class, 'destroy'])->name('configuracion.motivogasto.destroy')->middleware('auth');
+    // Motivo de ingreso
+    Route::get('/configuracion/motivoingreso', [App\Http\Controllers\MotivoIngresoController::class, 'index'])->name('configuracion.motivoingreso')->middleware('auth');
+    Route::post('/configuracion/motivoingreso', [App\Http\Controllers\MotivoIngresoController::class, 'store'])->name('configuracion.motivoingreso.store')->middleware('auth');
+    Route::put('/configuracion/motivoingreso/{id}', [App\Http\Controllers\MotivoIngresoController::class, 'update'])->name('configuracion.motivoingreso.update')->middleware('auth');
+    Route::delete('/configuracion/motivoingreso/{id}', [App\Http\Controllers\MotivoIngresoController::class, 'destroy'])->name('configuracion.motivoingreso.destroy')->middleware('auth');
+    // Comprobante Ingreso
+    Route::get('/configuracion/tipocomprobante', [App\Http\Controllers\ComprobanteIngresoController::class, 'index'])->name('configuracion.tipocomprobante')->middleware('auth');
+    Route::post('/configuracion/tipocomprobante', [App\Http\Controllers\ComprobanteIngresoController::class, 'store'])->name('configuracion.comprobanteingreso.store')->middleware('auth');
+    Route::put('/configuracion/tipocomprobante/{id}', [App\Http\Controllers\ComprobanteIngresoController::class, 'update'])->name('configuracion.comprobanteingreso.update')->middleware('auth');
+    Route::delete('/configuracion/tipocomprobante/{id}', [App\Http\Controllers\ComprobanteIngresoController::class, 'destroy'])->name('configuracion.comprobanteingreso.destroy')->middleware('auth');
+    // Comprobante Gasto
+    Route::post('/configuracion/tipocomprobante/gasto', [App\Http\Controllers\ComprobanteGastoController::class, 'store'])->name('configuracion.comprobantegasto.store')->middleware('auth');
+    Route::put('/configuracion/tipocomprobante/gasto/{id}', [App\Http\Controllers\ComprobanteGastoController::class, 'update'])->name('configuracion.comprobantegasto.update')->middleware('auth');
+    Route::delete('/configuracion/tipocomprobante/gasto/{id}', [App\Http\Controllers\ComprobanteGastoController::class, 'destroy'])->name('configuracion.comprobantegasto.destroy')->middleware('auth');
 
 });

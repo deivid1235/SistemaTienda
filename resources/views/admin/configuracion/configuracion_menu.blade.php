@@ -71,9 +71,9 @@
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
                 <li><a href="{{ route('configuracion.metodopago') }}" class="text-gray-800 text-sm hover:underline">Métodos de pago - ingreso / gastos</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Motivos de ingresos / Gastos</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Listado de métodos de pago</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Tipos de comprobantes INGRESOS Y GASTOS</a></li>
+                <li><a href="{{ route('configuracion.motivogasto') }}" class="text-gray-800 text-sm hover:underline">Motivos de ingresos / Gastos</a></li>
+               <!--<li><a href="#" class="text-gray-800 text-sm hover:underline">Listado de métodos de pago</a></li> -->
+                <li><a href="{{ route('configuracion.tipocomprobante') }}" class="text-gray-800 text-sm hover:underline">Tipos de comprobantes INGRESOS Y GASTOS</a></li>
             </ul>
         </div>
     </div>

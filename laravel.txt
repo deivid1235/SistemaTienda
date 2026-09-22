@@ -127,3 +127,11 @@ php artisan storage:link
 
 
 #269ad5 /// COLOR DE AL EMPRESA 
+
+
+ style="background-color: var(--active-pink);" 
+
+text-black
+
+
+control + h 

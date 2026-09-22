@@ -154,6 +154,29 @@ Table estilos {
     color varchar(20)
     modo varchar(20)
     menu_lateral varchar(20)
-    estado enum("ACTIVO", "INACTIVO") [default: "INACTIVO"]
+    estado varchar(10) [default: 'INACTIVO']
 }
 
+Table motivos_gastos {
+    id int [pk, increment]
+    descripcion varchar(150)
+    estado varchar(10) [default: 'INACTIVO']
+}
+
+Table motivos_ingresos {
+    id int [pk, increment]
+    descripcion varchar(150)
+    estado varchar(10) [default: 'INACTIVO']
+}
+
+Table comprobante_ingresos {
+    id int [pk, increment]
+    descripcion varchar(150)
+    estado enum('ACTIVO', 'INACTIVO') [default: 'INACTIVO']
+}
+
+Table comprobante_gastos {
+    id int [pk, increment]
+    descripcion varchar(150)
+    estado enum('ACTIVO', 'INACTIVO') [default: 'INACTIVO']
+}
