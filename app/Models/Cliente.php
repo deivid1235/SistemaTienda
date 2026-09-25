@@ -10,4 +10,11 @@ class Cliente extends Model
     {
         return $this->belongsTo(TipoCliente::class);
     }
+
+    public function sucursals()
+    {
+        return $this->hasMany(Sucursal::class);
+    }
+
+   
 }

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('informacion_adicional')->nullable();
             $table->string('codigo_sucursal', 20)->unique();
             $table->enum('estado', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->foreignId('cliente_id')->nullable()->constrained('clientes')->onDelete('restrict');
             $table->timestamps();
         });
     }

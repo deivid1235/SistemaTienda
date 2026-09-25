@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class SucursalController extends Controller
      */
     public function index()
     {
+        $clientes = Cliente::where('estado', true)->get();
         $sucursals = Sucursal::all();
-        return view('admin.sucursal.index', compact('sucursals'));
+        return view('admin.sucursal.index', compact('sucursals','clientes'));
     }
 
     /**
@@ -42,6 +44,7 @@ class SucursalController extends Controller
             'direccion_web' => 'nullable|string|max:255',
             'informacion_adicional' => 'nullable|string',
             'codigo_sucursal' => 'required|string|max:20|unique:sucursals,codigo_sucursal',
+            'cliente_id' => 'nullable|exists:clientes,id',
             'estado' => 'required|in:ACTIVO,INACTIVO',
         ]);
 
@@ -59,14 +62,13 @@ class SucursalController extends Controller
         $sucursal->direccion_web = $request->direccion_web;
         $sucursal->informacion_adicional = $request->informacion_adicional;
         $sucursal->codigo_sucursal = $request->codigo_sucursal;
+        $sucursal->cliente_id = $request->cliente_id ?: null;
         $sucursal->estado = $request->estado;
-
         $sucursal->save();
 
         return redirect()->route('sucursal')
             ->with('success', 'Sucursal registrada correctamente.');
     }
-
     /**
      * Display the specified resource.
      */
@@ -101,6 +103,7 @@ class SucursalController extends Controller
             'direccion_web' => 'nullable|string|max:255',
             'informacion_adicional' => 'nullable|string',
             'codigo_sucursal' => 'required|string|max:20|unique:sucursals,codigo_sucursal,' . $id,
+            'cliente_id' => 'nullable',
             'estado' => 'required|in:ACTIVO,INACTIVO',
         ]);
 
@@ -118,6 +121,7 @@ class SucursalController extends Controller
         $sucursal->direccion_web = $request->direccion_web;
         $sucursal->informacion_adicional = $request->informacion_adicional;
         $sucursal->codigo_sucursal = $request->codigo_sucursal;
+        $sucursal->cliente_id = $request->cliente_id ?: null;
         $sucursal->estado = $request->estado;
 
         $sucursal->save();

@@ -202,12 +202,27 @@
 
                                                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
 
-                                                    <div class="md:col-span-12">
+                                                    <div class="md:col-span-6">
                                                         <label for="informacion_adicional{{ $sucursal->id }}" class="block text-sm font-medium text-black mb-1">
                                                             Información Adicional
                                                         </label>
                                                         <textarea id="informacion_adicional{{ $sucursal->id }}" name="informacion_adicional"rows="2"
                                                         class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">{{ $sucursal->informacion_adicional }}</textarea>
+                                                    </div>
+                                                    <div class="md:col-span-6">
+                                                        <label for="cliente_id" class="block text-sm font-medium text-black mb-1">
+                                                            Cliente
+                                                        </label>
+                                                        <select id="cliente_id" name="cliente_id"
+                                                            class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                                            <option value="">Seleccione un cliente</option>
+                                                            @foreach ($clientes as $cliente)
+                                                                <option value="{{ $cliente->id }}"
+                                                                    {{ $sucursal->cliente_id == $cliente->id ? 'selected' : '' }}>
+                                                                    {{ $cliente->codigo_interno }} - {{ $cliente->nombre }} {{ $cliente->apellidos }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
@@ -404,12 +419,26 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
                     {{-- Información Adicional --}}
-                    <div class="md:col-span-12">
+                    <div class="md:col-span-6">
                         <label for="informacion_adicional" class="block text-sm font-medium text-black mb-1">
                             Información Adicional
                         </label>
                         <textarea id="informacion_adicional" name="informacion_adicional" rows="2" placeholder="Detalles adicionales..."
                         class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+                    </div>
+                    <div class="md:col-span-6">
+                        <label for="cliente_id" class="block text-sm font-medium text-black mb-1">
+                            Cliente
+                        </label>
+                        <select id="cliente_id" name="cliente_id"
+                            class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                            <option value="">Seleccione un cliente</option>
+                            @foreach ($clientes as $cliente)
+                                <option value="{{ $cliente->id }}">
+                                    {{ $cliente->codigo_interno }} - {{ $cliente->nombre }} {{ $cliente->apellidos }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 
