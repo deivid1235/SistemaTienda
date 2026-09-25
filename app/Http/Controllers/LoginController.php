@@ -77,7 +77,6 @@ class LoginController extends Controller
         ]);
 
         $compania = Compania::first();
-
         if (!$compania) {
             return redirect()
                 ->back()
@@ -85,7 +84,6 @@ class LoginController extends Controller
         }
 
         $login = Login::where('compania_id', $compania->id)->first();
-
         if (!$login) {
             $login = new Login();
             $login->compania_id = $compania->id;
@@ -94,21 +92,15 @@ class LoginController extends Controller
         $login->posicion_formulario = $request->posicion_formulario;
         $login->mostrar_logo = (int) $request->input('mostrar_logo', 0);
         $login->posicion_logo = $request->posicion_logo;
-
         $login->mostrar_facebook = (int) $request->input('mostrar_facebook', 0);
         $login->facebook = $request->input('facebook');
-
         $login->mostrar_twitter = (int) $request->input('mostrar_twitter', 0);
         $login->twitter = $request->input('twitter');
-
         $login->mostrar_instagram = (int) $request->input('mostrar_instagram', 0);
         $login->instagram = $request->input('instagram');
-
         $login->mostrar_linkedin = (int) $request->input('mostrar_linkedin', 0);
         $login->linkedin = $request->input('linkedin');
-
         $login->save();
-
         return redirect()
             ->route('configuracion.login')
             ->with('success', 'Configuración del login actualizada correctamente.');

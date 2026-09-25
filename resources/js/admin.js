@@ -62,8 +62,7 @@ if (colorPicker && colorHex) {
     });
 }
 
-
-
+//PERU/API
 document.addEventListener('DOMContentLoaded', function () {
     const departamento = document.getElementById('departamento');
     const provincia = document.getElementById('provincia');
@@ -237,3 +236,87 @@ if (zonaSeleccionImagen) {
         }
     });
 }
+
+// Consulta API DNI, RUC
+async function consultarDocumento() {
+    const boton = document.getElementById('btnConsultarDocumento');
+    const tipo = document.getElementById('tipo_documento').value;
+    const numero = document.getElementById('numero_documento').value.trim();
+    const url = boton.dataset.url;
+    const nombre = document.getElementById('nombre');
+    if (!tipo) {
+        alert('Seleccione el tipo de documento.');
+        return;
+    }
+    if (!numero) {
+        alert('Ingrese el número de documento.');
+        return;
+    }
+    if (tipo === 'DNI' && numero.length !== 8) {
+        alert('El DNI debe tener 8 dígitos.');
+        return;
+    }
+
+    if (tipo === 'RUC' && numero.length !== 11) {
+        alert('El RUC debe tener 11 dígitos.');
+        return;
+    }
+    if (tipo === 'PASAPORTE') {
+        alert('La consulta automática no está disponible para pasaporte.');
+        return;
+    }
+    if (!url) {
+        alert('No se encontró la ruta de consulta.');
+        return;
+    }
+    try {
+        boton.disabled = true;
+
+        const response = await fetch(
+            `${url}?tipo_documento=${encodeURIComponent(tipo)}&numero_documento=${encodeURIComponent(numero)}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }
+        );
+        const resultado = await response.json();
+
+        if (!response.ok || !resultado.success) {
+            alert(resultado.message ?? 'No se pudo realizar la consulta.');
+            return;
+        }
+        const data = resultado.data;
+        if (tipo === 'DNI') {
+            nombre.value = (
+                data.nombre_completo ??
+                `${data.nombres ?? ''} ${data.apellido_paterno ?? ''} ${data.apellido_materno ?? ''}`
+            ).trim();
+
+            if (document.getElementById('direccion')) {
+                document.getElementById('direccion').value =
+                    data.direccion ?? data.direccion_completa ?? '';
+            }
+        }
+        if (tipo === 'RUC') {
+            nombre.value =
+                data.razon_social ??
+                data.nombre_o_razon_social ??
+                data.nombre ??
+                '';
+            if (document.getElementById('direccion')) {
+                document.getElementById('direccion').value =
+                    data.direccion ?? data.direccion_completa ?? '';
+            }
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert('Ocurrió un error al consultar el documento.');
+    } finally {
+        boton.disabled = false;
+    }
+}
+window.consultarDocumento = consultarDocumento;
+

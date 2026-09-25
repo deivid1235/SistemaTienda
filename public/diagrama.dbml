@@ -1,6 +1,8 @@
 Table bancos{
     id int [pk, increment] //primary key 
     descripcion varchar
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table monedas {
@@ -9,6 +11,8 @@ Table monedas {
     descripcion varchar(100)
     simbolo varchar(10)
     estado boolean
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table cuenta_bancarias {
@@ -20,18 +24,24 @@ Table cuenta_bancarias {
     cci varchar(50)
     saldo_inicial decimal(15,2) [default: 0]
     mostrar_comprobante enum('Si', 'No') [default: 'No']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table tarjetas {
     id int [pk, increment]
     codigo varchar(10)
     descripcion varchar(100)
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table plataformas {
     id int [pk, increment]
     nombre varchar(100)
     estado varchar(2)
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table metodo_pagos {
@@ -39,11 +49,15 @@ Table metodo_pagos {
     codigo varchar(10)
     descripcion varchar(150)
     condicion_pago varchar(20)
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table metodo_gastos {
     id int [pk, increment]
     descripcion varchar(150)
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table atributos {
@@ -51,6 +65,8 @@ Table atributos {
     codigo varchar(100)
     descripcion varchar(50)
     estado boolean
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table detraccions{
@@ -60,6 +76,8 @@ Table detraccions{
     descripcion varchar(150)
     porcentaje decimal(5,2)
     activo boolean [default: true]
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table unidades {
@@ -68,6 +86,8 @@ Table unidades {
     descripcion varchar(100)
     simbolo varchar(10)
     estado enum('Si', 'No') [default: 'Si']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table traslados {
@@ -75,12 +95,16 @@ Table traslados {
     codigo varchar(20)
     descripcion varchar(100)
     descuenta_stock enum('SI', 'NO') [default: 'NO']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table login_imagens{
     id int [pk, increment]
     imagen varchar(255)
     estado boolean [default: true]
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table logins {
@@ -97,6 +121,8 @@ Table logins {
     instagram varchar(255)
     mostrar_linkedin boolean [default: false]
     linkedin varchar(255)
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table companias{
@@ -143,7 +169,6 @@ Table companias{
     // Configuración de pagos
     yape_habilitado boolean [default: false]
     mercado_pago_habilitado boolean [default: false]
-
     created_at timestamp
     updated_at timestamp
 }
@@ -155,33 +180,43 @@ Table estilos {
     modo varchar(20)
     menu_lateral varchar(20)
     estado varchar(10) [default: 'INACTIVO']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table motivos_gastos {
     id int [pk, increment]
     descripcion varchar(150)
     estado varchar(10) [default: 'INACTIVO']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table motivos_ingresos {
     id int [pk, increment]
     descripcion varchar(150)
     estado varchar(10) [default: 'INACTIVO']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table comprobante_ingresos {
     id int [pk, increment]
     descripcion varchar(150)
     estado enum('ACTIVO', 'INACTIVO') [default: 'INACTIVO']
+    created_at timestamp
+    updated_at timestamp
 }
 
 Table comprobante_gastos {
     id int [pk, increment]
     descripcion varchar(150)
     estado enum('ACTIVO', 'INACTIVO') [default: 'INACTIVO']
+    created_at timestamp
+    updated_at timestamp
 }
 
-Table sucursals {
+Table sucursales {
     id int [pk, increment]
     descripcion varchar(150)
     pais varchar(100)
@@ -196,4 +231,50 @@ Table sucursals {
     informacion_adicional text
     codigo_sucursal varchar(20)
     estado enum
+    created_at timestamp
+    updated_at timestamp
 }
+
+Table Roles {
+    id int [pk, increment]
+    nombre varchar(100)
+    descripcion varchar(255)
+    estado boolean
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table tipo_clientes {
+    id int [pk, increment]
+    nombre varchar(100)
+    estado boolean
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table clientes {
+    id int [pk, increment]
+    tipo_documento varchar(20)
+    numero_documento varchar(30)
+    nombre varchar(100)
+    apellidos varchar(150)
+    nombre_comercial varchar(150)
+    codigo_interno varchar(50)
+    nacionalidad varchar(100)
+    tipo_cliente_id int [not null, ref: > tipo_clientes.id]
+    codigo_barra varchar(100)
+    direccion varchar(255)
+    pais varchar(100)
+    codigo_sucursal varchar(50)
+    telefono varchar(30)
+    correo_electronico varchar(150)
+    sitio_web varchar(255)
+    dias_credito int [default: 0]
+    observaciones text
+    estado boolean [default: true]
+    created_at timestamp
+    updated_at timestamp
+}
+
+
+

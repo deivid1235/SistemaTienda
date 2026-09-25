@@ -87,18 +87,27 @@
                             </li>
 
                             {{-- CLIENTES --}}
-                            <li class="nav-parent">
+                            <li class="nav-parent {{ request()->routeIs('cliente') ? 'nav-expanded' : '' }}" style="{{ request()->routeIs('cliente') ? 'display: block;' : '' }}">
                                 <a class="nav-link" href="#">
-                                    <i class="fa-regular fa-address-card"></i>
-                                    <span>Clientes</span>
-                                    <i class="fas fa-chevron-down chevron"></i>
+                                    <i class="fa-regular fa-address-card"></i><span>Clientes</span><i class="fas fa-chevron-down chevron"></i>
                                 </a>
-                                <ul class="nav-children">
-                                    <li><a class="nav-link" href="#">Clientes</a></li>
-                                    <li><a class="nav-link" href="#">Tipos de clientes</a></li>
+
+                                <ul class="nav-children" style="{{ request()->routeIs('cliente','tipocliente') ? 'display: block !important;' : '' }}">
+                                    <li class="{{ request()->routeIs('cliente') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('cliente') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Clientes</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="{{ request()->routeIs('tipocliente') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('tipocliente') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Tipos de clientes</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
-
                             {{-- PRODUCTOS / SERVICIOS --}}
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">

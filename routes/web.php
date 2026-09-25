@@ -120,10 +120,30 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/tipocomprobante/gasto', [App\Http\Controllers\ComprobanteGastoController::class, 'store'])->name('configuracion.comprobantegasto.store')->middleware('auth');
     Route::put('/configuracion/tipocomprobante/gasto/{id}', [App\Http\Controllers\ComprobanteGastoController::class, 'update'])->name('configuracion.comprobantegasto.update')->middleware('auth');
     Route::delete('/configuracion/tipocomprobante/gasto/{id}', [App\Http\Controllers\ComprobanteGastoController::class, 'destroy'])->name('configuracion.comprobantegasto.destroy')->middleware('auth');
+    // Roles
+    Route::get('/configuracion/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('configuracion.roles')->middleware('auth');
+    Route::post('/configuracion/roles', [App\Http\Controllers\RoleController::class, 'store'])->name('configuracion.roles.store')->middleware('auth');
+    Route::get('/configuracion/roles/{role}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('configuracion.roles.edit')->middleware('auth');
+    Route::put('/configuracion/roles/{role}', [App\Http\Controllers\RoleController::class, 'update'])->name('configuracion.roles.update')->middleware('auth');
+    Route::delete('/configuracion/roles/{role}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('configuracion.roles.destroy')->middleware('auth');
+
     //Sucursal    
     Route::get('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursal')->middleware('auth');
     Route::post('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'store'])->name('sucursal.store')->middleware('auth');
     Route::put('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'update'])->name('sucursal.update')->middleware('auth');
     Route::delete('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'destroy'])->name('sucursal.destroy')->middleware('auth');
+    //TipoCliente
+    Route::get('/admin/tipocliente', [App\Http\Controllers\TipoClienteController::class, 'index'])->name('tipocliente')->middleware('auth');
+    Route::post('/admin/tipocliente', [App\Http\Controllers\TipoClienteController::class, 'store'])->name('tipocliente.store')->middleware('auth');
+    Route::put('/admin/tipocliente/{tipoCliente}', [App\Http\Controllers\TipoClienteController::class, 'update'])->name('tipocliente.update')->middleware('auth');
+    Route::delete('/admin/tipocliente/{tipoCliente}', [App\Http\Controllers\TipoClienteController::class, 'destroy'])->name('tipocliente.destroy')->middleware('auth');
+
+    //Cliente
+    Route::get('/admin/cliente', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente')->middleware('auth');
+    Route::post('/admin/cliente', [App\Http\Controllers\ClienteController::class, 'store'])->name('cliente.store')->middleware('auth');
+    Route::get('/admin/cliente/{cliente}/edit', [App\Http\Controllers\ClienteController::class, 'edit'])->name('cliente.edit')->middleware('auth');
+    Route::put('/admin/cliente/{cliente}', [App\Http\Controllers\ClienteController::class, 'update'])->name('cliente.update')->middleware('auth');
+    Route::delete('/admin/cliente/{cliente}', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('cliente.destroy')->middleware('auth');
+    Route::get('/admin/cliente/consulta-documento', [App\Http\Controllers\ClienteController::class, 'consultaDocumento'])->name('cliente.consulta.documento')->middleware('auth');
 
 });

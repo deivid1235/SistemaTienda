@@ -122,6 +122,7 @@
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Vendedores</a></li>
+                <li><a href="{{ route('configuracion.roles') }}" class="text-gray-800 text-sm hover:underline">Roles</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Productos</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
             </ul>
