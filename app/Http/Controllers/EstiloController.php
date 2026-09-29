@@ -36,23 +36,19 @@ class EstiloController extends Controller
         $estilo->menu_lateral = $request->menu_lateral;
         $estilo->estado = 'INACTIVO';
         $estilo->save();
-
         return back()->with('success', 'Estilo guardado correctamente.');
     }
 
     public function activar( string $id)
-{
-    Estilo::where('estado', 'ACTIVO')->update([
-        'estado' => 'INACTIVO'
-    ]);
-
-    $estilo = Estilo::findOrFail($id);
-
-    $estilo->estado = 'ACTIVO';
-    $estilo->save();
-
-    return back()->with('success', 'Estilo activado correctamente.');
-}
+    {
+        Estilo::where('estado', 'ACTIVO')->update([
+            'estado' => 'INACTIVO'
+        ]);
+        $estilo = Estilo::findOrFail($id);
+        $estilo->estado = 'ACTIVO';
+        $estilo->save();
+        return back()->with('success', 'Estilo activado correctamente.');
+    }
 
     /**
      * Display the specified resource.
@@ -78,14 +74,11 @@ class EstiloController extends Controller
     public function update(Request $request,  string $id)
     {
         $estilo = Estilo::findOrFail($id);
-
         $estilo->nombre = $request->nombre;
         $estilo->color = $request->color;
         $estilo->modo = $request->modo;
         $estilo->menu_lateral = $request->menu_lateral;
-
         $estilo->save();
-
         return redirect()
             ->route('configuracion')
             ->with('success', 'Estilo actualizado correctamente.');

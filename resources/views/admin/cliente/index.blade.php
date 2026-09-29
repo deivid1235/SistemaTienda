@@ -177,11 +177,9 @@
                                                             <label for="nacionalidad{{ $cliente->id }}" class="block text-sm font-medium text-slate-700 mb-1">
                                                                 Nacionalidad
                                                             </label>
-                                                            <select id="nacionalidad{{ $cliente->id }}" name="nacionalidad"
+                                                            <input type="text" id="nacionalidad{{ $cliente->id }}" name="nacionalidad"
+                                                                value="{{ old('nacionalidad', $cliente->nacionalidad) }}"
                                                                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                                                <option value="PERU" {{ old('nacionalidad', $cliente->nacionalidad) == 'PERU' ? 'selected' : '' }}>PERU</option>
-                                                                <option value="OTRO" {{ old('nacionalidad', $cliente->nacionalidad) == 'OTRO' ? 'selected' : '' }}>OTRO</option>
-                                                            </select>
                                                         </div>
 
                                                         <div>
@@ -435,15 +433,13 @@
                                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
                         </div>
 
-                        <div>
+                       <div>
                             <label for="nacionalidad" class="block text-sm font-medium text-slate-700 mb-1">
                                 Nacionalidad
                             </label>
-                            <select id="nacionalidad" name="nacionalidad"
+
+                            <input type="text" id="nacionalidad" name="nacionalidad"value="PERÚ"
                                 class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                <option value="PERU">PERU</option>
-                                <option value="OTRO">OTRO</option>
-                            </select>
                         </div>
 
                         <div>

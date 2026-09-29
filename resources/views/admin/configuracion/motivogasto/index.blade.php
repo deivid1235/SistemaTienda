@@ -238,7 +238,7 @@
         Motivos de ingresos
     </h1>
 
-   <div class="bg-white rounded-3xl shadow-md p-6">
+    <div class="bg-white rounded-3xl shadow-md p-6">
         <div class="flex justify-end mb-4">
             <button type="button"
                 onclick="document.getElementById('modalNuevoMotivoIngreso').classList.remove('hidden')"
@@ -253,7 +253,7 @@
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-base font-semibold text-slate-700 flex items-center gap-2">
                 <i class="fa-solid fa-file-invoice-dollar text-slate-600"></i>
-                Motivos de gastos
+                Motivos de Ingresos
             </h2>
         </div>
         

@@ -30,19 +30,20 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:100|unique:roles,nombre',
+            'nombre' => 'required|string|max:100|unique:roles,name',
             'descripcion' => 'nullable|string|max:255',
             'estado' => 'required|boolean',
         ]);
 
         $role = new Role();
-        $role->nombre = $request->nombre;
+        $role->name = $request->nombre;
+        $role->guard_name = 'web';
         $role->descripcion = $request->descripcion;
         $role->estado = $request->estado;
         $role->save();
 
         return redirect()->route('configuracion.roles')
-            ->with('success', 'Rol guardado correctamente.');
+            ->with('success', 'Rol creado correctamente.');
     }
     /**
      * Display the specified resource.
@@ -66,12 +67,12 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'nombre' => 'required|string|max:100|unique:roles,nombre,' . $role->id,
+            'nombre' => 'required|string|max:100|unique:roles,name,' . $role->id,
             'descripcion' => 'nullable|string|max:255',
             'estado' => 'required|boolean',
         ]);
 
-        $role->nombre = $request->nombre;
+        $role->name = $request->nombre;
         $role->descripcion = $request->descripcion;
         $role->estado = $request->estado;
         $role->save();

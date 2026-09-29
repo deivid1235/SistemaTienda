@@ -51,7 +51,7 @@
                                     <span class="text-amber-500 text-xs">
                                         <i class="fa-solid fa-user"></i>
                                     </span>
-                                    <span class="text-xs font-semibold text-amber-900">{{ $role->nombre }}</span>
+                                    <span class="text-xs font-semibold text-amber-900">{{ $role->name }}</span>
                                 </div>
                             </td>
                             <td class="py-2 text-black font-medium">{{ $role->descripcion }}</td>
@@ -94,7 +94,7 @@
                                                         <label for="nombre_rol{{ $role->id }}"class="block text-sm font-medium text-black mb-1">
                                                             Nombre
                                                         </label>
-                                                        <input type="text" id="nombre_rol{{ $role->id }}" name="nombre" value="{{ old('nombre', $role->nombre) }}" maxlength="100" required
+                                                        <input type="text" id="nombre_rol{{ $role->id }}" name="nombre" value="{{ old('nombre', $role->name) }}" maxlength="100" required
                                                             class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                                                             placeholder="Ej. Administrador">
                                                     </div>

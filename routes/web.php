@@ -100,7 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'update'])->name('configuracion.estilo.update')->middleware('auth');
     Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
     Route::put('/configuracion/estilo/{id}/activar', [App\Http\Controllers\EstiloController::class, 'activar'])->name('configuracion.estilo.activar')->middleware('auth');
-    Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
+    //Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
     //Motivo de gatos 
     Route::get('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'index'])->name('configuracion.motivogasto')->middleware('auth');
     Route::post('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'store'])->name('configuracion.motivogasto.store')->middleware('auth');

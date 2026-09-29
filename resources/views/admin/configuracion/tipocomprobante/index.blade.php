@@ -249,7 +249,7 @@
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-base font-semibold text-slate-700 flex items-center gap-2">
                 <i class="fa-solid fa-file-invoice-dollar text-slate-600"></i>
-                Tipo de comprobante Ingreso
+                Tipo de comprobante gasto
             </h2>
         </div>
         

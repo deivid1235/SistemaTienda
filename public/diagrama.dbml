@@ -237,13 +237,15 @@ Table sucursales {
 }
 
 Table Roles {
-    id int [pk, increment]
-    nombre varchar(100)
+    id bigint [pk, increment]
+    name varchar(100)
+    guard_name varchar(255)
     descripcion varchar(255)
     estado boolean
     created_at timestamp
     updated_at timestamp
 }
+
 
 Table tipo_clientes {
     id int [pk, increment]
