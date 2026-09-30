@@ -145,5 +145,21 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/cliente/{cliente}', [App\Http\Controllers\ClienteController::class, 'update'])->name('cliente.update')->middleware('auth');
     Route::delete('/admin/cliente/{cliente}', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('cliente.destroy')->middleware('auth');
     Route::get('/admin/cliente/consulta-documento', [App\Http\Controllers\ClienteController::class, 'consultaDocumento'])->name('cliente.consulta.documento')->middleware('auth');
+    // Tipo de documento
+    Route::get('/configuracion/tipodocumento', [App\Http\Controllers\TipoDocumentoController::class, 'index'])->name('configuracion.tipodocumento')->middleware('auth');
+    Route::post('/configuracion/tipodocumento', [App\Http\Controllers\TipoDocumentoController::class, 'store'])->name('configuracion.tipodocumento.store')->middleware('auth');
+    Route::put('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'update'])->name('configuracion.tipodocumento.update')->middleware('auth');
+    Route::delete('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'destroy'])->name('configuracion.tipodocumento.destroy')->middleware('auth');
+    // Series
+    Route::post('/admin/sucursal/series', [App\Http\Controllers\SerieController::class, 'store'])
+    ->name('configuracion.serie.store')
+    ->middleware('auth');
+    Route::put('/admin/sucursal/series/{id}', [App\Http\Controllers\SerieController::class, 'update'])
+    ->name('configuracion.serie.update')
+    ->middleware('auth');
+
+    Route::delete('/admin/sucursal/series/{id}', [App\Http\Controllers\SerieController::class, 'destroy'])
+    ->name('configuracion.serie.destroy')
+    ->middleware('auth');
 
 });

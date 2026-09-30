@@ -11,8 +11,7 @@
         
     <div class="bg-white rounded-3xl shadow-md p-6">
         <div class="flex justify-end">
-            <button type="button"
-                onclick="document.getElementById('modalNuevoSucursal').classList.remove('hidden')"
+            <button type="button" onclick="document.getElementById('modalNuevoSucursal').classList.remove('hidden')"
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
                  style="background-color: var(--active-pink);" >
                 <i class="fa-solid fa-circle-plus"></i>
@@ -40,7 +39,7 @@
                         <tr class="border-b border-slate-100">
                             <td class="py-2 text-slate-600">{{ $index + 1 }}</td>
                             <td class="py-2 text-blue-800 font-medium">{{ $sucursal->codigo_sucursal }}</td>
-                           <td class="py-2 text-slate-700">
+                            <td class="py-2 text-slate-700">
                                 <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20">
                                     <svg class="w-3 h-3 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21" />
@@ -65,6 +64,13 @@
                             </td>
                             <td class="py-2">
                                 <div class="flex justify-end gap-2">
+                                    <button type="button"
+                                            onclick="document.getElementById('modalNuevaSerie').classList.remove('hidden')"
+                                            class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#FF9800] hover:bg-[#FF9800] text-white text-sm font-semibold">
+                                        <i class="fa-solid fa-circle-plus"></i>
+                                        Nueva Serie
+                                    </button>
+
                                     <button type="button" onclick="document.getElementById('modalEditarSucursal{{ $sucursal->id }}').classList.remove('hidden')"
                                         class="px-4 py-1.5 rounded-md text-white text-xs font-semibold"
                                         style="background-color: #64DD17;">
@@ -288,8 +294,7 @@
 
     </div>
 
-    <div id="modalNuevoSucursal"
-        class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
+    <div id="modalNuevoSucursal" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
         <div class="absolute inset-0 bg-black/10"
             onclick="document.getElementById('modalNuevoSucursal').classList.add('hidden')">
         </div>
@@ -474,6 +479,266 @@
             </form>
         </div>
     </div>
+
+
+    <div id="modalNuevaSerie" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-16 overflow-y-auto">
+        <div class="absolute inset-0 bg-black/10" onclick="document.getElementById('modalNuevaSerie').classList.add('hidden')"></div>
+        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-6xl mx-3 sm:mx-4 p-4 sm:p-6 my-4 sm:my-0">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-lg font-semibold text-slate-800">
+                    <i class="fa-solid fa-layer-group text-slate-600"></i>
+                    Series
+                </h2>
+                <button type="button" onclick="document.getElementById('modalNuevaSerie').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            {{-- TABLA DE SERIES REGISTRADAS --}}
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-semibold text-slate-700"><i class="fa-solid fa-list mr-1"></i>Series registradas</h3>
+                    <span class="text-xs text-slate-500">Total: {{ $series->count() }}</span>
+                </div>
+                <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                    <table class="w-full text-sm">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-600">#</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-600">Código</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-600">Tipo de documento</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-600">Sucursal</th>
+                                <th class="px-4 py-3 text-left font-semibold text-slate-600">Serie</th>
+                                <th class="px-4 py-3 text-center font-semibold text-slate-600">Contingencia</th>
+                                <th class="px-4 py-3 text-center font-semibold text-slate-600">Estado</th>
+                                <th class="px-4 py-3 text-center font-semibold text-slate-600">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            @forelse($series as $serie)
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-3 text-slate-600">{{ $serie->id }}</td>
+                                    <td class="px-4 py-3 text-slate-600">{{ $serie->tipoDocumento->codigo ?? '-' }}</td>
+                                    <td class="px-4 py-3 text-slate-700">{{ $serie->tipoDocumento->nombre ?? '-' }}</td>
+                                    <td class="px-4 py-3 text-slate-700">{{ $serie->sucursal->codigo_sucursal ?? '-' }} - {{ $serie->sucursal->descripcion ?? '-' }}</td>
+                                    <td class="px-4 py-3 font-semibold text-slate-800">{{ $serie->serie }}</td>
+                                    <td class="px-4 py-3 text-center">
+                                        @if($serie->contingencia === 'SI')
+                                            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">Sí</span>
+                                        @else
+                                            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">No</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        @if($serie->estado === 'ACTIVO')
+                                            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Activo</span>
+                                        @else
+                                            <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">Inactivo</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-4 py-3 text-center">
+                                        <button type="button"
+                                                onclick="document.getElementById('modalEditarSerie{{ $serie->id }}').classList.remove('hidden')"
+                                                class="inline-flex items-center justify-center w-8 h-8 rounded-md text-blue-600 hover:bg-blue-50">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button type="button" onclick="confirmarEliminar('{{ route('configuracion.serie.destroy', $serie->id) }}')"
+                                            class="inline-flex items-center justify-center w-8 h-8 rounded-md text-red-600 hover:bg-red-50">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+
+                                    @foreach($series as $serie)
+                                        <div id="modalEditarSerie{{ $serie->id }}" class="hidden fixed inset-0 z-[999999] flex items-start justify-center pt-16 overflow-y-auto">
+                                            <div class="absolute inset-0 bg-black/10" onclick="document.getElementById('modalEditarSerie{{ $serie->id }}').classList.add('hidden')"></div>
+                                            <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-6xl mx-3 sm:mx-4 p-4 sm:p-6">
+                                                <div class="flex items-center justify-between mb-6">
+                                                    <h2 class="text-lg font-semibold text-slate-800">
+                                                        <i class="fa-solid fa-pen-to-square text-slate-600"></i>Editar Serie
+                                                    </h2>
+                                                    <button type="button" onclick="document.getElementById('modalEditarSerie{{ $serie->id }}').classList.add('hidden')"
+                                                        class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('configuracion.serie.update', $serie->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                                                        <div class="md:col-span-3">
+                                                            <label class="block text-sm font-medium text-black mb-1">Tipo de documento</label>
+                                                            <select name="tipo_documento_id"class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm"required>
+                                                                @foreach($tipoDocumentos as $tipoDocumento)
+                                                                    <option value="{{ $tipoDocumento->id }}"{{ $serie->tipo_documento_id == $tipoDocumento->id ? 'selected' : '' }}>
+                                                                        {{ $tipoDocumento->codigo }} - {{ $tipoDocumento->nombre }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="md:col-span-3">
+                                                            <label class="block text-sm font-medium text-black mb-1">Sucursal</label>
+                                                            <select name="sucursal_id"class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm"required>
+                                                                @foreach($sucursals as $sucursal)
+                                                                    <option value="{{ $sucursal->id }}"
+                                                                        {{ $serie->sucursal_id == $sucursal->id ? 'selected' : '' }}>
+                                                                        {{ $sucursal->codigo_sucursal }} - {{ $sucursal->descripcion }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="md:col-span-2">
+                                                            <label class="block text-sm font-medium text-black mb-1">
+                                                                Serie
+                                                            </label>
+                                                            <input type="text" name="serie" value="{{ $serie->serie }}" maxlength="10" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm" required>
+                                                        </div>
+                                                       {{-- CONTINGENCIA --}}
+                                                        <div class="md:col-span-2">
+                                                            <label class="block text-sm font-medium text-black mb-1">Contingencia</label>
+                                                            <label class="inline-flex items-center cursor-pointer gap-3">
+                                                                <input type="hidden"name="contingencia"value="NO">
+                                                                <span class="text-sm text-slate-700">No</span>
+                                                                <input type="checkbox"id="contingencia" name="contingencia" value="SI" class="sr-only peer"
+                                                                    {{ old('contingencia', $serie->contingencia ?? 'NO') == 'SI' ? 'checked' : '' }}>
+                                                                <div class="relative w-11 h-6 bg-slate-300 rounded-full
+                                                                    peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                                    after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5  after:transition-all peer-checked:bg-[#269ad5]">
+                                                                </div>
+                                                                <span class="text-sm text-black">Sí</span>
+                                                            </label>
+                                                        </div>
+                                                        {{-- ESTADO --}}
+                                                        <div class="md:col-span-2">
+                                                            <label class="block text-sm font-medium text-black mb-1">Estado</label>
+                                                            <label class="inline-flex items-center cursor-pointer gap-3">
+                                                                <input type="hidden" name="estado" value="INACTIVO">
+                                                                <span class="text-sm text-slate-700">No</span>
+                                                                <input type="checkbox" id="estado" name="estado" value="ACTIVO" class="sr-only peer" {{ old('estado', $serie->estado ?? 'ACTIVO') == 'ACTIVO' ? 'checked' : '' }}>
+                                                                <div class="relative w-11 h-6 bg-slate-300 rounded-full
+                                                                    peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                                    after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5  after:transition-all peer-checked:bg-[#269ad5]">
+                                                                </div>
+                                                                <span class="text-sm text-black"> Sí</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex justify-end gap-3 mt-6">
+                                                        <button type="button"
+                                                                onclick="document.getElementById('modalEditarSerie{{ $serie->id }}').classList.add('hidden')"
+                                                                class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
+                                                            Cancelar
+                                                        </button>
+
+                                                        <button type="submit"
+                                                                class="inline-flex items-center gap-2 px-5 py-2 rounded-md text-white text-sm font-semibold"
+                                                                style="background-color: var(--active-pink);">
+                                                            <i class="fa-solid fa-floppy-disk"></i>
+                                                            Actualizar
+                                                        </button>
+
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    @endforeach
+
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="px-4 py-8 text-center text-sm text-slate-500">
+                                        No hay series registradas.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{-- SEPARADOR --}}
+            <div class="border-t border-slate-200 pt-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-slate-700"><i class="fa-solid fa-plus-circle mr-1"></i>Agregar nueva serie</h3>
+                </div>
+                <form action="{{ route('configuracion.serie.store') }}" method="POST">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                        {{-- TIPO DOCUMENTO --}}
+                        <div class="md:col-span-3">
+                            <label for="tipo_documento_id" class="block text-sm font-medium text-black mb-1"> Tipo de documento</label>
+                            <select id="tipo_documento_id" name="tipo_documento_id" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" required>
+                                <option value="">
+                                    Seleccione una opcion  
+                                </option>
+                                @foreach($tipoDocumentos as $tipoDocumento)
+                                    <option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->codigo }} - {{ $tipoDocumento->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- SUCURSAL --}}
+                        <div class="md:col-span-3">
+                            <label for="sucursal_id" class="block text-sm font-medium text-black mb-1">Sucursal</label>
+                            <select id="sucursal_id" name="sucursal_id" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400" required>
+                                <option value="">Seleccione una opcion</option>
+                                @foreach($sucursals as $sucursal)
+                                    <option value="{{ $sucursal->id }}">{{ $sucursal->codigo_sucursal }} - {{ $sucursal->descripcion }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- SERIE --}}
+                        <div class="md:col-span-2">
+                            <label for="serie" class="block text-sm font-medium text-black mb-1"> Serie </label>
+                            <input type="text" id="serie" name="serie" maxlength="10" placeholder="Ej. F001" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            required>
+                        </div>
+                        {{-- CONTINGENCIA --}}
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-black mb-1">Contingencia</label>
+                            <label class="inline-flex items-center cursor-pointer gap-3">
+                                <input type="hidden"name="contingencia" value="NO"><span class="text-sm text-slate-700">No</span>
+                                <input type="checkbox" name="contingencia" value="SI" class="sr-only peer">
+                                <div class="relative w-11 h-6 bg-slate-300 rounded-full
+                                    peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px]
+                                    after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full
+                                    after:h-5 after:w-5 after:transition-all peer-checked:bg-[#269ad5]">
+                                </div>
+                                <span class="text-sm text-black"> Sí</span>
+                            </label>
+                        </div>
+
+                        {{-- ESTADO --}}
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-black mb-1">Estado</label>
+                            <label class="inline-flex items-center cursor-pointer gap-3">
+                                <input type="hidden" name="estado" value="INACTIVO"><span class="text-sm text-slate-700">No</span>
+                                <input type="checkbox"name="estado"value="ACTIVO" class="sr-only peer"checked>
+                                <div class="relative w-11 h-6 bg-slate-300 rounded-full
+                                    peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px]
+                                    after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full
+                                    after:h-5 after:w-5 after:transition-all peer-checked:bg-[#269ad5]">
+                                </div>
+                                <span class="text-sm text-black"> Sí</span>
+                            </label>
+                        </div>
+                        {{-- GUARDAR --}}
+                        <div class="md:col-span-12 flex justify-end gap-3 mt-2">
+                            <button type="button"onclick="document.getElementById('modalNuevaSerie').classList.add('hidden')"
+                                class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
+                                Cancelar
+                            </button>
+                            <button type="submit"class="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
+                                style="background-color: var(--active-pink);">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Guardar
+                            </button>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 @endsection
 

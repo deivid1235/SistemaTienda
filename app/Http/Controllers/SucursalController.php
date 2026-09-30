@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Serie;
 use App\Models\Sucursal;
+use App\Models\TipoDocumento;
 use Illuminate\Http\Request;
 
 class SucursalController extends Controller
@@ -13,9 +15,14 @@ class SucursalController extends Controller
      */
     public function index()
     {
+        $tipoDocumentos = TipoDocumento::where('estado', 'ACTIVO')->get();
         $clientes = Cliente::where('estado', true)->get();
         $sucursals = Sucursal::all();
-        return view('admin.sucursal.index', compact('sucursals','clientes'));
+        $series = Serie::with([
+        'tipoDocumento',
+        'sucursal'
+    ])->get();
+        return view('admin.sucursal.index', compact('sucursals','clientes','tipoDocumentos','series'));
     }
 
     /**

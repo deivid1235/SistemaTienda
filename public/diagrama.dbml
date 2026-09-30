@@ -280,4 +280,23 @@ Table clientes {
 }
 
 
+Table tipo_documentos {
+    id int [pk, increment]
+    codigo varchar(10) [unique]
+    nombre varchar(150)
+    estado enum('ACTIVO', 'INACTIVO') [default: 'INACTIVO']
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table series {
+    id int [pk, increment]
+    tipo_documento_id int [not null, ref: > tipo_documentos.id]
+    serie varchar(10) [not null]
+    contingencia enum('SI', 'NO') [default: 'NO']
+    estado enum('ACTIVO', 'INACTIVO') [default: 'ACTIVO']
+    created_at timestamp
+    updated_at timestamp
+}
+
 
