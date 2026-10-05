@@ -60,6 +60,7 @@
                 <li><a href="{{ route('configuracion.detraccion') }}" class="text-gray-800 text-sm hover:underline">Listado de tipos de detracciones</a></li>
                 <li><a href="{{ route('configuracion.unidad') }}" class="text-gray-800 text-sm hover:underline">Listado de unidades</a></li>
                 <li><a href="{{ route('configuracion.traslado') }}" class="text-gray-800 text-sm hover:underline">Tipos de motivos de transferencias</a></li>
+                <li><a href="{{ route('configuracion.tipodocumento') }}"class="text-gray-800 text-sm hover:underline">Tipos de documentos</a>
             </ul>
         </div>
     </div>
@@ -124,7 +125,12 @@
                 <li><a href="{{ route('configuracion.vendedor') }}" class="text-gray-800 text-sm hover:underline">Vendedores</a></li>
                 <li><a href="{{ route('configuracion.roles') }}" class="text-gray-800 text-sm hover:underline">Roles</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Productos</a></li>
+<<<<<<< HEAD
                 <li><a href="{{ route('configuracion.cuentapendiente') }}" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
+=======
+                <li><a href="#" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
+            </li>
+>>>>>>> 1ccfba97931256fbee21754f50debd1854ad8b95
             </ul>
         </div>
     </div>

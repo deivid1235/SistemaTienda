@@ -4,13 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sucursal extends Model
+class TipoDocumento extends Model
 {
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class);
-    }
-
     public function series()
     {
         return $this->hasMany(Serie::class);
