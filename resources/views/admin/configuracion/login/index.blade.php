@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="flex items-center gap-2 text-sm mb-4">
-    <a href="{{ route('configuracion') }}"
+    <a href="{{ route('configuracion.menu') }}"
         class="text-slate-400 hover:text-slate-700 flex items-center gap-1">
         <i class="fa-solid fa-house"></i>
         Dashboard
@@ -28,8 +28,7 @@
                     <div id="contenidoImagen" class="hidden text-center">
                         <div class="flex justify-center mb-3">
                             <div class="bg-white rounded-full p-5 shadow-md">
-                                <i class="fa-solid fa-images text-3xl"
-                                    style="background-color: var(--active-pink);"></i>
+                                <i class="fa-solid fa-images text-3xl"></i>
                             </div>
                         </div>
                         <p class="text-sm font-semibold text-slate-600">
@@ -42,7 +41,7 @@
                 @else
                     <div id="contenidoImagen" class="text-center">
                         <div class="flex justify-center mb-3">
-                            <div class="bg-white rounded-full p-5 shadow-md"><i class="fa-solid fa-images text-3xl" style="background-color: var(--active-pink);"></i></div>
+                            <div class="bg-white rounded-full p-5 shadow-md"><i class="fa-solid fa-images text-3xl"></i></div>
                         </div>
                         <p class="text-sm font-semibold text-slate-600">Imágenes del carrusel</p>
                         <p class="text-xs text-slate-400 mt-1">Haz clic aquí para seleccionar imágenes</p>

@@ -14,11 +14,8 @@ class LoginController extends Controller
     public function showLoginForm()
 {
     $login = Login::with('compania')->first();
-
     $compania = $login?->compania ?? Compania::find(1);
-
     $imagenes = LoginImagen::where('estado', true)->get();
-
     return view('auth.login', compact(
         'login',
         'compania',
@@ -34,9 +31,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-
             $request->session()->regenerate();
-
             return redirect()->intended(route('dashboard'));
         }
 

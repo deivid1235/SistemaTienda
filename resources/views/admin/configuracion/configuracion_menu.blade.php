@@ -23,11 +23,23 @@
 
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="{{ route('configuracion.banco') }}" class="text-gray-800 text-sm hover:underline">Listado de bancos</a></li>
-                <li><a href="{{ route('configuracion.cuentabancaria') }}" class="text-gray-800 text-sm hover:underline">Listado de cuentas bancarias</a></li>
-                <li><a href="{{ route('configuracion.moneda') }}" class="text-gray-800 text-sm hover:underline">Lista de monedas</a></li>
-                <li><a href="{{ route('configuracion.tarjeta') }}" class="text-gray-800 text-sm hover:underline">Listado de tarjetas</a></li>
-                <li><a href="{{ route('configuracion.plataforma') }}" class="text-gray-800 text-sm hover:underline">Plataformas</a></li>
+                @can('configuracion.banco.index')
+                    <li><a href="{{ route('configuracion.banco') }}" class="text-gray-800 text-sm hover:underline">Listado de bancos</a></li>
+                @endcan
+                @can('configuracion.cuentabancaria.index')
+                    <li><a href="{{ route('configuracion.cuentabancaria') }}" class="text-gray-800 text-sm hover:underline">Listado de cuentas bancarias</a></li>
+                @endcan
+                @can('configuracion.moneda.index')
+                    <li><a href="{{ route('configuracion.moneda') }}" class="text-gray-800 text-sm hover:underline">Lista de monedas</a></li>
+                @endcan
+                @can('configuracion.tarjeta.index')
+                    <li><a href="{{ route('configuracion.tarjeta') }}" class="text-gray-800 text-sm hover:underline">Listado de tarjetas</a></li>
+                @endcan
+
+                @can('configuracion.plataforma.index')
+                    <li><a href="{{ route('configuracion.plataforma') }}" class="text-gray-800 text-sm hover:underline">Plataformas</a></li>
+                @endcan
+
             </ul>
         </div>
 
@@ -39,7 +51,9 @@
         </div>
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="{{ route('configuracion.compania') }}" class="text-gray-800 text-sm hover:underline">Empresa</a></li>
+                @can('configuracion.compania.index')
+                    <li><a href="{{ route('configuracion.compania') }}" class="text-gray-800 text-sm hover:underline">Empresa</a></li>
+                @endcan
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Giro de negocio</a></li>
                 <li><a href="#" id="open-styles-2" class="text-gray-800 text-sm hover:underline">Estilos y temas</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Avanzado</a></li>
@@ -56,11 +70,21 @@
         </div>
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="{{ route('configuracion.atributo') }}" class="text-gray-800 text-sm hover:underline">Listado de Atributos</a></li>
-                <li><a href="{{ route('configuracion.detraccion') }}" class="text-gray-800 text-sm hover:underline">Listado de tipos de detracciones</a></li>
-                <li><a href="{{ route('configuracion.unidad') }}" class="text-gray-800 text-sm hover:underline">Listado de unidades</a></li>
-                <li><a href="{{ route('configuracion.traslado') }}" class="text-gray-800 text-sm hover:underline">Tipos de motivos de transferencias</a></li>
-                <li><a href="{{ route('configuracion.tipodocumento') }}"class="text-gray-800 text-sm hover:underline">Tipos de documentos</a>
+                @can('configuracion.atributo.index')
+                    <li><a href="{{ route('configuracion.atributo') }}" class="text-gray-800 text-sm hover:underline">Listado de Atributos</a></li>
+                @endcan
+                @can('configuracion.detraccion.index')
+                    <li><a href="{{ route('configuracion.detraccion') }}" class="text-gray-800 text-sm hover:underline">Listado de tipos de detracciones</a></li>
+                @endcan
+                @can('configuracion.unidad.index')
+                    <li><a href="{{ route('configuracion.unidad') }}" class="text-gray-800 text-sm hover:underline">Listado de unidades</a></li>
+                @endcan
+                @can('configuracion.traslado.index')
+                    <li><a href="{{ route('configuracion.traslado') }}" class="text-gray-800 text-sm hover:underline">Tipos de motivos de transferencias</a></li>
+                @endcan
+                @can('configuracion.tipodocumento.index')
+                    <li><a href="{{ route('configuracion.tipodocumento') }}"class="text-gray-800 text-sm hover:underline">Tipos de documentos</a></li>
+                @endcan
             </ul>
         </div>
     </div>
@@ -71,10 +95,16 @@
         </div>
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="{{ route('configuracion.metodopago') }}" class="text-gray-800 text-sm hover:underline">Métodos de pago - ingreso / gastos</a></li>
-                <li><a href="{{ route('configuracion.motivogasto') }}" class="text-gray-800 text-sm hover:underline">Motivos de ingresos / Gastos</a></li>
+                @can('configuracion.metodopago.index')
+                    <li><a href="{{ route('configuracion.metodopago') }}" class="text-gray-800 text-sm hover:underline">Métodos de pago - ingreso / gastos</a></li>
+                @endcan
+                @can('configuracion.motivogasto.index')
+                    <li><a href="{{ route('configuracion.motivogasto') }}" class="text-gray-800 text-sm hover:underline">Motivos de ingresos / Gastos</a></li>
+                @endcan
                <!--<li><a href="#" class="text-gray-800 text-sm hover:underline">Listado de métodos de pago</a></li> -->
-                <li><a href="{{ route('configuracion.tipocomprobante') }}" class="text-gray-800 text-sm hover:underline">Tipos de comprobantes INGRESOS Y GASTOS</a></li>
+                @can('configuracion.tipocomprobante.index')
+                    <li><a href="{{ route('configuracion.tipocomprobante') }}" class="text-gray-800 text-sm hover:underline">Tipos de comprobantes INGRESOS Y GASTOS</a></li>
+                @endcan
             </ul>
         </div>
     </div>
@@ -110,9 +140,11 @@
             <h2 class="text-blue-900 font-bold text-base">Visual</h2>
         </div>
         <div class="px-6 py-6">
-            <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="{{ route('configuracion.login') }}" class="text-gray-800 text-sm hover:underline">Login</a></li>
-            </ul>
+            @can('configuracion.login.index')
+                <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
+                    <li><a href="{{ route('configuracion.login') }}" class="text-gray-800 text-sm hover:underline">Login</a></li>
+                </ul>
+            @endcan
         </div>
     </div>
 
@@ -123,10 +155,11 @@
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Vendedores</a></li>
-                <li><a href="{{ route('configuracion.roles') }}" class="text-gray-800 text-sm hover:underline">Roles</a></li>
+                @can('configuracion.roles.index')
+                    <li><a href="{{ route('configuracion.roles') }}" class="text-gray-800 text-sm hover:underline">Roles</a></li>
+                @endcan
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Productos</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
-            </li>
             </ul>
         </div>
     </div>

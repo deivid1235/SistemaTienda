@@ -68,7 +68,7 @@
                                             onclick="document.getElementById('modalNuevaSerie').classList.remove('hidden')"
                                             class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#FF9800] hover:bg-[#FF9800] text-white text-sm font-semibold">
                                         <i class="fa-solid fa-circle-plus"></i>
-                                        Nueva Serie
+                                        Serie
                                     </button>
 
                                     <button type="button" onclick="document.getElementById('modalEditarSucursal{{ $sucursal->id }}').classList.remove('hidden')"

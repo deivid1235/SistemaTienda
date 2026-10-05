@@ -87,27 +87,32 @@
                             </li>
 
                             {{-- CLIENTES --}}
-                            <li class="nav-parent {{ request()->routeIs('cliente') ? 'nav-expanded' : '' }}" style="{{ request()->routeIs('cliente') ? 'display: block;' : '' }}">
-                                <a class="nav-link" href="#">
-                                    <i class="fa-regular fa-address-card"></i><span>Clientes</span><i class="fas fa-chevron-down chevron"></i>
-                                </a>
+                            @canany(['admin.cliente.index', 'admin.tipocliente.index'])
+                                <li class="nav-parent {{ request()->routeIs('cliente') ? 'nav-expanded' : '' }}" style="{{ request()->routeIs('cliente') ? 'display: block;' : '' }}">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa-regular fa-address-card"></i><span>Clientes</span><i class="fas fa-chevron-down chevron"></i>
+                                    </a>
 
-                                <ul class="nav-children" style="{{ request()->routeIs('cliente','tipocliente') ? 'display: block !important;' : '' }}">
-                                    <li class="{{ request()->routeIs('cliente') ? 'nav-active' : '' }}">
-                                        <a class="nav-link" href="{{ route('cliente') }}">
-                                            <i class="fa-solid fa-circle text-[8px]"></i>
-                                            <span>Clientes</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="{{ request()->routeIs('tipocliente') ? 'nav-active' : '' }}">
-                                        <a class="nav-link" href="{{ route('tipocliente') }}">
-                                            <i class="fa-solid fa-circle text-[8px]"></i>
-                                            <span>Tipos de clientes</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                                    <ul class="nav-children" style="{{ request()->routeIs('cliente','tipocliente') ? 'display: block !important;' : '' }}">
+                                        @can('admin.cliente.index')
+                                            <li class="{{ request()->routeIs('cliente') ? 'nav-active' : '' }}">
+                                                <a class="nav-link" href="{{ route('cliente') }}">
+                                                    <i class="fa-solid fa-circle text-[8px]"></i>
+                                                    <span>Clientes</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('admin.tipocliente.index')
+                                            <li class="{{ request()->routeIs('tipocliente') ? 'nav-active' : '' }}">
+                                                <a class="nav-link" href="{{ route('tipocliente') }}">
+                                                    <i class="fa-solid fa-circle text-[8px]"></i>
+                                                    <span>Tipos de clientes</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </li>
+                            @endcanany
                             {{-- PRODUCTOS / SERVICIOS --}}
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
@@ -250,25 +255,29 @@
                     <span>Configuración y más</span>
                 </button>
                 <!-- MENÚ DESPLEGABLE -->
-                <div id="configuracionMenu"
-                    class="hidden absolute bottom-full left-0 mb-2 w-72 bg-white rounded-xl shadow-xl border border-gray-200 p-2 z-50">
-                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
-                        <i class="fa-solid fa-users text-gray-600 w-5 text-base"></i>
-                        <span>Usuarios</span>
-                    </a>
-                    <a href="{{ route('sucursal') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
-                        <i class="fa-solid fa-list-ol text-gray-600 w-5 text-base"></i>
-                        <span>Sucursales & Series</span>
-                    </a>
+                <div id="configuracionMenu" class="hidden absolute bottom-full left-0 mb-2 w-72 bg-white rounded-xl shadow-xl border border-gray-200 p-2 z-50">
+                   @can('admin.usuario.index')
+                        <a href="{{ route('usuario') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-users text-gray-600 w-5 text-base"></i>
+                            <span>Usuarios</span>
+                        </a>
+                    @endcan
+                    @can('admin.sursal.menu')
+                        <a href="{{ route('sucursal') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-list-ol text-gray-600 w-5 text-base"></i>
+                            <span>Sucursales & Series</span>
+                        </a>
+                    @endcan
                     <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
                         <i class="fa-solid fa-mobile-screen-button text-gray-600 w-5 text-base"></i>
                         <span>APP 3.1</span>
                     </a>
-
-                    <a href="{{ route('configuracion.menu') }}"class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
-                        <i class="fa-solid fa-briefcase text-gray-600 w-5 text-base"></i>
-                        <span>Configuraciones Globales</span>
-                    </a>
+                    @can('admin.configuracion.menu')
+                        <a href="{{ route('configuracion.menu') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-briefcase text-gray-600 w-5 text-base"></i>
+                            <span>Configuraciones Globales</span>
+                        </a>
+                    @endcan
                 </div>
             </div>
 
