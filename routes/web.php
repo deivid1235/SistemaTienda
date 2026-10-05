@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/metodopago', [App\Http\Controllers\MetodoPagoController::class, 'store'])->name('configuracion.metodopago.store')->middleware('auth');
     Route::put('/configuracion/metodopago/{metodopago}', [App\Http\Controllers\MetodoPagoController::class, 'update'])->name('configuracion.metodopago.update')->middleware('auth');
     Route::delete('/configuracion/metodopago/{metodopago}', [App\Http\Controllers\MetodoPagoController::class, 'destroy'])->name('configuracion.metodopago.destroy')->middleware('auth');
-    //metodo gasto 
+    //metodo gasto
     Route::post('/configuracion/metodopago/gasto', [App\Http\Controllers\MetodoGastoController::class, 'store'])->name('configuracion.metodogasto.store')->middleware('auth');
     Route::put('/configuracion/metodopago/gasto/{metodoGasto}', [App\Http\Controllers\MetodoGastoController::class, 'update']) ->name('configuracion.metodogasto.update')->middleware('auth');
     Route::delete('/configuracion/metodopago/gasto/{metodoGasto}', [App\Http\Controllers\MetodoGastoController::class, 'destroy'])->name('configuracion.metodogasto.destroy')->middleware('auth');
@@ -84,7 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/compania', [App\Http\Controllers\CompaniaController::class, 'store'])->name('configuracion.compania.store')->middleware('auth');
     Route::put('/configuracion/compania/{id}', [App\Http\Controllers\CompaniaController::class, 'update'])->name('configuracion.compania.update')->middleware('auth');
     Route::delete('/configuracion/compania/{id}/eliminar-logo', [App\Http\Controllers\CompaniaController::class, 'eliminarLogo'])->name('configuracion.compania.eliminar-logo')->middleware('auth');
-    
+
     //configuración de login
     Route::get('/configuracion/login', [App\Http\Controllers\LoginController::class, 'index'])->name('configuracion.login')->middleware('auth');
     Route::put('/configuracion/login', [App\Http\Controllers\LoginController::class, 'update'])->name('configuracion.login.update')->middleware('auth');
@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
     Route::put('/configuracion/estilo/{id}/activar', [App\Http\Controllers\EstiloController::class, 'activar'])->name('configuracion.estilo.activar')->middleware('auth');
     //Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth');
-    //Motivo de gatos 
+    //Motivo de gatos
     Route::get('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'index'])->name('configuracion.motivogasto')->middleware('auth');
     Route::post('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'store'])->name('configuracion.motivogasto.store')->middleware('auth');
     Route::put('/configuracion/motivogasto/{id}', [App\Http\Controllers\MotivoGastoController::class, 'update'])->name('configuracion.motivogasto.update')->middleware('auth');
@@ -127,7 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/configuracion/roles/{role}', [App\Http\Controllers\RoleController::class, 'update'])->name('configuracion.roles.update')->middleware('auth');
     Route::delete('/configuracion/roles/{role}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('configuracion.roles.destroy')->middleware('auth');
 
-    //Sucursal    
+    //Sucursal
     Route::get('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursal')->middleware('auth');
     Route::post('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'store'])->name('sucursal.store')->middleware('auth');
     Route::put('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'update'])->name('sucursal.update')->middleware('auth');
@@ -137,6 +137,23 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/tipocliente', [App\Http\Controllers\TipoClienteController::class, 'store'])->name('tipocliente.store')->middleware('auth');
     Route::put('/admin/tipocliente/{tipoCliente}', [App\Http\Controllers\TipoClienteController::class, 'update'])->name('tipocliente.update')->middleware('auth');
     Route::delete('/admin/tipocliente/{tipoCliente}', [App\Http\Controllers\TipoClienteController::class, 'destroy'])->name('tipocliente.destroy')->middleware('auth');
+
+    // Avanzado - Contable
+    Route::get('/configuracion/contable', [App\Http\Controllers\CuentaContableController::class, 'index'])->name('configuracion.contable')->middleware('auth');
+    Route::post('/configuracion/contable', [App\Http\Controllers\CuentaContableController::class, 'store'])->name('configuracion.contable.store')->middleware('auth');
+
+    // Comisiones - Vendedores
+    Route::get('/configuracion/vendedor', [App\Http\Controllers\ComisionVendedorController::class, 'index'])->name('configuracion.vendedor')->middleware('auth');
+    Route::post('/configuracion/vendedor', [App\Http\Controllers\ComisionVendedorController::class, 'store'])->name('configuracion.vendedor.store')->middleware('auth');
+    Route::put('/configuracion/vendedor/{comision}', [App\Http\Controllers\ComisionVendedorController::class, 'update'])->name('configuracion.vendedor.update')->middleware('auth');
+    Route::delete('/configuracion/vendedor/{comision}', [App\Http\Controllers\ComisionVendedorController::class, 'destroy'])->name('configuracion.vendedor.destroy')->middleware('auth');
+
+
+        // Comisiones - Cuentas pendientes
+    Route::get('/configuracion/cuentapendiente', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'index'])->name('configuracion.cuentapendiente')->middleware('auth');
+    Route::post('/configuracion/cuentapendiente', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'store'])->name('configuracion.cuentapendiente.store')->middleware('auth');
+    Route::put('/configuracion/cuentapendiente/{comision}', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'update'])->name('configuracion.cuentapendiente.update')->middleware('auth');
+    Route::delete('/configuracion/cuentapendiente/{comision}', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'destroy'])->name('configuracion.cuentapendiente.destroy')->middleware('auth');
 
     //Cliente
     Route::get('/admin/cliente', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente')->middleware('auth');

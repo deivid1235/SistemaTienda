@@ -44,7 +44,7 @@
                 <li><a href="#" id="open-styles-2" class="text-gray-800 text-sm hover:underline">Estilos y temas</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Avanzado</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Generador de link de pago</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Tienda Virtual/Restaurante</a></li> 
+                <li><a href="#" class="text-gray-800 text-sm hover:underline">Tienda Virtual/Restaurante</a></li>
             </ul>
         </div>
     </div>
@@ -97,9 +97,9 @@
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Tareas programadas</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Numeración de facturación</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Avanzado - Contable</a></li> 
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Inventarios</a></li> 
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Nota de ventas</a></li> 
+                <li><a href="{{ route('configuracion.contable') }}" class="text-gray-800 text-sm hover:underline">Avanzado - Contable</a></li>
+                <li><a href="#" class="text-gray-800 text-sm hover:underline">Inventarios</a></li>
+                <li><a href="#" class="text-gray-800 text-sm hover:underline">Nota de ventas</a></li>
             </ul>
         </div>
     </div>
@@ -121,10 +121,10 @@
         </div>
         <div class="px-6 py-6">
             <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Vendedores</a></li>
+                <li><a href="{{ route('configuracion.vendedor') }}" class="text-gray-800 text-sm hover:underline">Vendedores</a></li>
                 <li><a href="{{ route('configuracion.roles') }}" class="text-gray-800 text-sm hover:underline">Roles</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Productos</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
+                <li><a href="{{ route('configuracion.cuentapendiente') }}" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
             </ul>
         </div>
     </div>
