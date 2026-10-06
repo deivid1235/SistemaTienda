@@ -262,7 +262,7 @@
                             <span>Usuarios</span>
                         </a>
                     @endcan
-                    @can('admin.sursal.menu')
+                    @can('admin.sucursal.index')
                         <a href="{{ route('sucursal') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
                             <i class="fa-solid fa-list-ol text-gray-600 w-5 text-base"></i>
                             <span>Sucursales & Series</span>

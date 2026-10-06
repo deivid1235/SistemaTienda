@@ -167,16 +167,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/sucursal/series/{id}', [App\Http\Controllers\SerieController::class, 'destroy'])->name('configuracion.serie.destroy')->middleware('auth','can:admin.serie.destroy');
     //Usuarios
     Route::get('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'index'])->name('usuario')->middleware('auth','can:admin.usuario.index');
-   Route::post('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'store'])
-    ->name('usuario.store')
-    ->middleware('auth');
-
-Route::put('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'update'])
-    ->name('usuario.update')
-    ->middleware('auth');
-
-Route::delete('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'destroy'])
-    ->name('usuario.destroy')
-    ->middleware('auth');
+    Route::post('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'store'])->name('usuario.store')->middleware('auth');
+    Route::put('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'update']) ->name('usuario.update') ->middleware('auth');
+    Route::delete('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('usuario.destroy')->middleware('auth');
 
 });
