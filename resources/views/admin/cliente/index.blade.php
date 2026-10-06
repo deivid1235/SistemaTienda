@@ -10,16 +10,28 @@
     </h1>
         
     <div class="bg-white rounded-3xl shadow-md p-6">
-        <div class="flex justify-end">
-            <button type="button"
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
+            <div class="relative w-full sm:flex-1 sm:max-w-xl">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" id="buscador" name="buscar" 
+                placeholder="Buscar..."class="w-full pl-9 pr-4 py-2.5 sm:py-2 rounded-md border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:bg-white transition-colors">
+            </div>
+
+            <button
+                type="button"
                 onclick="document.getElementById('modalNuevoCliente').classList.remove('hidden')"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold"
-                 style="background-color: var(--active-pink);" >
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-md text-white text-sm font-semibold shrink-0 hover:opacity-90 transition-opacity"
+                style="background-color: var(--active-pink);">
                 <i class="fa-solid fa-circle-plus"></i>
                 Nuevo
             </button>
+
         </div>
-        
+
         <div class="overflow-x-auto mt-4">
             <table class="w-full min-w-[700px] text-left text-sm">
                 <thead>
