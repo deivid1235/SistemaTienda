@@ -15,4 +15,9 @@ class Serie extends Model
     {
         return $this->belongsTo(Sucursal::class);
     }
+    
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class);
+    }
 }

@@ -15,4 +15,8 @@ class Sucursal extends Model
     {
         return $this->hasMany(Serie::class);
     }
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class);
+    }
 }
