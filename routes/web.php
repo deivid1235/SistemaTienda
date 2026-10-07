@@ -144,7 +144,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/cliente/{cliente}', [App\Http\Controllers\ClienteController::class, 'update'])->name('cliente.update')->middleware('auth','can:admin.cliente.update');
     Route::delete('/admin/cliente/{cliente}', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('cliente.destroy')->middleware('auth','can:admin.cliente.destroy');
     Route::get('/admin/cliente/consulta-documento', [App\Http\Controllers\ClienteController::class, 'consultaDocumento'])->name('cliente.consulta.documento')->middleware('auth','can:admin.cliente.consulta.documento');
-    
     // Series
     Route::post('/admin/sucursal/series', [App\Http\Controllers\SerieController::class, 'store'])->name('configuracion.serie.store')->middleware('auth','can:admin.serie.store');
     Route::put('/admin/sucursal/series/{id}', [App\Http\Controllers\SerieController::class, 'update'])->name('configuracion.serie.update')->middleware('auth','can:admin.serie.update');
