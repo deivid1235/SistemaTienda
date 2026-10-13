@@ -21,12 +21,12 @@
         <div class="overflow-x-auto mt-4">
             <table class="w-full min-w-[700px] text-left text-sm">
                 <thead>
-                    <tr class="border-b border-slate-200 text-black">
-                        <th class="font-semibold w-16">#</th>
-                        <th class="py-2 text-left">Nombre</th>
-                        <th class="py-2 text-left">Estado</th>
-                        <th class="py-2 text-left">Fecha</th>
-                        <th class="font-semibold text-right">Acciones</th>
+                    <tr class="border-b border-slate-200 bg-slate-100 text-left text-sm text-slate-700">
+                        <th class="w-16 whitespace-nowrap px-4 py-4 font-bold">#</th>
+                        <th class="whitespace-nowrap px-4 py-4 font-bold">Nombre</th>
+                        <th class="whitespace-nowrap px-4 py-4 font-bold">Estado</th>
+                        <th class="whitespace-nowrap px-4 py-4 font-bold">Fecha</th>
+                        <th class="whitespace-nowrap px-4 py-4 text-right font-bold">Acciones</th>
                     </tr>
                 </thead>
                

@@ -1,6 +1,8 @@
 //
 import './admin';
 import './usuario';
+import './categoriaproducto';
+import './marca';
 
 
 

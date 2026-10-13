@@ -166,5 +166,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'store'])->name('usuario.store')->middleware('auth','can:admin.usuario.store');
     Route::put('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'update']) ->name('usuario.update') ->middleware('auth','can:admin.usuario.update');
     Route::delete('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('usuario.destroy')->middleware('auth','can:admin.usuario.destroy');
-
+    //Categoria de productos
+    Route::get('/admin/categoriaproducto', [App\Http\Controllers\CategoriaProductoController::class, 'index'])->name('categoriaproducto')->middleware('auth');
+    Route::post('/admin/categoriaproducto', [App\Http\Controllers\CategoriaProductoController::class, 'store'])->name('categoriaproducto.store')->middleware('auth');
+    Route::put('/admin/categoriaproducto/{id}', [App\Http\Controllers\CategoriaProductoController::class, 'update'])->name('categoriaproducto.update')->middleware('auth');
+    Route::delete('/admin/categoriaproducto/{id}', [App\Http\Controllers\CategoriaProductoController::class, 'destroy'])->name('categoriaproducto.destroy')->middleware('auth');
+    //Marca de productos
+    Route::get('/admin/marca', [App\Http\Controllers\MarcaController::class, 'index'])->name('marca')->middleware('auth');
+    Route::post('/admin/marca', [App\Http\Controllers\MarcaController::class, 'store'])->name('marcas.store');
+    Route::put('/admin/marca/{id}', [App\Http\Controllers\MarcaController::class, 'update'])->name('marcas.update');
+    Route::delete('/admin/marca/{id}', [App\Http\Controllers\MarcaController::class, 'destroy'])->name('marcas.destroy');
+    
 });

@@ -52,17 +52,17 @@
             <div class="w-full overflow-x-auto">
                 <table class="w-full min-w-[1000px] table-auto border-collapse text-left text-xs sm:text-sm">
                     <thead>
-                        <tr class="border-b border-slate-200 text-black">
-                            <th class="font-semibold w-16">#</th>
-                            <th class="font-semibold">Tipo Doc.</th>
-                            <th class="font-semibold">Número</th>
-                            <th class="font-semibold">Nombre / Razón Social</th>
-                            <th class="font-semibold">Nombre Comercial</th>
-                            <th class="font-semibold">Tipo Cliente</th>
-                            <th class="font-semibold">Teléfono</th>
-                            <th class="font-semibold">Fecha Registro</th>
-                            <th class="font-semibold">Estado</th>
-                            <th class="font-semibold text-right">Acciones</th>
+                        <tr class="border-b border-slate-200 bg-slate-100 text-left text-sm text-slate-700">
+                            <th class="w-16 whitespace-nowrap px-4 py-4 font-bold">#</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Tipo Doc.</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Número</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Nombre / Razón Social</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Nombre Comercial</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Tipo Cliente</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Teléfono</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Fecha Registro</th>
+                            <th class="whitespace-nowrap px-4 py-4 font-bold">Estado</th>
+                            <th class="whitespace-nowrap px-4 py-4 text-right font-bold">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

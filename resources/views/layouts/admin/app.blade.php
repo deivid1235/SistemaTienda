@@ -113,18 +113,51 @@
                                     </ul>
                                 </li>
                             @endcanany
+                           
                             {{-- PRODUCTOS / SERVICIOS --}}
-                            <li class="nav-parent">
-                                <a class="nav-link" href="#">
-                                    <i class="fa-regular fa-square"></i>
-                                    <span>Productos/Servicios</span>
-                                    <i class="fas fa-chevron-down chevron"></i>
-                                </a>
-                                <ul class="nav-children">
-                                    <li><a class="nav-link" href="#">Productos</a></li>
-                                    <li><a class="nav-link" href="#">Categorías</a></li>
-                                    <li><a class="nav-link" href="#">Marcas</a></li>
-                                    <li><a class="nav-link" href="#">Promociones</a></li>
+                            <li class="nav-parent {{ request()->routeIs('producto', 'categoriaproducto', 'marca', 'promocion') ? 'nav-expanded' : '' }}"
+                                style="{{ request()->routeIs('producto', 'categoria_producto', 'marca', 'promocion') ? 'display: block;' : '' }}">
+
+                                <a class="nav-link" href="#"><i class="fa-regular fa-square"></i><span>Productos/Servicios</span><i class="fas fa-chevron-down chevron"></i></a>
+                                <ul class="nav-children"
+                                    style="{{ request()->routeIs('producto', 'categoriaproducto', 'marca', 'promocion') ? 'display: block !important;' : '' }}">
+
+                                    @can('admin.producto.index')
+                                        <li class="{{ request()->routeIs('producto') ? 'nav-active' : '' }}">
+                                            <a class="nav-link" href="{{ route('producto') }}">
+                                                <i class="fa-solid fa-circle text-[8px]"></i>
+                                                <span>Productos</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+
+                                    
+                                        <li class="{{ request()->routeIs('categoriaproducto') ? 'nav-active' : '' }}">
+                                            <a class="nav-link" href="{{ route('categoriaproducto') }}">
+                                                <i class="fa-solid fa-circle text-[8px]"></i>
+                                                <span>Categorías</span>
+                                            </a>
+                                        </li>
+                                   
+
+                                   
+                                        <li class="{{ request()->routeIs('marca') ? 'nav-active' : '' }}">
+                                            <a class="nav-link" href="{{ route('marca') }}">
+                                                <i class="fa-solid fa-circle text-[8px]"></i>
+                                                <span>Marcas</span>
+                                            </a>
+                                        </li>
+                                    
+
+                                    @can('admin.promocion.index')
+                                        <li class="{{ request()->routeIs('promocion') ? 'nav-active' : '' }}">
+                                            <a class="nav-link" href="{{ route('promocion') }}">
+                                                <i class="fa-solid fa-circle text-[8px]"></i>
+                                                <span>Promociones</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+
                                 </ul>
                             </li>
 
@@ -240,6 +273,7 @@
                                 </ul>
                             </li>
 
+
                         </ul>
 
                     </nav>
@@ -278,6 +312,11 @@
                             <span>Configuraciones Globales</span>
                         </a>
                     @endcan
+                        <a href="" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                            <i class="fa-solid fa-warehouse"></i>
+                            <span>Almacenes</span>
+                        </a>
+
                 </div>
             </div>
 
