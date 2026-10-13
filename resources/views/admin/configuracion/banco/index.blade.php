@@ -17,7 +17,6 @@
         <i class="fa-solid fa-building-columns text-slate-600"></i>
         Listado de bancos
     </h1>
-        
 
     <div class="bg-white rounded-3xl shadow-md p-6">
         <table class="w-full text-left text-sm">

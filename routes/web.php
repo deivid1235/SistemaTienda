@@ -123,7 +123,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/configuracion/roles/{role}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('configuracion.roles.edit')->middleware('auth','can:configuracion.roles.edit');
     Route::put('/configuracion/roles/{role}', [App\Http\Controllers\RoleController::class, 'update'])->name('configuracion.roles.update')->middleware('auth','can:configuracion.roles.update');
     Route::delete('/configuracion/roles/{role}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('configuracion.roles.destroy')->middleware('auth','can:configuracion.roles.destroy');
-    // Tipo de documento
+    // Avanzado - Contable
+    Route::get('/configuracion/contable', [App\Http\Controllers\CuentaContableController::class, 'index'])->name('configuracion.contable')->middleware('auth','can:configuracion.contable.index');
+    Route::post('/configuracion/contable', [App\Http\Controllers\CuentaContableController::class, 'store'])->name('configuracion.contable.store')->middleware('auth','can:configuracion.contable.store');
+    // Comisiones - Vendedores
+    Route::get('/configuracion/vendedor', [App\Http\Controllers\ComisionVendedorController::class, 'index'])->name('configuracion.vendedor')->middleware('auth','can:configuracion.vendedor.index');
+    Route::post('/configuracion/vendedor', [App\Http\Controllers\ComisionVendedorController::class, 'store'])->name('configuracion.vendedor.store')->middleware('auth','can:configuracion.vendedor.store');
+    Route::put('/configuracion/vendedor/{comision}', [App\Http\Controllers\ComisionVendedorController::class, 'update'])->name('configuracion.vendedor.update')->middleware('auth','can:configuracion.vendedor.update');
+    Route::delete('/configuracion/vendedor/{comision}', [App\Http\Controllers\ComisionVendedorController::class, 'destroy'])->name('configuracion.vendedor.destroy')->middleware('auth','can:configuracion.vendedor.destroy');
+    // Comisiones - Cuentas pendientes
+    Route::get('/configuracion/cuentapendiente', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'index'])->name('configuracion.cuentapendiente')->middleware('auth','can:configuracion.cuentapendiente.index');
+    Route::post('/configuracion/cuentapendiente', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'store'])->name('configuracion.cuentapendiente.store')->middleware('auth','can:configuracion.cuentapendiente.store');
+    Route::put('/configuracion/cuentapendiente/{comision}', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'update'])->name('configuracion.cuentapendiente.update')->middleware('auth','can:configuracion.cuentapendiente.update');
+    Route::delete('/configuracion/cuentapendiente/{comision}', [App\Http\Controllers\ComisionCuentaPendienteController::class, 'destroy'])->name('configuracion.cuentapendiente.destroy')->middleware('auth','can:configuracion.cuentapendiente.destroy');
+    // Tipo de document
     Route::get('/configuracion/tipodocumento', [App\Http\Controllers\TipoDocumentoController::class, 'index'])->name('configuracion.tipodocumento')->middleware('auth','can:configuracion.tipodocumento.index');
     Route::post('/configuracion/tipodocumento', [App\Http\Controllers\TipoDocumentoController::class, 'store'])->name('configuracion.tipodocumento.store')->middleware('auth','can:configuracion.tipodocumento.store');
     Route::put('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'update'])->name('configuracion.tipodocumento.update')->middleware('auth','can:configuracion.tipodocumento.update');
@@ -150,8 +163,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/sucursal/series/{id}', [App\Http\Controllers\SerieController::class, 'destroy'])->name('configuracion.serie.destroy')->middleware('auth','can:admin.serie.destroy');
     //Usuarios
     Route::get('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'index'])->name('usuario')->middleware('auth','can:admin.usuario.index');
-    Route::post('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'store'])->name('usuario.store')->middleware('auth');
-    Route::put('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'update']) ->name('usuario.update') ->middleware('auth');
-    Route::delete('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('usuario.destroy')->middleware('auth');
+    Route::post('/admin/usuario', [App\Http\Controllers\UsuarioController::class, 'store'])->name('usuario.store')->middleware('auth','can:admin.usuario.store');
+    Route::put('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'update']) ->name('usuario.update') ->middleware('auth','can:admin.usuario.update');
+    Route::delete('/admin/usuario/{usuario}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('usuario.destroy')->middleware('auth','can:admin.usuario.destroy');
 
 });

@@ -13,151 +13,165 @@ class RolePermissionSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $permisos = [
-            //configuracion
-            'admin.dashboard.index',
-            'admin.configuracion.menu',
-            'admin.configuracion.index',
-            //Banco
-            'configuracion.banco.index',
-            'configuracion.banco.store',
-            'configuracion.banco.update',
-            'configuracion.banco.destroy',
-            // Monedas
-            'configuracion.moneda.index',
-            'configuracion.moneda.store',
-            'configuracion.moneda.update',
-            'configuracion.moneda.destroy',
-            // Cuentas bancarias
-            'configuracion.cuentabancaria.index',
-            'configuracion.cuentabancaria.store',
-            'configuracion.cuentabancaria.update',
-            'configuracion.cuentabancaria.destroy',
-            // Tarjetas
-            'configuracion.tarjeta.index',
-            'configuracion.tarjeta.store',
-            'configuracion.tarjeta.update',
-            'configuracion.tarjeta.destroy',
-            // Plataformas
-            'configuracion.plataforma.index',
-            'configuracion.plataforma.store',
-            'configuracion.plataforma.update',
-            'configuracion.plataforma.destroy',
-            // Métodos de pago
-            'configuracion.metodopago.index',
-            'configuracion.metodopago.store',
-            'configuracion.metodopago.update',
-            'configuracion.metodopago.destroy',
-            // Métodos de gasto
-            'configuracion.metodogasto.store',
-            'configuracion.metodogasto.update',
-            'configuracion.metodogasto.destroy',
-            // Atributos
-            'configuracion.atributo.index',
-            'configuracion.atributo.store',
-            'configuracion.atributo.update',
-            'configuracion.atributo.destroy',
-            // Detracciones
-            'configuracion.detraccion.index',
-            'configuracion.detraccion.store',
-            'configuracion.detraccion.update',
-            'configuracion.detraccion.destroy',
-            // Unidades
-            'configuracion.unidad.index',
-            'configuracion.unidad.store',
-            'configuracion.unidad.update',
-            'configuracion.unidad.destroy',
-            // Traslados
-            'configuracion.traslado.index',
-            'configuracion.traslado.store',
-            'configuracion.traslado.update',
-            'configuracion.traslado.destroy',
-            // Configuración de la empresa
-            'configuracion.compania.index',
-            'configuracion.compania.store',
-            'configuracion.compania.update',
-            'configuracion.compania.eliminar-logo',
-            // Configuración de login
-            'configuracion.login.index',
-            'configuracion.login.update',
-            'configuracion.login.imagenes.store',
-            'configuracion.login.imagenes.update',
-            'configuracion.login.imagenes.destroy',
-            // Configuración - Estilos
-            'configuracion.estilo.index',
-            'configuracion.estilo.store',
-            'configuracion.estilo.editar',
-            'configuracion.estilo.update',
-            'configuracion.estilo.eliminar',
-            'configuracion.estilo.activar',
-            // Configuración - Motivo de gasto
-            'configuracion.motivogasto.index',
-            'configuracion.motivogasto.store',
-            'configuracion.motivogasto.update',
-            'configuracion.motivogasto.destroy',
-            // Configuración - Motivo de ingreso
-            'configuracion.motivoingreso.index',
-            'configuracion.motivoingreso.store',
-            'configuracion.motivoingreso.update',
-            'configuracion.motivoingreso.destroy',
-            // Configuración - Comprobante de ingreso
-            'configuracion.tipocomprobante.index',
-            'configuracion.tipocomprobante.store',
-            'configuracion.tipocomprobante.update',
-            'configuracion.tipocomprobante.destroy',
-            // Configuración - Comprobante de gasto
-            'configuracion.comprobantegasto.store',
-            'configuracion.comprobantegasto.update',
-            'configuracion.comprobantegasto.destroy',
-            // Configuración - Roles
-            'configuracion.roles.index',
-            'configuracion.roles.store',
-            'configuracion.roles.edit',
-            'configuracion.roles.update',
-            'configuracion.roles.destroy',
-            // Tipos de documento
-            'configuracion.tipodocumento.index',
-            'configuracion.tipodocumento.store',
-            'configuracion.tipodocumento.update',
-            'configuracion.tipodocumento.destroy',
-            // Sucursal
-            'admin.sucursal.index',
-            'admin.sucursal.store',
-            'admin.sucursal.update',
-            'admin.sucursal.destroy',
-            // Tipo de cliente
-            'admin.tipocliente.index',
-            'admin.tipocliente.store',
-            'admin.tipocliente.update',
-            'admin.tipocliente.destroy',
-            // Clientes
-            'admin.cliente.index',
-            'admin.cliente.store',
-            'admin.cliente.edit',
-            'admin.cliente.update',
-            'admin.cliente.destroy',
-            'admin.cliente.consulta.documento',
-            // Series
-            'admin.serie.store',
-            'admin.serie.update',
-            'admin.serie.destroy',
-            //Usuarios
-            'admin.usuario.index',
-        
-        ];
-
-        foreach ($permisos as $permiso) {
-            Permission::firstOrCreate([
-                'name' => $permiso,
-                'guard_name' => 'web',
-            ]);
-        }
-
         $admin = Role::firstOrCreate([
             'name' => 'ADMINISTRADOR',
             'guard_name' => 'web',
         ]);
+        // Configuración
+        Permission::create(['name' => 'admin.dashboard.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.configuracion.menu'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.configuracion.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.configuracion.store'])->syncRoles($admin);
+        // Gestiones del sistema
+        Permission::create(['name' => 'admin.gestiones.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.gestiones.create'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.gestiones.store'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.gestiones.edit'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.gestiones.update'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.gestiones.destroy'])->syncRoles($admin);
+        // Banco
+        Permission::create(['name' => 'configuracion.banco.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.banco.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.banco.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.banco.destroy'])->syncRoles($admin);
+        // Monedas
+        Permission::create(['name' => 'configuracion.moneda.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.moneda.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.moneda.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.moneda.destroy'])->syncRoles($admin);
+        // Cuentas bancarias
+        Permission::create(['name' => 'configuracion.cuentabancaria.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.cuentabancaria.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.cuentabancaria.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.cuentabancaria.destroy'])->syncRoles($admin);
+        // Tarjetas
+        Permission::create(['name' => 'configuracion.tarjeta.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tarjeta.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tarjeta.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tarjeta.destroy'])->syncRoles($admin);
+        // Plataformas
+        Permission::create(['name' => 'configuracion.plataforma.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.plataforma.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.plataforma.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.plataforma.destroy'])->syncRoles($admin);
+        // Métodos de pago
+        Permission::create(['name' => 'configuracion.metodopago.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.metodopago.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.metodopago.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.metodopago.destroy'])->syncRoles($admin);
+        // Métodos de gasto
+        Permission::create(['name' => 'configuracion.metodogasto.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.metodogasto.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.metodogasto.destroy'])->syncRoles($admin);
+        // Atributos
+        Permission::create(['name' => 'configuracion.atributo.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.atributo.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.atributo.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.atributo.destroy'])->syncRoles($admin);
+        // Detracciones
+        Permission::create(['name' => 'configuracion.detraccion.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.detraccion.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.detraccion.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.detraccion.destroy'])->syncRoles($admin);
+        // Unidades
+        Permission::create(['name' => 'configuracion.unidad.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.unidad.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.unidad.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.unidad.destroy'])->syncRoles($admin);
+        // Traslados
+        Permission::create(['name' => 'configuracion.traslado.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.traslado.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.traslado.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.traslado.destroy'])->syncRoles($admin);
+        // Configuración de la empresa
+        Permission::create(['name' => 'configuracion.compania.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.compania.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.compania.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.compania.eliminar-logo'])->syncRoles($admin);
+        // Configuración de login
+        Permission::create(['name' => 'configuracion.login.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.login.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.login.imagenes.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.login.imagenes.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.login.imagenes.destroy'])->syncRoles($admin);
+        // Configuración - Estilos
+        Permission::create(['name' => 'configuracion.estilo.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.estilo.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.estilo.editar'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.estilo.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.estilo.eliminar'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.estilo.activar'])->syncRoles($admin);
+        // Configuración - Motivo de gasto
+        Permission::create(['name' => 'configuracion.motivogasto.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.motivogasto.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.motivogasto.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.motivogasto.destroy'])->syncRoles($admin);
+        // Configuración - Motivo de ingreso
+        Permission::create(['name' => 'configuracion.motivoingreso.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.motivoingreso.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.motivoingreso.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.motivoingreso.destroy'])->syncRoles($admin);
+        // Configuración - Comprobante de ingreso
+        Permission::create(['name' => 'configuracion.tipocomprobante.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tipocomprobante.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tipocomprobante.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tipocomprobante.destroy'])->syncRoles($admin);
+        // Configuración - Comprobante de gasto
+        Permission::create(['name' => 'configuracion.comprobantegasto.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.comprobantegasto.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.comprobantegasto.destroy'])->syncRoles($admin);
+        // Configuración - Roles
+        Permission::create(['name' => 'configuracion.roles.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.roles.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.roles.edit'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.roles.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.roles.destroy'])->syncRoles($admin);
+        // Tipos de documento
+        Permission::create(['name' => 'configuracion.tipodocumento.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tipodocumento.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tipodocumento.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.tipodocumento.destroy'])->syncRoles($admin);
+        // Sucursal
+        Permission::create(['name' => 'admin.sucursal.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.sucursal.store'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.sucursal.update'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.sucursal.destroy'])->syncRoles($admin);
+        // Tipo de cliente
+        Permission::create(['name' => 'admin.tipocliente.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.tipocliente.store'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.tipocliente.update'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.tipocliente.destroy'])->syncRoles($admin);
+        // Avanzado - Contable
+        Permission::create(['name' => 'configuracion.contable.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.contable.store'])->syncRoles($admin);
+        // Comisiones - Vendedores
+        Permission::create(['name' => 'configuracion.vendedor.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.vendedor.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.vendedor.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.vendedor.destroy'])->syncRoles($admin);
+        // Comisiones - Cuentas pendientes
+        Permission::create(['name' => 'configuracion.cuentapendiente.index'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.cuentapendiente.store'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.cuentapendiente.update'])->syncRoles($admin);
+        Permission::create(['name' => 'configuracion.cuentapendiente.destroy'])->syncRoles($admin);
+        // Clientes
+        Permission::create(['name' => 'admin.cliente.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.cliente.store'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.cliente.edit'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.cliente.update'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.cliente.destroy'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.cliente.consulta.documento'])->syncRoles($admin);
+        // Series
+        Permission::create(['name' => 'admin.serie.store'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.serie.update'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.serie.destroy'])->syncRoles($admin);
+        // Usuarios
+        Permission::create(['name' => 'admin.usuario.index'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.usuario.store'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.usuario.update'])->syncRoles($admin);
+        Permission::create(['name' => 'admin.usuario.destroy'])->syncRoles($admin);
 
-        $admin->syncPermissions(Permission::all());
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
     }
 }
+
