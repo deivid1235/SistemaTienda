@@ -312,7 +312,7 @@
                             <span>Configuraciones Globales</span>
                         </a>
                     @endcan
-                        <a href="" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
+                        <a href="{{ route('almacen') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 text-sm font-medium transition-colors">
                             <i class="fa-solid fa-warehouse"></i>
                             <span>Almacenes</span>
                         </a>

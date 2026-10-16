@@ -19,4 +19,12 @@ class Sucursal extends Model
     {
         return $this->hasMany(Usuario::class);
     }
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+    public function almacenes()
+    {
+        return $this->hasMany(Almacen::class);
+    }
 }

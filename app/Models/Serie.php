@@ -20,4 +20,9 @@ class Serie extends Model
     {
         return $this->hasMany(Usuario::class);
     }
+
+    public function almacenes()
+    {
+        return $this->hasMany(Almacen::class);
+    }
 }

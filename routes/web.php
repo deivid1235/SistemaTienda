@@ -176,5 +176,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/marca', [App\Http\Controllers\MarcaController::class, 'store'])->name('marcas.store');
     Route::put('/admin/marca/{id}', [App\Http\Controllers\MarcaController::class, 'update'])->name('marcas.update');
     Route::delete('/admin/marca/{id}', [App\Http\Controllers\MarcaController::class, 'destroy'])->name('marcas.destroy');
-    
+    //Almacen
+    Route::get('/admin/almacen', [App\Http\Controllers\AlmacenController::class, 'index'])->name('almacen')->middleware('auth');
+    Route::post('/admin/almacen', [App\Http\Controllers\AlmacenController::class, 'store'])->name('almacen.store')->middleware('auth');
+    Route::put('/admin/almacen/{id}', [App\Http\Controllers\AlmacenController::class, 'update'])->name('almacen.update')->middleware('auth');
+    Route::delete('/admin/almacen/{id}', [App\Http\Controllers\AlmacenController::class, 'destroy'])->name('almacen.destroy')->middleware('auth');
+
 });

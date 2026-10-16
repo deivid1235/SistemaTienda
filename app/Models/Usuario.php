@@ -30,4 +30,9 @@ class Usuario extends Model
     {
         return $this->belongsTo(Serie::class);
     }
+
+    public function almacenes()
+    {
+        return $this->hasMany(Almacen::class);
+    }
 }
