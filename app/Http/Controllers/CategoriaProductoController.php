@@ -137,7 +137,7 @@ class CategoriaProductoController extends Controller
         // Eliminar la categoría de la base de datos
         $categoriaProducto->delete();
 
-        return redirect()->route('categoria')
+        return redirect()->route('categoriaproducto')
             ->with('success', 'Categoría eliminada correctamente.');
     }
 

@@ -105,7 +105,13 @@
                                 <td class="px-4 py-4 align-middle">
                                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold
                                         {{ $usuario->estado ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20' : 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20' }}">
-                                        <span class="w-1.5 h-1.5 rounded-full {{ $usuario->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>{{ $usuario->estado ? 'Activo' : 'Inactivo' }}
+                                        <span class="relative flex h-2 w-2">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75
+                                                {{ $usuario->estado ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2
+                                                {{ $usuario->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
+                                        </span>
+                                        {{ $usuario->estado ? 'Activo' : 'Inactivo' }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-4 align-middle text-slate-600"> {{ $usuario->created_at->format('d/m/Y') }}</td>
@@ -122,7 +128,7 @@
                                                    {{-- VER USUARIO --}}
                                                     <button type="button" onclick="document.getElementById('modalVerUsuario{{ $usuario->id }}').classList.remove('hidden')"
                                                         class="w-full flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 text-left">
-                                                        <i class="fa-solid fa-eye w-4 text-indigo-500"></i>Ver
+                                                        <i class="fa-solid fa-eye w-4 text-black"></i></i>Ver
                                                     </button>
                                                     {{-- MODAL VER USUARIO --}}
                                                     <div id="modalVerUsuario{{ $usuario->id }}"class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
@@ -303,7 +309,7 @@
                                                     {{-- EDITAR --}}
                                                     <button type="button" onclick="document.getElementById('modalEditarUsuario{{ $usuario->id }}').classList.remove('hidden')"
                                                         class="w-full flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 text-left">
-                                                        <i class="fa-solid fa-pen-to-square w-4 text-emerald-500"></i>
+                                                        <i class="fa-solid fa-pen-to-square w-4 text-black"></i>
                                                         Editar
                                                     </button>
                                                     <div id="modalEditarUsuario{{ $usuario->id }}" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
@@ -564,10 +570,9 @@
                                                         </div>
                                                     </div>
 
-                                                    <button type="button"
-                                                        onclick="confirmarEliminar('{{ route('usuario.destroy', $usuario->id) }}')"
-                                                        class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 text-left">
-                                                        <i class="fa-solid fa-trash w-4"></i>
+                                                    <button type="button" onclick="confirmarEliminar('{{ route('usuario.destroy', $usuario->id) }}')"
+                                                        class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-black hover:bg-slate-50 text-left">
+                                                        <i class="fa-solid fa-trash w-4 text-black"></i>
                                                         Eliminar
                                                     </button>
                                                 </div>

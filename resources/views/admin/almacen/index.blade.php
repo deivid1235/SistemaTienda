@@ -92,166 +92,301 @@
                                     @endif
                                 </td>
                                 <td class="py-2 px-4 text-slate-600">{{ $almacen->descripcion ?: '-' }}</td>
-                                <td class="py-3 px-4">
+                               <td class="py-3 px-4">
                                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold
-                                        {{ $almacen->estado ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20': 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20' }}">
-                                        <span class="w-1.5 h-1.5 rounded-full
-                                            {{ $almacen->estado ? 'bg-emerald-500' : 'bg-rose-500' }}">
+                                        {{ $almacen->estado ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20' : 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20' }}">
+                                        
+                                        <span class="relative flex h-2 w-2">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75
+                                                {{ $almacen->estado ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2
+                                                {{ $almacen->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
                                         </span>
+
                                         {{ $almacen->estado ? 'Activo' : 'Inactivo' }}
                                     </span>
                                 </td>
                                 <td class="py-2 px-4 text-slate-600 whitespace-nowrap">{{ $almacen->created_at?->format('d/m/Y') ?? '-' }}</td>
-                                {{-- ACCIONES --}}
-                                <td class="py-2 px-4">
-                                    <div class="flex justify-end gap-2">
-                                        {{-- BOTÓN EDITAR --}}
-                                        <button type="button" onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.remove('hidden')"
-                                            class="px-4 py-1.5 rounded-md text-white text-xs font-semibold" style="background-color: #64DD17;">
-                                            Editar
-                                        </button>
-                                        {{-- MODAL EDITAR ALMACÉN --}}
-                                        <div id="modalEditarAlmacen{{ $almacen->id }}" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
-                                            <div class="absolute inset-0 bg-black/10"
-                                                onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.add('hidden')">
-                                            </div>
-                                            <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-4xl mx-3 sm:mx-4 p-4 sm:p-6 my-4 sm:my-0">
-                                                <div class="flex items-center justify-between mb-4">
-                                                    <h2 class="text-xl font-semibold text-slate-800 flex items-center gap-2">
-                                                        <i class="fa-solid fa-warehouse text-slate-600"></i> Editar Almacén
-                                                    </h2>
-                                                    <button type="button" onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.add('hidden')"
-                                                        class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i>
+                                <td class="py-4 px-4 relative">
+                                    <div class="flex justify-end">
+                                        <div class="relative">
+                                            <input type="checkbox" id="menuAlmacen{{ $almacen->id }}"  class="peer hidden">
+                                            <label for="menuAlmacen{{ $almacen->id }}"
+                                                class="flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border border-slate-300"><i class="fa-solid fa-ellipsis-vertical text-lg"></i>
+                                            </label>
+                                            <div class="hidden peer-checked:block absolute right-0 bottom-full mb-2 w-48 h-24 overflow-y-scroll overscroll-contain bg-white rounded-md  shadow-xl border border-slate-200 z-[99999]">
+                                                <div class="py-1">
+                                                   {{-- VER USUARIO --}}
+                                                    <button type="button" onclick="document.getElementById('modalVerAlmacen{{ $almacen->id }}').classList.remove('hidden')"
+                                                        class="w-full flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 text-left">
+                                                        <i class="fa-solid fa-eye w-4 text-black"></i></i>Ver
                                                     </button>
-                                                </div>
-                                                <form action="{{ route('almacen.update', $almacen->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="radio" name="tab_almacen_{{ $almacen->id }}" id="almacen_edit_tab1_{{ $almacen->id }}" class="peer/tab1 hidden" checked>
-                                                    <input type="radio" name="tab_almacen_{{ $almacen->id }}" id="almacen_edit_tab2_{{ $almacen->id }}" class="peer/tab2 hidden">
-                                                    <input type="radio" name="tab_almacen_{{ $almacen->id }}" id="almacen_edit_tab3_{{ $almacen->id }}" class="peer/tab3 hidden">
-                                                    <div class="flex flex-wrap border-b border-slate-200 mb-6 gap-4 sm:gap-6">
-                                                        <label for="almacen_edit_tab1_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
-                                                            peer-checked/tab1:text-indigo-600 peer-checked/tab1:border-b-2 peer-checked/tab1:border-indigo-600 text-slate-500
-                                                            hover:text-slate-800 border-b-2 border-transparent"> <i class="fa-solid fa-warehouse mr-2"></i>Información Básica
-                                                        </label>
-                                                        <label for="almacen_edit_tab2_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
-                                                            peer-checked/tab2:text-indigo-600 peer-checked/tab2:border-b-2 peer-checked/tab2:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                            <i class="fa-solid fa-link mr-2"></i> Relaciones
-                                                        </label>
-                                                        <label for="almacen_edit_tab3_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
-                                                            peer-checked/tab3:text-indigo-600 peer-checked/tab3:border-b-2 peer-checked/tab3:border-indigo-600 text-slate-500
-                                                            hover:text-slate-800 border-b-2 border-transparent"> <i class="fa-solid fa-sliders mr-2"></i>Configuración y Estado
-                                                        </label>
-                                                    </div>
-                                                    {{-- 1. INFORMACIÓN BÁSICA --}}
-                                                    <div class="hidden peer-checked/tab1:block space-y-4">
-                                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                            <div>
-                                                                <label for="codigo_edit_{{ $almacen->id }}"class="block text-sm font-medium text-slate-700 mb-1">Código <span class="text-red-500">*</span></label>
-                                                                <input type="text" id="codigo_edit_{{ $almacen->id }}" name="codigo" value="{{ old('codigo', $almacen->codigo) }}" maxlength="20" required placeholder="Ej. ALM-001"
-                                                                class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                                            </div>
-                                                            {{-- NOMBRE --}}
-                                                            <div>
-                                                                <label for="nombre_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1"> Nombre del almacén <span class="text-red-500">*</span></label>
-                                                                <input type="text" id="nombre_edit_{{ $almacen->id }}" name="nombre" value="{{ old('nombre', $almacen->nombre) }}" maxlength="100" required placeholder="Ej. Almacén principal"
-                                                                class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                                            </div>
-                                                            {{-- DESCRIPCIÓN --}}
-                                                            <div class="md:col-span-2">
-                                                                <label for="descripcion_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1">Descripción</label>
-                                                                <textarea id="descripcion_edit_{{ $almacen->id }}" name="descripcion" rows="3" placeholder="Descripción del almacén..."
-                                                                class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">{{ old('descripcion', $almacen->descripcion) }}</textarea>
-                                                            </div>
+                                                    {{-- MODAL VER ALMACÉN --}}
+                                                    <div id="modalVerAlmacen{{ $almacen->id }}" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
+                                                        <div class="absolute inset-0 bg-black/10" onclick="document.getElementById('modalVerAlmacen{{ $almacen->id }}').classList.add('hidden')">
                                                         </div>
-                                                    </div>
-                                                    {{-- 2. RELACIONES --}}
-                                                    <div class="hidden peer-checked/tab2:block space-y-4">
-                                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                            <div>
-                                                                <label for="sucursal_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1">Sucursal <span class="text-red-500">*</span></label>
-                                                                <select id="sucursal_edit_{{ $almacen->id }}" name="sucursal_id"required
-                                                                    class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                                                    <option value="">Seleccione una sucursal</option>
-                                                                    @foreach($sucursales as $sucursal)
-                                                                        <option value="{{ $sucursal->id }}"
-                                                                            {{ old('sucursal_id', $almacen->sucursal_id) == $sucursal->id ? 'selected' : '' }}>
-                                                                            {{ $sucursal->descripcion }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
+                                                        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-4xl mx-3 sm:mx-4 p-4 sm:p-6 my-4 sm:my-0">
+                                                            <div class="flex items-center justify-between mb-4">
+                                                                <h2 class="text-xl font-semibold text-slate-800 flex items-center gap-2">
+                                                                    <i class="fa-solid fa-warehouse text-slate-600"></i>Ver Almacén
+                                                                </h2>
+                                                                <button type="button" onclick="document.getElementById('modalVerAlmacen{{ $almacen->id }}').classList.add('hidden')"
+                                                                    class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i>
+                                                                </button>
                                                             </div>
-                                                            {{-- SERIE --}}
-                                                            <div>
-                                                                <label for="serie_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1">Serie <span class="text-red-500">*</span></label>
-                                                                <select id="serie_edit_{{ $almacen->id }}" name="serie_id" required
-                                                                    class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                                                    <option value="">Seleccione una serie</option>
-                                                                    @foreach($series as $serie)
-                                                                        <option value="{{ $serie->id }}"
-                                                                            {{ old('serie_id', $almacen->serie_id) == $serie->id ? 'selected' : '' }}>
-                                                                            {{ $serie->serie }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            {{-- RESPONSABLE --}}
-                                                            <div class="md:col-span-2">
-                                                                <label for="responsable_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1"> Responsable <span class="text-red-500">*</span></label>
-                                                                <select id="responsable_edit_{{ $almacen->id }}" name="responsable_id" required
-                                                                    class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                                                    <option value="">Seleccione un responsable</option>
-                                                                    @foreach($usuarios as $usuario)
-                                                                        <option value="{{ $usuario->id }}"
-                                                                            {{ old('responsable_id', $almacen->responsable_id) == $usuario->id ? 'selected' : '' }}>
-                                                                            {{ $usuario->apellidos }} - {{ $usuario->nombre }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- 3. CONFIGURACIÓN Y ESTADO --}}
-                                                    <div class="hidden peer-checked/tab3:block space-y-4">
-                                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                            <div class="md:col-span-2">
-                                                                <label class="block text-sm font-medium text-slate-700 mb-2">Estado</label>
-                                                                <label class="inline-flex items-center cursor-pointer gap-3">
-                                                                    <input type="hidden" name="estado" value="0">
-                                                                    <input type="checkbox" name="estado" value="1" class="sr-only peer" {{ old('estado', $almacen->estado) ? 'checked' : '' }}>
-                                                                    <span class="text-sm font-medium text-slate-600">Inactivo</span>
-                                                                    <div class="relative w-11 h-6 bg-slate-300 rounded-full peer-checked:after:translate-x-full after:content-['']
-                                                                        after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border
-                                                                        after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600" style="background-color: var(--active-pink);">
-                                                                    </div>
-                                                                    <span class="text-sm font-medium text-slate-800">Activo</span>
+                                                            {{-- PESTAÑAS --}}
+                                                            <input type="radio" name="tab_ver_almacen_{{ $almacen->id }}" id="almacen_ver_tab1_{{ $almacen->id }}" class="peer/tab1 hidden" checked>
+                                                            <input type="radio" name="tab_ver_almacen_{{ $almacen->id }}" id="almacen_ver_tab2_{{ $almacen->id }}"class="peer/tab2 hidden">
+                                                            <input type="radio" name="tab_ver_almacen_{{ $almacen->id }}"id="almacen_ver_tab3_{{ $almacen->id }}"class="peer/tab3 hidden">
+                                                            {{-- MENÚ SUPERIOR --}}
+                                                            <div class="flex flex-wrap border-b border-slate-200 mb-6 gap-4 sm:gap-6">
+                                                                <label for="almacen_ver_tab1_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+                                                                    peer-checked/tab1:text-indigo-600 peer-checked/tab1:border-b-2 peer-checked/tab1:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                    <i class="fa-solid fa-warehouse mr-2"></i>
+                                                                    Información Básica
+                                                                </label>
+                                                                <label for="almacen_ver_tab2_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+                                                                    peer-checked/tab2:text-indigo-600 peer-checked/tab2:border-b-2 peer-checked/tab2:border-indigo-600text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                    <i class="fa-solid fa-link mr-2"></i>
+                                                                    Relaciones
+                                                                </label>
+                                                                <label for="almacen_ver_tab3_{{ $almacen->id }}"
+                                                                    class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/tab3:text-indigo-600 peer-checked/tab3:border-b-2 peer-checked/tab3:border-indigo-600
+                                                                    text-slate-500 hover:text-slate-800 border-b-2 border-transparent"><i class="fa-solid fa-sliders mr-2"></i>
+                                                                    Configuración y Estado
                                                                 </label>
                                                             </div>
+                                                            @php
+                                                                $claseLecturaAlmacen = 'w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 cursor-default focus:outline-none focus:ring-0';
+                                                            @endphp
+                                                            {{-- 1. INFORMACIÓN BÁSICA --}}
+                                                            <div class="hidden peer-checked/tab1:block space-y-4">
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-1">Código</label>
+                                                                        <input type="text" value="{{ $almacen->codigo }}"class="{{ $claseLecturaAlmacen }}"readonly>
+                                                                    </div>
+                                                                    {{-- NOMBRE --}}
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-1"> Nombre del almacén</label>
+                                                                        <input type="text"value="{{ $almacen->nombre }}"class="{{ $claseLecturaAlmacen }}" readonly>
+                                                                    </div>
+                                                                    {{-- DESCRIPCIÓN --}}
+                                                                    <div class="md:col-span-2">
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-1"> Descripción</label>
+                                                                        <textarea rows="3"class="{{ $claseLecturaAlmacen }} resize-none"readonly>{{ $almacen->descripcion }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {{-- 2. RELACIONES --}}
+                                                            <div class="hidden peer-checked/tab2:block space-y-4">
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-1">Sucursal</label>
+                                                                        <input type="text" value="{{ $almacen->sucursal ? $almacen->sucursal->descripcion : 'Sin sucursal asignada' }}"class="{{ $claseLecturaAlmacen }}"readonly>
+                                                                    </div>
+                                                                    {{-- SERIE --}}
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-1">Serie</label>
+                                                                        <input type="text"value="{{ $almacen->serie ? $almacen->serie->serie : 'Sin serie asignada' }}" class="{{ $claseLecturaAlmacen }}"readonly>
+                                                                    </div>
+                                                                    {{-- RESPONSABLE --}}
+                                                                    <div class="md:col-span-2">
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-1"> Responsable
+                                                                        </label>
+                                                                        <input type="text"value="{{ $almacen->responsable ? $almacen->responsable->apellidos . ' - ' . $almacen->responsable->nombre : 'Sin responsable asignado' }}"
+                                                                        class="{{ $claseLecturaAlmacen }}"readonly>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {{-- 3. CONFIGURACIÓN Y ESTADO --}}
+                                                            <div class="hidden peer-checked/tab3:block space-y-4">
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                    <div class="md:col-span-2">
+                                                                        <label class="block text-sm font-medium text-slate-700 mb-2">Estado</label>
+                                                                        <div class="flex items-center gap-3">
+                                                                            <span class="text-sm font-medium text-slate-600">Inactivo</span>
+                                                                            {{-- INTERRUPTOR VISUAL --}}
+                                                                            <div class="relative w-11 h-6 rounded-full transition-colors duration-300
+                                                                                {{ $almacen->estado ? 'bg-[#269ad5]' : 'bg-slate-300' }}">
+                                                                                <div class="absolute top-[2px] left-[2px] bg-white border border-slate-300
+                                                                                    rounded-full h-5 w-5 transition-transform duration-300
+                                                                                    {{ $almacen->estado ? 'translate-x-5' : 'translate-x-0' }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <span class="text-sm font-medium text-slate-800">
+                                                                                Activo
+                                                                            </span>
+                                                                            {{-- ETIQUETA DEL ESTADO --}}
+                                                                            <span class="ml-2 px-2 py-1 rounded-full text-xs font-semibold
+                                                                                {{ $almacen->estado ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                                                                {{ $almacen->estado ? 'ACTIVO' : 'INACTIVO' }}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {{-- BOTÓN CERRAR --}}
+                                                            <div class="flex justify-end gap-3 mt-8 pt-4 border-t border-slate-100">
+                                                                <button type="button"onclick="document.getElementById('modalVerAlmacen{{ $almacen->id }}').classList.add('hidden')"
+                                                                    class="px-5 py-2 rounded-md border border-slate-300 text-slate-700 text-sm font-medium hover:bg-slate-50"><i class="fa-solid fa-xmark mr-1"></i>
+                                                                    Cerrar
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    {{-- BOTONES --}}
-                                                    <div class="flex justify-end gap-3 mt-8 pt-4 border-t border-slate-100">
-                                                        <button type="button" onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.add('hidden')"
-                                                            class="px-5 py-2 rounded-md border border-slate-300 text-slate-700 text-sm font-medium hover:bg-slate-50">
-                                                            Cancelar
-                                                        </button>
+                                                    {{-- EDITAR --}}
+                                                    <button type="button" onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.remove('hidden')"
+                                                        class="w-full flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 text-left">
+                                                        <i class="fa-solid fa-pen-to-square w-4 text-black"></i>
+                                                        Editar
+                                                    </button>
+                                                    {{-- MODAL EDITAR ALMACÉN --}}
+                                                    <div id="modalEditarAlmacen{{ $almacen->id }}" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-6 sm:pt-24 overflow-y-auto">
+                                                        <div class="absolute inset-0 bg-black/10"
+                                                            onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.add('hidden')">
+                                                        </div>
+                                                        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-4xl mx-3 sm:mx-4 p-4 sm:p-6 my-4 sm:my-0">
+                                                            <div class="flex items-center justify-between mb-4">
+                                                                <h2 class="text-xl font-semibold text-slate-800 flex items-center gap-2">
+                                                                    <i class="fa-solid fa-warehouse text-slate-600"></i> Editar Almacén
+                                                                </h2>
+                                                                <button type="button" onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.add('hidden')"
+                                                                    class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                            </div>
+                                                            <form action="{{ route('almacen.update', $almacen->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="radio" name="tab_almacen_{{ $almacen->id }}" id="almacen_edit_tab1_{{ $almacen->id }}" class="peer/tab1 hidden" checked>
+                                                                <input type="radio" name="tab_almacen_{{ $almacen->id }}" id="almacen_edit_tab2_{{ $almacen->id }}" class="peer/tab2 hidden">
+                                                                <input type="radio" name="tab_almacen_{{ $almacen->id }}" id="almacen_edit_tab3_{{ $almacen->id }}" class="peer/tab3 hidden">
+                                                                <div class="flex flex-wrap border-b border-slate-200 mb-6 gap-4 sm:gap-6">
+                                                                    <label for="almacen_edit_tab1_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+                                                                        peer-checked/tab1:text-indigo-600 peer-checked/tab1:border-b-2 peer-checked/tab1:border-indigo-600 text-slate-500
+                                                                        hover:text-slate-800 border-b-2 border-transparent"> <i class="fa-solid fa-warehouse mr-2"></i>Información Básica
+                                                                    </label>
+                                                                    <label for="almacen_edit_tab2_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+                                                                        peer-checked/tab2:text-indigo-600 peer-checked/tab2:border-b-2 peer-checked/tab2:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                        <i class="fa-solid fa-link mr-2"></i> Relaciones
+                                                                    </label>
+                                                                    <label for="almacen_edit_tab3_{{ $almacen->id }}" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+                                                                        peer-checked/tab3:text-indigo-600 peer-checked/tab3:border-b-2 peer-checked/tab3:border-indigo-600 text-slate-500
+                                                                        hover:text-slate-800 border-b-2 border-transparent"> <i class="fa-solid fa-sliders mr-2"></i>Configuración y Estado
+                                                                    </label>
+                                                                </div>
+                                                                {{-- 1. INFORMACIÓN BÁSICA --}}
+                                                                <div class="hidden peer-checked/tab1:block space-y-4">
+                                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                        <div>
+                                                                            <label for="codigo_edit_{{ $almacen->id }}"class="block text-sm font-medium text-slate-700 mb-1">Código <span class="text-red-500">*</span></label>
+                                                                            <input type="text" id="codigo_edit_{{ $almacen->id }}" name="codigo" value="{{ old('codigo', $almacen->codigo) }}" maxlength="20" required placeholder="Ej. ALM-001"
+                                                                            class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                                                        </div>
+                                                                        {{-- NOMBRE --}}
+                                                                        <div>
+                                                                            <label for="nombre_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1"> Nombre del almacén <span class="text-red-500">*</span></label>
+                                                                            <input type="text" id="nombre_edit_{{ $almacen->id }}" name="nombre" value="{{ old('nombre', $almacen->nombre) }}" maxlength="100" required placeholder="Ej. Almacén principal"
+                                                                            class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                                                        </div>
+                                                                        {{-- DESCRIPCIÓN --}}
+                                                                        <div class="md:col-span-2">
+                                                                            <label for="descripcion_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1">Descripción</label>
+                                                                            <textarea id="descripcion_edit_{{ $almacen->id }}" name="descripcion" rows="3" placeholder="Descripción del almacén..."
+                                                                            class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">{{ old('descripcion', $almacen->descripcion) }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {{-- 2. RELACIONES --}}
+                                                                <div class="hidden peer-checked/tab2:block space-y-4">
+                                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                        <div>
+                                                                            <label for="sucursal_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1">Sucursal <span class="text-red-500">*</span></label>
+                                                                            <select id="sucursal_edit_{{ $almacen->id }}" name="sucursal_id"required
+                                                                                class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                                                                <option value="">Seleccione una sucursal</option>
+                                                                                @foreach($sucursales as $sucursal)
+                                                                                    <option value="{{ $sucursal->id }}"
+                                                                                        {{ old('sucursal_id', $almacen->sucursal_id) == $sucursal->id ? 'selected' : '' }}>
+                                                                                        {{ $sucursal->descripcion }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        {{-- SERIE --}}
+                                                                        <div>
+                                                                            <label for="serie_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1">Serie <span class="text-red-500">*</span></label>
+                                                                            <select id="serie_edit_{{ $almacen->id }}" name="serie_id" required
+                                                                                class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                                                                <option value="">Seleccione una serie</option>
+                                                                                @foreach($series as $serie)
+                                                                                    <option value="{{ $serie->id }}"
+                                                                                        {{ old('serie_id', $almacen->serie_id) == $serie->id ? 'selected' : '' }}>
+                                                                                        {{ $serie->serie }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        {{-- RESPONSABLE --}}
+                                                                        <div class="md:col-span-2">
+                                                                            <label for="responsable_edit_{{ $almacen->id }}" class="block text-sm font-medium text-slate-700 mb-1"> Responsable <span class="text-red-500">*</span></label>
+                                                                            <select id="responsable_edit_{{ $almacen->id }}" name="responsable_id" required
+                                                                                class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                                                                <option value="">Seleccione un responsable</option>
+                                                                                @foreach($usuarios as $usuario)
+                                                                                    <option value="{{ $usuario->id }}"
+                                                                                        {{ old('responsable_id', $almacen->responsable_id) == $usuario->id ? 'selected' : '' }}>
+                                                                                        {{ $usuario->apellidos }} - {{ $usuario->nombre }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                        <button type="submit" class="px-5 py-2 rounded-md text-white text-sm font-medium"
-                                                            style="background-color: var(--active-pink);">
-                                                            <i class="fa-solid fa-floppy-disk mr-1"></i>
-                                                            Actualizar Almacén
-                                                        </button>
+                                                                {{-- 3. CONFIGURACIÓN Y ESTADO --}}
+                                                                <div class="hidden peer-checked/tab3:block space-y-4">
+                                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                        <div class="md:col-span-2">
+                                                                            <label class="block text-sm font-medium text-slate-700 mb-2">Estado</label>
+                                                                            <label class="inline-flex items-center cursor-pointer gap-3">
+                                                                                <input type="hidden" name="estado" value="0">
+                                                                                <input type="checkbox" name="estado" value="1" class="sr-only peer" {{ old('estado', $almacen->estado) ? 'checked' : '' }}>
+                                                                                <span class="text-sm font-medium text-slate-600">Inactivo</span>
+                                                                                <div class="relative w-11 h-6 bg-slate-300 rounded-full peer-checked:after:translate-x-full after:content-['']
+                                                                                    after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border
+                                                                                    after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600" style="background-color: var(--active-pink);">
+                                                                                </div>
+                                                                                <span class="text-sm font-medium text-slate-800">Activo</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {{-- BOTONES --}}
+                                                                <div class="flex justify-end gap-3 mt-8 pt-4 border-t border-slate-100">
+                                                                    <button type="button" onclick="document.getElementById('modalEditarAlmacen{{ $almacen->id }}').classList.add('hidden')"
+                                                                        class="px-5 py-2 rounded-md border border-slate-300 text-slate-700 text-sm font-medium hover:bg-slate-50">
+                                                                        Cancelar
+                                                                    </button>
+
+                                                                    <button type="submit" class="px-5 py-2 rounded-md text-white text-sm font-medium"
+                                                                        style="background-color: var(--active-pink);">
+                                                                        <i class="fa-solid fa-floppy-disk mr-1"></i>
+                                                                        Actualizar Almacén
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                </form>
+                                                    {{--ELIMINAR--}}
+                                                    <button type="button" onclick="confirmarEliminar('{{ route('almacen.destroy', $almacen->id) }}')"
+                                                        class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-black hover:bg-slate-50 text-left">
+                                                        <i class="fa-solid fa-trash w-4 text-black"></i>
+                                                        Eliminar
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        {{-- BOTÓN ELIMINAR --}}
-                                        <button type="button" onclick="confirmarEliminar('{{ route('almacen.destroy', $almacen->id) }}')"
-                                            class="px-4 py-1.5 rounded-md text-white text-xs font-semibold"style="background-color: #D50000;">
-                                            Eliminar
-                                        </button>
                                     </div>
                                 </td>
                             </tr>
