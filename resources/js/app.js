@@ -2,6 +2,7 @@
 import './admin';
 import './usuario';
 import './categoriaproducto';
+import './producto';
 import './marca';
 
 

@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="flex items-center gap-2 text-sm mb-4">
-        <a href="{{ route('configuracion') }}"
+        <a href="{{ route('configuracion.menu') }}"
         class="text-slate-400 hover:text-slate-700 flex items-center gap-1">
             <i class="fa-solid fa-house"></i>Dashboard</a>
         <span class="text-slate-400">/</span>
@@ -18,7 +18,6 @@
         Listado de Atributos
     </h1>
         
-
     <div class="bg-white rounded-3xl shadow-md p-6">
         <div class="flex justify-end">
             <button type="button"
@@ -118,20 +117,10 @@
                                                         <span class="text-sm font-medium text-slate-700">
                                                             No
                                                         </span>
-                                                        <div class="relative w-11 h-6 bg-slate-300 rounded-full peer
-                                                            peer-checked:after:translate-x-full
-                                                            after:content-['']
-                                                            after:absolute
-                                                            after:top-[2px]
-                                                            after:left-[2px]
-                                                            after:bg-white
-                                                            after:border-slate-300
-                                                            after:border
-                                                            after:rounded-full
-                                                            after:h-5
-                                                            after:w-5
-                                                            after:transition-all
-                                                            peer-checked:bg-[#269ad5]">
+                                                        <div class="relative w-11 h-6 bg-slate-300 rounded-full peer peer-checked:after:translate-x-full
+                                                            after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+                                                            after:bg-white after:border-slate-300 after:border after:rounded-full
+                                                            after:h-5 after:w-5 after:transition-all peer-checked:bg-[#269ad5]">
                                                         </div>
                                                         <span class="text-sm font-medium text-[#000000]">
                                                             Sí
@@ -225,19 +214,10 @@
                             No
                         </span>
                         <div class="relative w-11 h-6 bg-slate-300 rounded-full peer
-                            peer-checked:after:translate-x-full
-                            after:content-['']
-                            after:absolute
-                            after:top-[2px]
-                            after:left-[2px]
-                            after:bg-white
-                            after:border-slate-300
-                            after:border
-                            after:rounded-full
-                            after:h-5
-                            after:w-5
-                            after:transition-all
-                            peer-checked:bg-[#269ad5]">
+                            peer-checked:after:translate-x-full after:content-['']
+                            after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                            after:border-slate-300 after:border after:rounded-full after:h-5
+                            after:w-5 after:transition-all peer-checked:bg-[#269ad5]">
                         </div>
                         <span class="text-sm font-medium text-[#000000]">
                             Sí

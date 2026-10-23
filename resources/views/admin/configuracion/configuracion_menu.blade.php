@@ -158,8 +158,18 @@
                 @can('configuracion.roles.index')
                     <li><a href="{{ route('configuracion.roles') }}" class="text-gray-800 text-sm hover:underline">Roles</a></li>
                 @endcan
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Productos</a></li>
                 <li><a href="{{ route('configuracion.cuentapendiente') }}" class="text-gray-800 text-sm hover:underline">Cuentas pendientes</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-4 bg-white rounded-2xl shadow-md overflow-hidden">
+        <div class="bg-blue-50 px-3 py-1">
+            <h2 class="text-blue-900 font-bold text-base">Configuración de productos</h2>
+        </div>
+        <div class="px-6 py-6">
+            <ul class="space-y-4 list-disc list-inside marker:text-slate-800">
+                <li><a href="{{ route('configuracion.tipoafectacionigv') }}" class="text-gray-800 text-sm hover:underline">Tipos de afectación del IGV</a></li>
             </ul>
         </div>
     </div>

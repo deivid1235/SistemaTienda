@@ -122,14 +122,12 @@
                                 <ul class="nav-children"
                                     style="{{ request()->routeIs('producto', 'categoriaproducto', 'marca', 'promocion') ? 'display: block !important;' : '' }}">
 
-                                    @can('admin.producto.index')
                                         <li class="{{ request()->routeIs('producto') ? 'nav-active' : '' }}">
                                             <a class="nav-link" href="{{ route('producto') }}">
                                                 <i class="fa-solid fa-circle text-[8px]"></i>
                                                 <span>Productos</span>
                                             </a>
                                         </li>
-                                    @endcan
 
                                     
                                         <li class="{{ request()->routeIs('categoriaproducto') ? 'nav-active' : '' }}">
@@ -138,8 +136,6 @@
                                                 <span>Categorías</span>
                                             </a>
                                         </li>
-                                   
-
                                    
                                         <li class="{{ request()->routeIs('marca') ? 'nav-active' : '' }}">
                                             <a class="nav-link" href="{{ route('marca') }}">
@@ -513,8 +509,7 @@
                             class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
                         Cancelar
                     </button>
-                    <button type="submit"
-                            class="px-4 py-2 rounded-md bg-[#0407e2] hover:bg-[#0305b8] text-white text-sm font-semibold">
+                    <button type="submit" class="px-4 py-2 rounded-md bg-[#D50000] hover:bg-[#D50000] text-white text-sm font-semibold">
                         Eliminar
                     </button>
                 </div>

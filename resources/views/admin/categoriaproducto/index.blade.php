@@ -139,18 +139,20 @@
                                                             <input type="radio" name="tab_ver_categoria_{{ $categoria->id }}" id="ver_cat_tab1_{{ $categoria->id }}" class="peer/vtab1 hidden" checked>
                                                             <input type="radio" name="tab_ver_categoria_{{ $categoria->id }}"id="ver_cat_tab2_{{ $categoria->id }}" class="peer/vtab2 hidden">
                                                             <input type="radio" name="tab_ver_categoria_{{ $categoria->id }}"id="ver_cat_tab3_{{ $categoria->id }}" class="peer/vtab3 hidden">
-                                                            <div class="flex flex-wrap border-b border-slate-200 mb-6 gap-4 sm:gap-6">
+                                                            <div class="flex overflow-x-auto scrollbar-none border-b border-slate-200 mb-6 gap-4 sm:gap-6 pb-0.5">
                                                                 <label for="ver_cat_tab1_{{ $categoria->id }}"
-                                                                    class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/vtab1:text-indigo-600 peer-checked/vtab1:border-b-2 peer-checked/vtab1:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                                    <i class="fa-solid fa-folder-tree mr-2"></i>Información Básica
+                                                                    class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 peer-checked/vtab1:text-indigo-600 peer-checked/vtab1:border-b-2 peer-checked/vtab1:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                    <i class="fa-solid fa-folder-tree mr-1.5 sm:mr-2"></i>Información Básica
                                                                 </label>
+                                                                
                                                                 <label for="ver_cat_tab2_{{ $categoria->id }}"
-                                                                    class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/vtab2:text-indigo-600 peer-checked/vtab2:border-b-2 peer-checked/vtab2:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                                    <i class="fa-solid fa-image mr-2"></i>Imagen y SEO
+                                                                    class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 peer-checked/vtab2:text-indigo-600 peer-checked/vtab2:border-b-2 peer-checked/vtab2:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                    <i class="fa-solid fa-image mr-1.5 sm:mr-2"></i>Imagen y SEO
                                                                 </label>
+                                                                
                                                                 <label for="ver_cat_tab3_{{ $categoria->id }}"
-                                                                    class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/vtab3:text-indigo-600 peer-checked/vtab3:border-b-2 peer-checked/vtab3:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                                    <i class="fa-solid fa-sliders mr-2"></i>Configuración y Estado
+                                                                    class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 peer-checked/vtab3:text-indigo-600 peer-checked/vtab3:border-b-2 peer-checked/vtab3:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                    <i class="fa-solid fa-sliders mr-1.5 sm:mr-2"></i>Configuración y Estado
                                                                 </label>
                                                             </div>
                                                             {{-- 1. INFORMACIÓN BÁSICA --}}
@@ -259,20 +261,22 @@
                                                                 <input type="radio" name="tab_categoria_{{ $categoria->id }}" id="cat_tab1_{{ $categoria->id }}" class="peer/tab1 hidden" checked>
                                                                 <input type="radio" name="tab_categoria_{{ $categoria->id }}" id="cat_tab2_{{ $categoria->id }}" class="peer/tab2 hidden">
                                                                 <input type="radio" name="tab_categoria_{{ $categoria->id }}" id="cat_tab3_{{ $categoria->id }}" class="peer/tab3 hidden">
-                                                                <div class="flex flex-wrap border-b border-slate-200 mb-6 gap-4 sm:gap-6">
+                                                                <div class="flex overflow-x-auto scrollbar-none border-b border-slate-200 mb-6 gap-4 sm:gap-6 pb-0.5">
                                                                     <label for="cat_tab1_{{ $categoria->id }}"
-                                                                        class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/tab1:text-indigo-600 peer-checked/tab1:border-b-2 peer-checked/tab1:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                                        <i class="fa-solid fa-folder-tree mr-2"></i>
+                                                                        class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 peer-checked/tab1:text-indigo-600 peer-checked/tab1:border-b-2 peer-checked/tab1:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                        <i class="fa-solid fa-folder-tree mr-1.5 sm:mr-2"></i>
                                                                         Información Básica
                                                                     </label>
+
                                                                     <label for="cat_tab2_{{ $categoria->id }}"
-                                                                        class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/tab2:text-indigo-600 peer-checked/tab2:border-b-2 peer-checked/tab2:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                                        <i class="fa-solid fa-image mr-2"></i>
+                                                                        class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 peer-checked/tab2:text-indigo-600 peer-checked/tab2:border-b-2 peer-checked/tab2:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                        <i class="fa-solid fa-image mr-1.5 sm:mr-2"></i>
                                                                         Imagen y SEO
                                                                     </label>
+
                                                                     <label for="cat_tab3_{{ $categoria->id }}"
-                                                                        class="pb-3 text-sm font-semibold cursor-pointer transition-all peer-checked/tab3:text-indigo-600 peer-checked/tab3:border-b-2 peer-checked/tab3:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                                                                        <i class="fa-solid fa-sliders mr-2"></i>
+                                                                        class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 peer-checked/tab3:text-indigo-600 peer-checked/tab3:border-b-2 peer-checked/tab3:border-indigo-600 text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
+                                                                        <i class="fa-solid fa-sliders mr-1.5 sm:mr-2"></i>
                                                                         Configuración y Estado
                                                                     </label>
                                                                 </div>
@@ -433,23 +437,25 @@
                 <input type="radio" name="tab_group_cat" id="cat_tab3" class="peer/tab3 hidden">
 
                 <!-- BOTONES / PESTAÑAS (TABS VISUALES) -->
-                <div class="flex border-b border-slate-200 mb-6 gap-6">
-                    <label for="cat_tab1" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+                <div class="flex overflow-x-auto scrollbar-none border-b border-slate-200 mb-6 gap-4 sm:gap-6 pb-0.5">
+                    <label for="cat_tab1" class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0
                         peer-checked/tab1:text-indigo-600 peer-checked/tab1:border-b-2 peer-checked/tab1:border-indigo-600
                         text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                        <i class="fa-solid fa-folder-tree mr-2"></i>
+                        <i class="fa-solid fa-folder-tree mr-1.5 sm:mr-2"></i>
                         Información Básica
                     </label>
-                    <label for="cat_tab2" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+
+                    <label for="cat_tab2" class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0
                         peer-checked/tab2:text-indigo-600 peer-checked/tab2:border-b-2 peer-checked/tab2:border-indigo-600
                         text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                        <i class="fa-solid fa-image mr-2"></i>
+                        <i class="fa-solid fa-image mr-1.5 sm:mr-2"></i>
                         Imagen y SEO
                     </label>
-                    <label for="cat_tab3" class="pb-3 text-sm font-semibold cursor-pointer transition-all
+
+                    <label for="cat_tab3" class="pb-3 text-xs sm:text-sm font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0
                         peer-checked/tab3:text-indigo-600 peer-checked/tab3:border-b-2 peer-checked/tab3:border-indigo-600
                         text-slate-500 hover:text-slate-800 border-b-2 border-transparent">
-                        <i class="fa-solid fa-sliders mr-2"></i>
+                        <i class="fa-solid fa-sliders mr-1.5 sm:mr-2"></i>
                         Configuración y Estado
                     </label>
                 </div>

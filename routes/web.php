@@ -181,5 +181,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/almacen', [App\Http\Controllers\AlmacenController::class, 'store'])->name('almacen.store')->middleware('auth');
     Route::put('/admin/almacen/{id}', [App\Http\Controllers\AlmacenController::class, 'update'])->name('almacen.update')->middleware('auth');
     Route::delete('/admin/almacen/{id}', [App\Http\Controllers\AlmacenController::class, 'destroy'])->name('almacen.destroy')->middleware('auth');
+    //Tipo de afectacion
+    Route::get('/configuracion/tipoafectacionigv', [App\Http\Controllers\TipoAfectacionIgvController::class, 'index'])->name('configuracion.tipoafectacionigv')->middleware('auth');
+    Route::post('/configuracion/tipoafectacionigv',[App\Http\Controllers\TipoAfectacionIgvController::class, 'store'])->name('configuracion.tipoafectacionigv.store')->middleware('auth');
+    Route::put('/configuracion/tipoafectacionigv/{id}',[App\Http\Controllers\TipoAfectacionIgvController::class, 'update'])->name('configuracion.tipoafectacionigv.update')->middleware('auth');
+    Route::delete('/configuracion/tipoafectacionigv/{id}',[App\Http\Controllers\TipoAfectacionIgvController::class, 'destroy'])->name('configuracion.tipoafectacionigv.destroy')->middleware('auth');
+    //Productos
+    Route::get('/admin/producto', [App\Http\Controllers\ProductoController::class, 'index'])->name('producto')->middleware('auth');
+    Route::post('/admin/producto', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.store')->middleware('auth');
+
 
 });

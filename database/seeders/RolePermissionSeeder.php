@@ -170,6 +170,8 @@ class RolePermissionSeeder extends Seeder
         Permission::create(['name' => 'admin.usuario.store'])->syncRoles($admin);
         Permission::create(['name' => 'admin.usuario.update'])->syncRoles($admin);
         Permission::create(['name' => 'admin.usuario.destroy'])->syncRoles($admin);
+        // Usuarios
+        
 
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
     }

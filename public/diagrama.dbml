@@ -398,3 +398,48 @@ Table almacenes {
 }
 
 
+
+Table tipo_afectacion_igv {
+    id int [pk, increment]
+    codigo varchar(2) [not null, unique]
+    nombre varchar(100) [not null]
+    tipo varchar(30) [not null]
+    descripcion text
+    estado boolean [not null, default: true]
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table productos {
+    id int [pk, increment]
+    nombre varchar(200) [not null]
+    descripcion text
+    modelo varchar(150)
+    categoria_producto_id int [not null, ref: > categoria_producto.id]
+    marca_id int [ref: > marcas.id]
+    unidad_id int [ref: > unidades.id]
+    moneda_id int [not null, ref: > monedas.id]
+    tipo_afectacion_igv_id int [ref: > tipo_afectacion_igv.id]
+    precio_unitario decimal(12,2) [not null]
+    costo_unitario decimal(12,2)
+    incluye_igv boolean [not null, default: true]
+    incluye_isc boolean [not null, default: false]
+    codigo_interno varchar(50) [unique]
+    codigo_barras varchar(100) [unique]
+    codigo_sunat varchar(20)
+    codigo_fabricante varchar(100)
+    imagen_qr varchar(255)
+    imagen varchar(255)
+    activo boolean [not null, default: true]
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table inventario {
+  id int [pk, increment]
+  producto_id int [not null, ref: > productos.id]
+  almacen_id int [not null, ref: > almacenes.id]
+  stock_inicial decimal(12,3) [not null, default: 0]
+  stock_actual decimal(12,3) [not null, default: 0]
+  stock_minimo decimal(12,3) [not null, default: 0]
+}

@@ -86,7 +86,8 @@
                                         {{ $cliente->estado ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20' : 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20' }}">
                                         
                                         <span class="relative flex h-2 w-2">
-                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75{{ $cliente->estado ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 
+                                                {{ $cliente->estado ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
                                             <span class="relative inline-flex rounded-full h-2 w-2
                                                 {{ $cliente->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
                                         </span>
