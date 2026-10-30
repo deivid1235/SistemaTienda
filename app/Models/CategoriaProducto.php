@@ -23,4 +23,5 @@ class CategoriaProducto extends Model
             'categoria_padre_id'
         );
     }
+    
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
@@ -31,8 +31,9 @@ class Producto extends Model
         return $this->belongsTo(TipoAfectacionIgv::class);
     }
 
-    public function inventarios()
-    {
-        return $this->hasMany(Inventario::class);
-    }
+    public function inventario(): HasMany
+{
+    return $this->hasMany(Inventario::class, 'producto_id');
+}
+
 }

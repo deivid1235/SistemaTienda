@@ -189,6 +189,7 @@ Route::middleware('auth')->group(function () {
     //Productos
     Route::get('/admin/producto', [App\Http\Controllers\ProductoController::class, 'index'])->name('producto')->middleware('auth');
     Route::post('/admin/producto', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.store')->middleware('auth');
-
+    Route::put('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('producto.update')->middleware('auth');
+    Route::delete('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('producto.destroy')->middleware('auth');
 
 });
