@@ -32,8 +32,8 @@ class Producto extends Model
     }
 
     public function inventario(): HasMany
-{
-    return $this->hasMany(Inventario::class, 'producto_id');
-}
+    {
+        return $this->hasMany(Inventario::class, 'producto_id');
+    }
 
 }

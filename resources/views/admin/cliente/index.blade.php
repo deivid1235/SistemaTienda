@@ -237,14 +237,20 @@
                                                                         <label class="block text-sm font-medium text-slate-700 mb-2"> Estado</label>
                                                                         <div class="flex items-center gap-3">
                                                                             <span class="text-sm font-medium text-slate-600">Inactivo</span>
-                                                                            <div class="relative w-11 h-6 rounded-full transition-colors duration-300{{ $cliente->estado ? 'bg-[#269ad5]' : 'bg-slate-300' }}">
+                                                                            <div class="relative w-11 h-6 rounded-full transition-colors duration-300 {{ $cliente->estado ? 'bg-[#269ad5]' : 'bg-slate-300' }}">
                                                                                 <div class="absolute top-[2px] left-[2px] bg-white border border-slate-300
                                                                                     rounded-full h-5 w-5 transition-transform duration-300
                                                                                     {{ $cliente->estado ? 'translate-x-5' : 'translate-x-0' }}">
                                                                                 </div>
                                                                             </div>
                                                                             <span class="text-sm font-medium text-slate-800">Activo</span>
-                                                                            <span class="ml-2 px-2 py-1 rounded-full text-xs font-semibold{{ $cliente->estado ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">{{ $cliente->estado ? 'ACTIVO' : 'INACTIVO' }}</span>
+                                                                            <span class="ml-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold {{ $cliente->estado ? 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20' : 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20' }}">
+                                                                                <span class="relative flex h-2 w-2">
+                                                                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 {{ $cliente->estado ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
+                                                                                    <span class="relative inline-flex rounded-full h-2 w-2 {{ $cliente->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
+                                                                                </span>
+                                                                                {{ $cliente->estado ? 'ACTIVO' : 'INACTIVO' }}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

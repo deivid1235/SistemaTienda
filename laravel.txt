@@ -141,10 +141,14 @@ control + h
 //$datos = Request()->all();
 //return response()->json($datos);
 
+value="{{ old('nombre') }}"
 
 @error('rol')
     <small style="color: red">{{ $message }}</small>
 @enderror
+
+
+
 
 
 @if ($errors->any())
@@ -170,3 +174,29 @@ control + h
     </div>
 @endif
 
+
+Eliminar el enlace public/storage:
+php artisan storage:unlink
+
+Crearlo nuevamente:
+php artisan storage:link
+
+
+view/admin
+
+
+Public
+
+
+
+Public/
+├── Home.vue
+├── Productos.vue
+├── DetalleProducto.vue
+├── Categorias.vue
+├── Carrito.vue
+├── Checkout.vue
+└── Nosotros.vue
+
+
+npm install vue @vitejs/plugin-vue

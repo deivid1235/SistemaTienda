@@ -4,19 +4,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
-    return redirect()->route('login');
-});
+    return view('public.Home');
+})->name('public.index');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/', [App\Http\Controllers\TiendaController::class, 'index'])->name('public.index');
+
 
 Route::middleware('auth')->group(function () {
     //Ubigeo
     Route::get('/ubigeo/departamentos', [App\Http\Controllers\UbigeoController::class, 'departamentos'])->name('ubigeo.departamentos') ->middleware('auth');
     Route::get('/ubigeo/provincias/{codigo}', [App\Http\Controllers\UbigeoController::class, 'provincias'])->name('ubigeo.provincias')->middleware('auth');
     Route::get('/ubigeo/distritos/{codigo}', [App\Http\Controllers\UbigeoController::class, 'distritos'])->name('ubigeo.distritos')->middleware('auth');
-    
+    //public
+    Route::post('/carrito/agregar/{id}', [App\Http\Controllers\CarritoController::class, 'agregar'])->name('carrito.agregar');
+    Route::delete('/carrito/eliminar/{id}', [App\Http\Controllers\CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+    Route::post('/carrito/agregar/{id}', [App\Http\Controllers\CarritoController::class, 'agregar'])->name('carrito.agregar');
+    Route::post('/carrito/disminuir/{id}', [App\Http\Controllers\CarritoController::class, 'disminuir'])->name('carrito.disminuir');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('dashboard')->middleware('auth', 'can:admin.dashboard.index');
     Route::get('/configuracion/menu', function () {
     $estilos = \App\Models\Estilo::all();$estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
@@ -191,5 +200,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/producto', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.store')->middleware('auth');
     Route::put('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('producto.update')->middleware('auth');
     Route::delete('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('producto.destroy')->middleware('auth');
+
+
 
 });

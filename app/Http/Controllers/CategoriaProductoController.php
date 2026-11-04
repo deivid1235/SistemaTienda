@@ -128,15 +128,10 @@ class CategoriaProductoController extends Controller
     public function destroy( string $id)
     {
         $categoriaProducto = CategoriaProducto::findOrFail($id);
-
-        // Eliminar la imagen de la categoría si existe
         if ($categoriaProducto->imagen && Storage::disk('public')->exists($categoriaProducto->imagen)) {
             Storage::disk('public')->delete($categoriaProducto->imagen);
         }
-
-        // Eliminar la categoría de la base de datos
         $categoriaProducto->delete();
-
         return redirect()->route('categoriaproducto')
             ->with('success', 'Categoría eliminada correctamente.');
     }

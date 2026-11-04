@@ -249,12 +249,15 @@
                                                                     <div>
                                                                         <label class="block text-sm font-medium text-slate-700 mb-2">Estado</label>
                                                                         <div class="mt-3">
-                                                                            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold
-                                                                                {{ $usuario->estado ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700' }}"><span class="w-2 h-2 rounded-full {{ $usuario->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>{{ $usuario->estado ? 'Activo' : 'Inactivo' }}
+                                                                            <span class="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold {{ $usuario->estado ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700' }}">
+                                                                                <span class="relative flex h-2 w-2">
+                                                                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 {{ $usuario->estado ? 'bg-emerald-400' : 'bg-rose-400' }}"></span>
+                                                                                    <span class="relative inline-flex rounded-full h-2 w-2 {{ $usuario->estado ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
+                                                                                </span>
+                                                                                {{ $usuario->estado ? 'Activo' : 'Inactivo' }}
                                                                             </span>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                             {{-- ACCESO Y PERMISOS --}}

@@ -1,3 +1,4 @@
+
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
@@ -9,6 +10,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/css/public.css',
                 'resources/css/login.css',
                 'resources/js/login.js',
             ],

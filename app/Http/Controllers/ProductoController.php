@@ -282,4 +282,33 @@ class ProductoController extends Controller
             return redirect()->route('producto')->with('error', 'Error al eliminar el producto: ' . $e->getMessage());
         }
     }
+
+
+    public function publicos()
+{
+    $productos = Producto::where('activo', true)
+        ->select([
+            'id',
+            'nombre',
+            'descripcion',
+            'modelo',
+            'precio_unitario',
+            'moneda_id',
+            'imagen',
+        ])
+        ->latest()
+        ->get()
+        ->map(function ($producto) {
+            $producto->imagen_url = $producto->imagen
+                ? asset('storage/' . $producto->imagen)
+                : null;
+
+            return $producto;
+        });
+
+    return response()->json([
+        'success' => true,
+        'productos' => $productos,
+    ]);
+}
 }

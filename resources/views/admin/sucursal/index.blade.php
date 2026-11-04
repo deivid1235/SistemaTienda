@@ -25,7 +25,6 @@
         </div>
         
         <div class="overflow-x-auto mt-4">
-
             <div id="panelFiltros" class="{{ request()->filled('buscar') ? '' : 'hidden' }} mt-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
                     <form action="{{ url('/admin/sucursal') }}" method="GET">
                         <div class="flex flex-col sm:flex-row gap-3 items-center">
@@ -97,12 +96,10 @@
                                     <div class="flex justify-end">
                                         <div class="relative">
                                             <input type="checkbox" id="menuSucursal{{ $sucursal->id }}" class="peer hidden">
-
                                             <label for="menuSucursal{{ $sucursal->id }}"
                                                 class="flex items-center justify-center w-9 h-9 rounded-lg cursor-pointer text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border border-slate-300">
                                                 <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
                                             </label>
-
                                             <div class="hidden peer-checked:block absolute right-0 bottom-full mb-2 w-48 h-24 overflow-y-scroll overscroll-contain bg-white rounded-md shadow-xl border border-slate-200 z-[99999]">
                                                 <div class="py-1">
                                                     {{-- VER --}}

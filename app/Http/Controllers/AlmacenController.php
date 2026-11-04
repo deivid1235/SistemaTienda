@@ -20,7 +20,6 @@ class AlmacenController extends Controller
         $sucursales = Sucursal::all();
         $series = Serie::all();
         $usuarios = Usuario::all();
-
         return view('admin.almacen.index', compact('sucursales', 'series', 'usuarios','almacenes'));
     }
 
@@ -82,7 +81,6 @@ class AlmacenController extends Controller
     public function update(Request $request,  string $id)
     {
         $almacen = Almacen::findOrFail($id);
-
         $request->validate([
             'codigo' => ['required','string','max:20',Rule::unique('almacens', 'codigo')->ignore($id),],
             'nombre' => 'required|string|max:100',

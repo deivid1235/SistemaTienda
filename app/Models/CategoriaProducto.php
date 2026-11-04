@@ -9,19 +9,11 @@ class CategoriaProducto extends Model
 {
     public function padre(): BelongsTo
     {
-        return $this->belongsTo(
-            CategoriaProducto::class,
-            'categoria_padre_id'
-        );
+        return $this->belongsTo( CategoriaProducto::class,'categoria_padre_id');
     }
 
-    // Una categoría puede tener varias subcategorías
     public function subcategorias(): HasMany
     {
-        return $this->hasMany(
-            CategoriaProducto::class,
-            'categoria_padre_id'
-        );
+        return $this->hasMany(CategoriaProducto::class,'categoria_padre_id');
     }
-    
 }
