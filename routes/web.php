@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/carrito/eliminar/{id}', [App\Http\Controllers\CarritoController::class, 'eliminar'])->name('carrito.eliminar');
     Route::post('/carrito/agregar/{id}', [App\Http\Controllers\CarritoController::class, 'agregar'])->name('carrito.agregar');
     Route::post('/carrito/disminuir/{id}', [App\Http\Controllers\CarritoController::class, 'disminuir'])->name('carrito.disminuir');
+    //Libro Reclamacione
+    Route::get('/libro_reclamaciones', function () {return view('public.libro_reclamacion');})->name('libro.reclamacion');
+
+
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 

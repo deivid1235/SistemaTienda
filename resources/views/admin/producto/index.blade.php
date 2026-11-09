@@ -579,28 +579,30 @@
                                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
                                                                         <div>
                                                                             <label class="block text-sm font-medium text-slate-700 mb-1">Imagen del Producto</label>
-                                                                            <label for="imagen_{{ $producto->id }}"
+                                                                            <label for="imagen_edit_{{ $producto->id }}"
                                                                                 class="flex flex-col items-center justify-center w-36 h-44 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100 transition-all overflow-hidden relative">
-                                                                                <div id="preview-container-imagen-{{ $producto->id }}"
+                                                                                <div id="preview-container-imagen-edit-{{ $producto->id }}"
                                                                                     class="flex flex-col items-center justify-center w-full h-full text-slate-400">
                                                                                     @if ($producto->imagen)
-                                                                                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen actual del producto"class="w-full h-full object-cover">
+                                                                                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen actual del producto"  class="w-full h-full object-cover">
                                                                                     @else
                                                                                         <span class="text-4xl font-light text-slate-300">+</span>
                                                                                         <span class="text-xs text-slate-400 mt-2">Subir imagen</span>
                                                                                     @endif
                                                                                 </div>
-                                                                                <button type="button" id="quitar-imagen-{{ $producto->id }}" onclick="quitarImagenProducto(event, {{ $producto->id }})"
+                                                                                <button type="button" id="quitar-imagen-edit-{{ $producto->id }}" onclick="quitarImagenProductoEdicion(event, {{ $producto->id }})"
                                                                                     class="{{ $producto->imagen ? '' : 'hidden' }} absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full items-center justify-center text-sm font-bold hover:bg-red-600 z-10">
                                                                                     X
                                                                                 </button>
-                                                                                <input type="file" id="imagen_{{ $producto->id }}" name="imagen" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"class="hidden"onchange="mostrarImagenProducto(this, {{ $producto->id }})">
+                                                                                <input type="file" id="imagen_edit_{{ $producto->id }}" name="imagen" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="hidden"
+                                                                                onchange="mostrarImagenProductoEdicion(this, {{ $producto->id }})">
                                                                             </label>
                                                                             <p class="text-xs text-slate-500 mt-1">Selecciona una imagen PNG, JPG o WEBP.</p>
                                                                             @error('imagen')
                                                                                 <small class="mt-1 block text-red-600">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
+
                                                                         <div>
                                                                             <label class="block text-sm font-medium text-slate-700 mb-1">
                                                                                 Código de Barras

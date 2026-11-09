@@ -60,44 +60,35 @@ function quitarImagenProducto(event) {
     btnQuitar.classList.remove('flex');
 }
 
+
 // Mostrar imagen del producto al editar
 function mostrarImagenProductoEdicion(input, id) {
     const contenedor = document.getElementById('preview-container-imagen-edit-' + id);
     const botonQuitar = document.getElementById('quitar-imagen-edit-' + id);
-
     if (!contenedor || !botonQuitar) {
         console.error('No se encontró la vista previa del producto:', id);
         return;
     }
-
     if (!input.files || !input.files[0]) return;
-
     const archivo = input.files[0];
-
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(archivo.type)) {
         input.value = '';
         alert('Selecciona una imagen JPG, PNG o WEBP.');
         return;
     }
-
     if (archivo.size > 2 * 1024 * 1024) {
         input.value = '';
         alert('La imagen no debe superar los 2 MB.');
         return;
     }
-
     const lector = new FileReader();
-
     lector.onload = function (e) {
         contenedor.innerHTML = `
-            <img src="${e.target.result}"
-                 class="w-full h-full object-cover"
-                 alt="Vista previa del producto">`;
-
+            <img src="${e.target.result}"class="w-full h-full object-cover"alt="Vista previa del producto">
+        `;
         botonQuitar.classList.remove('hidden');
         botonQuitar.classList.add('flex');
     };
-
     lector.readAsDataURL(archivo);
 }
 
@@ -105,19 +96,12 @@ function mostrarImagenProductoEdicion(input, id) {
 function quitarImagenProductoEdicion(event, id) {
     event.preventDefault();
     event.stopPropagation();
-
     const input = document.getElementById('imagen_edit_' + id);
     const contenedor = document.getElementById('preview-container-imagen-edit-' + id);
     const boton = document.getElementById('quitar-imagen-edit-' + id);
-
     if (!input || !contenedor || !boton) return;
-
     input.value = '';
-
-    contenedor.innerHTML = `
-        <span class="text-4xl font-light text-slate-300">+</span>
-        <span class="text-xs text-slate-400 mt-2">Subir imagen</span>`;
-
+    contenedor.innerHTML = `<span class="text-4xl font-light text-slate-300">+</span><span class="text-xs text-slate-400 mt-2">Subir imagen</span>`;
     boton.classList.add('hidden');
     boton.classList.remove('flex');
 }
