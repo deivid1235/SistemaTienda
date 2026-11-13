@@ -264,17 +264,14 @@
                                     <span>Tienda</span>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </a>
-
                                 <ul class="nav-children"
                                     style="{{ request()->routeIs('cliente_externo') ? 'display: block !important;' : '' }}">
-
                                     <li class="{{ request()->routeIs('cliente_externo') ? 'nav-active' : '' }}">
                                         <a class="nav-link" href="{{ route('cliente_externo') }}">
                                             <i class="fa-solid fa-circle text-[8px]"></i>
                                             <span>Clientes Externos</span>
                                         </a>
                                     </li>
-
                                 </ul>
                             </li>
                         </ul>

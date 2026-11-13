@@ -12,6 +12,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', [App\Http\Controllers\TiendaController::class, 'index'])->name('public.index');
 Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/registro-cliente', [App\Http\Controllers\ClienteExternoController::class, 'store'])->name('cliente_externo.store');
+Route::get('/categorias/{categoria}', [App\Http\Controllers\HomeController::class, 'categorias'])->name('categorias');
+Route::get('/carrito', [App\Http\Controllers\CarritoController::class, 'index'])
+    ->name('carrito.index');
 
 Route::middleware('auth')->group(function () {
     //Ubigeo

@@ -127,112 +127,7 @@
             @endforelse
         </div>
     </section>
-
-    <div id="panelCarrito" class="hidden fixed top-0 right-0 w-96 max-w-full h-screen bg-white shadow-2xl z-50 flex flex-col justify-between font-sans">
-        <div class="p-5 flex items-center justify-between sticky top-0 z-10 shadow-md" style="background-color: #0F1D3A;">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-[#b8952d] text-gray-950 flex items-center justify-center font-bold shadow-inner">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                    </svg>
-                </div>
-                <div>
-                    <h2 class="text-base font-bold text-[#b8952d] tracking-tight leading-tight">Mi Carrito</h2>
-                    <p class="text-xs text-blue-100 font-medium mt-0.5">Tus productos seleccionados</p>
-                </div>
-            </div>
-            <button onclick="document.getElementById('panelCarrito').classList.add('hidden')"
-                class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-xl transition-colors">
-                &times;
-            </button>
-        </div>
-
-        @php
-            $carrito = session('carrito', []);
-            $total = 0;
-            $cantidadTotal = collect($carrito)->sum('cantidad');
-        @endphp
-        <div class="p-5 overflow-y-auto flex-1 space-y-3 bg-slate-50/50">
-            @forelse($carrito as $id => $producto)
-                @php
-                    $subtotal = ($producto['precio_unitario'] ?? 0) * ($producto['cantidad'] ?? 0);
-                    $total += $subtotal;
-                @endphp
-                
-                <div class="group relative flex items-center justify-between gap-3 p-3.5 bg-white border border-slate-100 rounded-2xl shadow-xs hover:border-[#b8952d] transition-all">
-                    <div class="w-16 h-16 shrink-0 flex items-center justify-center bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
-                        @if(!empty($producto['imagen']))
-                            <img src="{{ asset('storage/' . ltrim($producto['imagen'], '/')) }}" alt="{{ $producto['nombre'] ?? 'Producto' }}" class="w-full h-full object-contain p-1"
-                                onerror="this.onerror=null; this.style.display='none';">
-                        @else
-                            <span class="text-xl">📦</span>
-                        @endif
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-semibold text-xs sm:text-sm text-slate-800 line-clamp-1 group-hover:text-[#0F1D3A] transition-colors leading-snug">
-                            {{ $producto['nombre'] }}
-                        </h3>
-                        
-                        <div class="flex items-center gap-2.5 mt-1.5 text-xs text-slate-600">
-                            <span class="font-medium">S/ {{ number_format($producto['precio_unitario'] ?? 0, 2) }}</span>
-                            <span class="text-slate-300">|</span>
-                            <div class="flex items-center gap-2">
-                                <form action="{{ route('carrito.disminuir', $producto['id']) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="w-6 h-6 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded flex items-center justify-center transition-colors">-</button>
-                                </form>
-                                <span class="font-bold text-slate-800 text-xs">{{ $producto['cantidad'] ?? 0 }}</span>
-                                <form action="{{ route('carrito.agregar', $producto['id']) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="w-6 h-6 bg-[#b8952d] hover:bg-[#9e7d23] text-gray-950 font-bold rounded flex items-center justify-center transition-colors">+</button>
-                                </form>
-                            </div>
-                        </div>
-                        <span class="font-bold text-xs text-[#0F1D3A] block mt-1.5">
-                            Subtotal: S/ {{ number_format($subtotal, 2) }}
-                        </span>
-                    </div>
-                    <button type="button" onclick="window.confirmarEliminar('{{ route('carrito.eliminar', $id) }}')"
-                        class="group/btn relative w-9 h-9 flex items-center justify-center rounded-xl bg-rose-50 border border-rose-100 text-rose-500 hover:bg-rose-500 hover:text-white transition-all duration-200 active:scale-95 shrink-0 shadow-xs"
-                        title="Eliminar producto">
-                        <svg class="w-4 h-4 fill-current transition-transform group-hover/btn:scale-110" viewBox="0 0 24 24">
-                            <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"/>
-                        </svg>
-                    </button>
-                </div>
-            @empty
-                <div class="text-center py-20 px-4">
-                    <div class="w-16 h-16 bg-[#b8952d]/20 text-gray-950 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner">
-                        <svg class="w-8 h-8 fill-current text-[#0F1D3A]" viewBox="0 0 24 24">
-                            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-slate-800">Tu carrito está vacío</h3>
-                    <p class="text-slate-500 text-xs mt-1 max-w-[200px] mx-auto font-normal leading-relaxed">Explora nuestros productos y agrega tus favoritos.</p>
-                </div>
-            @endforelse
-        </div>
-
-        <!-- Footer del Carrito / Totales y Botón de Checkout -->
-        <div class="p-5 border-t border-slate-100 bg-white shadow-lg space-y-3">
-            <div class="space-y-2 text-xs text-slate-600">
-                <div class="flex justify-between font-medium">
-                    <span>Total de artículos ({{ $cantidadTotal }})</span>
-                    <span class="font-semibold text-slate-800">S/ {{ number_format($total, 2) }}</span>
-                </div>
-                <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-sm font-bold">
-                    <span class="text-slate-900">Total a pagar:</span>
-                    <span class="text-base font-black text-slate-900"><span class="text-[#0F1D3A]">S/</span> {{ number_format($total, 2) }}</span>
-                </div>
-            </div>
-            <a href="#" class="w-full py-3.5 bg-[#b8952d] hover:bg-[#9e7d23] text-gray-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 active:scale-95">
-                <span>Continuar compra</span>
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
-            </a>
-        </div>
-    </div>
+  
 
     <section id="panelCategorias" class="bg-white py-12 sm:py-16 font-sans scroll-mt-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -244,7 +139,7 @@
             <p class="text-sm text-slate-500 mb-5 font-normal">Selecciona una categoría para ver sus productos.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($categorias as $categoria)
-                    <a href="{{ route('home', ['categoria' => $categoria->id]) }}"
+                    <a href="{{ route('categorias', ['categoria' => $categoria->id]) }}"
                     class="group relative flex items-center gap-5 p-4 sm:p-5 bg-gradient-to-r from-white via-white to-amber-50/30 border border-slate-200 rounded-3xl shadow-lg shadow-slate-900/5 hover:border-[#0F1D3A] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full overflow-hidden">
                         <div class="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-white flex items-center justify-center overflow-hidden border border-slate-200 p-2 shadow-sm group-hover:border-[#b8952d]/50 transition-colors">
                             @if($categoria->imagen)

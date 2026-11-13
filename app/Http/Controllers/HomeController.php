@@ -17,9 +17,20 @@ class HomeController extends Controller
         $compania = Compania::first();
         $query = Producto::query();
         if ($request->filled('categoria')) {
-            $query->where('categoria_id', $request->categoria);
+           $query->where('categoria_productos_id', $request->categoria);
         }
         $productos = $query->get();
-        return view('public.Home', compact('categorias', 'productos', 'marcas','compania'));
+        $carrito = session()->get('carrito', []);
+        return view('public.Home', compact('categorias', 'productos', 'marcas','compania','carrito'));
+    }
+
+   
+    public function categorias(string $categoria)
+    {
+        $categorias = CategoriaProducto::all();
+        $categoria = CategoriaProducto::findOrFail($categoria);
+        $compania = Compania::first();
+        $productos = Producto::where('categoria_productos_id', $categoria->id)->get();
+        return view('public.categoria', compact('categorias','categoria','productos','compania'));
     }
 }

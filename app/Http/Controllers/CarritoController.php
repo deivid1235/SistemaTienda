@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class CarritoController extends Controller
 {
-
     public function agregar(string $id)
     {
         $carrito = session()->get('carrito', []);
