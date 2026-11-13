@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoriaProducto;
+use App\Models\Compania;
+use App\Models\Marca;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -10,19 +12,25 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener todas las categorías
         $categorias = CategoriaProducto::all();
-
-        // Consultar productos
+        $marcas = Marca::all();
+        $compania = Compania::first();
         $query = Producto::query();
-
-        // Filtrar por categoría si se selecciona una
         if ($request->filled('categoria')) {
-            $query->where('categoria_id', $request->categoria);
+           $query->where('categoria_productos_id', $request->categoria);
         }
-
         $productos = $query->get();
+        $carrito = session()->get('carrito', []);
+        return view('public.Home', compact('categorias', 'productos', 'marcas','compania','carrito'));
+    }
 
-        return view('public.Home', compact('categorias', 'productos'));
+   
+    public function categorias(string $categoria)
+    {
+        $categorias = CategoriaProducto::all();
+        $categoria = CategoriaProducto::findOrFail($categoria);
+        $compania = Compania::first();
+        $productos = Producto::where('categoria_productos_id', $categoria->id)->get();
+        return view('public.categoria', compact('categorias','categoria','productos','compania'));
     }
 }

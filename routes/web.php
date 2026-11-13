@@ -3,15 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
-Route::get('/', function () {
-    return view('public.Home');
-})->name('public.index');
+Route::get('/', function () {return view('public.Home');})->name('public.index');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Tienda virtual
 Route::get('/', [App\Http\Controllers\TiendaController::class, 'index'])->name('public.index');
-
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/registro-cliente', [App\Http\Controllers\ClienteExternoController::class, 'store'])->name('cliente_externo.store');
+Route::get('/categorias/{categoria}', [App\Http\Controllers\HomeController::class, 'categorias'])->name('categorias');
+Route::get('/carrito', [App\Http\Controllers\CarritoController::class, 'index'])
+    ->name('carrito.index');
 
 Route::middleware('auth')->group(function () {
     //Ubigeo
@@ -23,8 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/carrito/eliminar/{id}', [App\Http\Controllers\CarritoController::class, 'eliminar'])->name('carrito.eliminar');
     Route::post('/carrito/agregar/{id}', [App\Http\Controllers\CarritoController::class, 'agregar'])->name('carrito.agregar');
     Route::post('/carrito/disminuir/{id}', [App\Http\Controllers\CarritoController::class, 'disminuir'])->name('carrito.disminuir');
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+    //Libro Reclamacione
+    Route::get('/libro_reclamaciones', function () {return view('public.libro_reclamacion');})->name('libro.reclamacion');
+    Route::post('/libro_reclamaciones', [App\Http\Controllers\LibroReclamoController::class, 'store'])->name('libro.reclamacion.store');
+    
+    
 
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('dashboard')->middleware('auth', 'can:admin.dashboard.index');
     Route::get('/configuracion/menu', function () {
@@ -221,7 +227,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/producto', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.store')->middleware('auth');
     Route::put('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'update'])->name('producto.update')->middleware('auth');
     Route::delete('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('producto.destroy')->middleware('auth');
-
+    //Cliente externo
+    Route::get('/admin/cliente-externo', [App\Http\Controllers\ClienteExternoController::class, 'index'])->name('cliente_externo')->middleware('auth');
 
 
 });

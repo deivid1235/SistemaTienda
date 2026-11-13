@@ -279,25 +279,27 @@
                                 </ul>
                             </li>
 
-                            {{-- SUSCRIPCIÓN ESCOLAR (BETA) --}}
-                            <li class="nav-parent">
+                            {{-- TIENDA --}}
+                            <li class="nav-parent {{ request()->routeIs('cliente_externo') ? 'nav-expanded' : '' }}"
+                                style="{{ request()->routeIs('cliente_externo') ? 'display: block;' : '' }}">
+
                                 <a class="nav-link" href="#">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                    <span>Suscripción Escolar</span>
-                                    <span class="badge-beta">Beta</span>
+                                    <i class="fa-solid fa-store"></i>
+                                    <span>Tienda</span>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </a>
-                                <ul class="nav-children">
-                                    <li><a class="nav-link" href="#">Matrículas</a></li>
-                                    <li><a class="nav-link" href="#">Pensiones</a></li>
+                                <ul class="nav-children"
+                                    style="{{ request()->routeIs('cliente_externo') ? 'display: block !important;' : '' }}">
+                                    <li class="{{ request()->routeIs('cliente_externo') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('cliente_externo') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Clientes Externos</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
-
-
                         </ul>
-
                     </nav>
-
                 </div>
             </div>
 
@@ -429,9 +431,7 @@
 
     </header>
     <main class="main-content">
-
         @yield('content')
-
     </main>
 
     @yield('js')
@@ -477,6 +477,7 @@
         return redirect()->back()->with('success', 'Banco editado con éxito'); --}}
 
     @if (session('success'))
+<<<<<<< HEAD
     <div id="alertaExito"
         class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
 
@@ -485,23 +486,30 @@
                     rounded-lg shadow-sm">
             <i class="fa-solid fa-circle-check text-green-500"></i>
             <span>{{ session('success') }}</span>
+=======
+        <div id="alertaExito"
+            class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
+            <div class="flex items-center gap-2 bg-green-50 border border-green-100
+                        text-green-600 text-sm font-medium px-5 py-2.5
+                        rounded-lg shadow-sm">
+                <i class="fa-solid fa-circle-check text-green-500"></i>
+                <span>{{ session('success') }}</span>
+            </div>
+>>>>>>> 591dcf72b1863fffb025b888ba6380b918f53642
         </div>
-
-    </div>
-
-    <script>
-        setTimeout(function () {
-            const alerta = document.getElementById('alertaExito');
-            if (alerta) {
-                alerta.style.transition = 'opacity .4s ease';
-                alerta.style.opacity = '0';
-                setTimeout(function () {
-                    alerta.remove();
-                }, 400);
-            }
-        }, 3000);
-    </script>
-@endif
+        <script>
+            setTimeout(function () {
+                const alerta = document.getElementById('alertaExito');
+                if (alerta) {
+                    alerta.style.transition = 'opacity .4s ease';
+                    alerta.style.opacity = '0';
+                    setTimeout(function () {
+                        alerta.remove();
+                    }, 400);
+                }
+            }, 3000);
+        </script>
+    @endif
     {{-- ================= MODAL DE CONFIRMACIÓN: ELIMINAR ================= --}}
     {{-- Inclúyelo una vez dentro de tu vista (o layout) y usa la función JS
      confirmarEliminar('URL_DEL_REGISTRO') en el onclick de cada botón "Eliminar". --}}
@@ -542,7 +550,11 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 591dcf72b1863fffb025b888ba6380b918f53642
 </body>
 </html>

@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class CarritoController extends Controller
 {
-
-    public function index()
-    {
-        $categorias = CategoriaProducto::all();
-        return view('public.Home', compact('categorias'));
-    }
-
     public function agregar(string $id)
     {
         $carrito = session()->get('carrito', []);

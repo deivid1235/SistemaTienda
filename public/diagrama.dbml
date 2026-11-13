@@ -408,7 +408,7 @@ Table tipo_afectacion_igv {
     estado boolean [not null, default: true]
     created_at timestamp
     updated_at timestamp
-}
+} 
 
 Table productos {
     id int [pk, increment]
@@ -443,3 +443,53 @@ Table inventario {
   stock_actual decimal(12,3) [not null, default: 0]
   stock_minimo decimal(12,3) [not null, default: 0]
 }
+
+
+
+Table libro_reclamaciones {
+    id bigint [pk, increment, note: 'ID único autoincrementable']
+    tipo_documento varchar [note: 'DNI, CE, RUC, Pasaporte']
+    numero_documento varchar
+    primer_nombre varchar
+    segundo_nombre varchar [null, note: 'Opcional']
+    primer_apellido varchar
+    segundo_apellido varchar
+    correo varchar
+    telefono varchar
+    direccion varchar
+    departamento varchar
+    provincia varchar
+    distrito varchar
+    servicio_contratado varchar
+    numero_orden varchar [null, note: 'Opcional']
+    identificacion_servicio varchar [null, note: 'Opcional']
+    monto_reclamado decimal(10,2) [null, note: 'Monto en Soles (S/.)']
+    tipo_reclamo varchar [note: 'Reclamo o Queja']
+    motivo text
+    detalle_solicitud text
+    pedido_concreto text
+    acepto_politicas boolean [default: true]
+    clientes_id bigint [ref: > clientes.id]
+}
+
+
+Table clientes_externos {
+    id bigint [pk, increment, note: 'ID único autoincrementable']
+    correo varchar(150) [unique, note: 'Correo electrónico del cliente']
+    nombre varchar(100) [note: 'Nombres del cliente']
+    apellido varchar(100) [note: 'Apellidos del cliente']
+    tipo_documento varchar(20) [note: 'DNI, CE o Pasaporte']
+    numero_documento varchar(20) [unique, note: 'Número de documento']
+    celular varchar(15) [note: 'Número de celular']
+    contrasena varchar(255) [note: 'Contraseña cifrada mediante bcrypt']
+    acepta_terminos boolean [default: false, note: 'Aceptación de términos y condiciones']
+    declaracion_jurada boolean [default: false, note: 'Aceptación de declaración jurada']
+    fecha_registro datetime [note: 'Fecha de registro']
+    estado boolean [default: true, note: 'Estado de la cuenta']
+}
+
+
+
+
+
+

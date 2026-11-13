@@ -29,4 +29,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Usuario::class);
     }
+
+    public function clienteExterno()
+    {
+        return $this->hasOne(ClienteExterno::class);
+    }
 }
