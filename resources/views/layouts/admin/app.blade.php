@@ -477,7 +477,7 @@
         return redirect()->back()->with('success', 'Banco editado con éxito'); --}}
 
     @if (session('success'))
-<<<<<<< HEAD
+
     <div id="alertaExito"
         class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
 
@@ -486,7 +486,7 @@
                     rounded-lg shadow-sm">
             <i class="fa-solid fa-circle-check text-green-500"></i>
             <span>{{ session('success') }}</span>
-=======
+
         <div id="alertaExito"
             class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
             <div class="flex items-center gap-2 bg-green-50 border border-green-100
@@ -495,7 +495,7 @@
                 <i class="fa-solid fa-circle-check text-green-500"></i>
                 <span>{{ session('success') }}</span>
             </div>
->>>>>>> 591dcf72b1863fffb025b888ba6380b918f53642
+
         </div>
         <script>
             setTimeout(function () {
@@ -554,7 +554,7 @@
 
 
 =======
-    
+
 >>>>>>> 591dcf72b1863fffb025b888ba6380b918f53642
 </body>
 </html>
