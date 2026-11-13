@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('css')
-    
+
 </head>
 @php
     $estiloActivo = \App\Models\Estilo::where('estado', 'ACTIVO')->first();
@@ -113,7 +113,7 @@
                                     </ul>
                                 </li>
                             @endcanany
-                           
+
                             {{-- PRODUCTOS / SERVICIOS --}}
                             <li class="nav-parent {{ request()->routeIs('producto', 'categoriaproducto', 'marca', 'promocion') ? 'nav-expanded' : '' }}"
                                 style="{{ request()->routeIs('producto', 'categoria_producto', 'marca', 'promocion') ? 'display: block;' : '' }}">
@@ -129,21 +129,21 @@
                                             </a>
                                         </li>
 
-                                    
+
                                         <li class="{{ request()->routeIs('categoriaproducto') ? 'nav-active' : '' }}">
                                             <a class="nav-link" href="{{ route('categoriaproducto') }}">
                                                 <i class="fa-solid fa-circle text-[8px]"></i>
                                                 <span>Categorías</span>
                                             </a>
                                         </li>
-                                   
+
                                         <li class="{{ request()->routeIs('marca') ? 'nav-active' : '' }}">
                                             <a class="nav-link" href="{{ route('marca') }}">
                                                 <i class="fa-solid fa-circle text-[8px]"></i>
                                                 <span>Marcas</span>
                                             </a>
                                         </li>
-                                    
+
 
                                     @can('admin.promocion.index')
                                         <li class="{{ request()->routeIs('promocion') ? 'nav-active' : '' }}">
@@ -199,16 +199,40 @@
                                 </ul>
                             </li>
 
-                            {{-- COMPROBANTES PENDIENTES --}}
-                            <li class="nav-parent">
+                                                        {{-- COMPROBANTES PENDIENTES --}}
+                            <li class="nav-parent {{ request()->routeIs('comprobantes.*') ? 'nav-expanded' : '' }}"
+                                style="{{ request()->routeIs('comprobantes.*') ? 'display: block;' : '' }}">
                                 <a class="nav-link" href="#">
                                     <i class="fa-regular fa-circle-question"></i>
                                     <span>Comprobantes pendientes</span>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </a>
-                                <ul class="nav-children">
-                                    <li><a class="nav-link" href="#">Por enviar</a></li>
-                                    <li><a class="nav-link" href="#">Rechazados</a></li>
+                                <ul class="nav-children"
+                                    style="{{ request()->routeIs('comprobantes.*') ? 'display: block !important;' : '' }}">
+                                    <li class="{{ request()->routeIs('comprobantes.no_enviados*') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('comprobantes.no_enviados') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Comprobantes no enviados</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('comprobantes.rectificacion*') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('comprobantes.rectificacion') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>CPE pendientes de rectificación</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('comprobantes.resumenes*') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('comprobantes.resumenes') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Resúmenes</span>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('comprobantes.anulaciones*') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('comprobantes.anulaciones') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Anulaciones</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -276,7 +300,7 @@
 
                 </div>
             </div>
-        
+
             <!-- CONTENEDOR PRINCIPAL -->
             <div class="relative">
                 <button type="button" onclick="document.getElementById('configuracionMenu').classList.toggle('hidden')"
@@ -455,7 +479,7 @@
     @if (session('success'))
     <div id="alertaExito"
         class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
-        
+
         <div class="flex items-center gap-2 bg-green-50 border border-green-100
                     text-green-600 text-sm font-medium px-5 py-2.5
                     rounded-lg shadow-sm">
@@ -518,7 +542,7 @@
         </div>
     </div>
 
-    
-    
+
+
 </body>
 </html>

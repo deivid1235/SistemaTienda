@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/metodopago', [App\Http\Controllers\MetodoPagoController::class, 'store'])->name('configuracion.metodopago.store')->middleware('auth','can:configuracion.metodopago.store');
     Route::put('/configuracion/metodopago/{metodopago}', [App\Http\Controllers\MetodoPagoController::class, 'update'])->name('configuracion.metodopago.update')->middleware('auth','can:configuracion.metodopago.update');
     Route::delete('/configuracion/metodopago/{metodopago}', [App\Http\Controllers\MetodoPagoController::class, 'destroy'])->name('configuracion.metodopago.destroy')->middleware('auth','can:configuracion.metodopago.destroy');
-    //metodo gasto 
+    //metodo gasto
     Route::post('/configuracion/metodopago/gasto', [App\Http\Controllers\MetodoGastoController::class, 'store'])->name('configuracion.metodogasto.store')->middleware('auth','can:configuracion.metodogasto.store');
     Route::put('/configuracion/metodopago/gasto/{metodoGasto}', [App\Http\Controllers\MetodoGastoController::class, 'update']) ->name('configuracion.metodogasto.update')->middleware('auth','can:configuracion.metodogasto.update');
     Route::delete('/configuracion/metodopago/gasto/{metodoGasto}', [App\Http\Controllers\MetodoGastoController::class, 'destroy'])->name('configuracion.metodogasto.destroy')->middleware('auth','can:configuracion.metodogasto.destroy');
@@ -91,7 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/compania', [App\Http\Controllers\CompaniaController::class, 'store'])->name('configuracion.compania.store')->middleware('auth','can:configuracion.compania.store');
     Route::put('/configuracion/compania/{id}', [App\Http\Controllers\CompaniaController::class, 'update'])->name('configuracion.compania.update')->middleware('auth','can:configuracion.compania.update');
     Route::delete('/configuracion/compania/{id}/eliminar-logo', [App\Http\Controllers\CompaniaController::class, 'eliminarLogo'])->name('configuracion.compania.eliminar-logo')->middleware('auth','can');
-    
+
     //configuración de login
     Route::get('/configuracion/login', [App\Http\Controllers\LoginController::class, 'index'])->name('configuracion.login')->middleware('auth','can:configuracion.login.index');
     Route::put('/configuracion/login', [App\Http\Controllers\LoginController::class, 'update'])->name('configuracion.login.update')->middleware('auth','can:configuracion.login.update');
@@ -107,7 +107,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'update'])->name('configuracion.estilo.update')->middleware('auth','can:configuracion.estilo.update');
     Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth','can:configuracion.estilo.eliminar');
     Route::put('/configuracion/estilo/{id}/activar', [App\Http\Controllers\EstiloController::class, 'activar'])->name('configuracion.estilo.activar')->middleware('auth','can:configuracion.estilo.activar');
-    //Motivo de gatos 
+    //Motivo de gatos
     Route::get('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'index'])->name('configuracion.motivogasto')->middleware('auth','can:configuracion.motivogasto.index');
     Route::post('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'store'])->name('configuracion.motivogasto.store')->middleware('auth','can:configuracion.motivogasto.store');
     Route::put('/configuracion/motivogasto/{id}', [App\Http\Controllers\MotivoGastoController::class, 'update'])->name('configuracion.motivogasto.update')->middleware('auth','can:configuracion.motivogasto.update');
@@ -150,7 +150,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/tipodocumento', [App\Http\Controllers\TipoDocumentoController::class, 'store'])->name('configuracion.tipodocumento.store')->middleware('auth','can:configuracion.tipodocumento.store');
     Route::put('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'update'])->name('configuracion.tipodocumento.update')->middleware('auth','can:configuracion.tipodocumento.update');
     Route::delete('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'destroy'])->name('configuracion.tipodocumento.destroy')->middleware('auth','can:configuracion.tipodocumento.destroy');
-    //Sucursal    
+    //Sucursal
     Route::get('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursal')->middleware('auth','can:admin.sucursal.index');
     Route::post('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'store'])->name('sucursal.store')->middleware('auth','can:admin.sucursal.store');
     Route::put('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'update'])->name('sucursal.update')->middleware('auth','can:admin.sucursal.update');
@@ -195,6 +195,27 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/tipoafectacionigv',[App\Http\Controllers\TipoAfectacionIgvController::class, 'store'])->name('configuracion.tipoafectacionigv.store')->middleware('auth');
     Route::put('/configuracion/tipoafectacionigv/{id}',[App\Http\Controllers\TipoAfectacionIgvController::class, 'update'])->name('configuracion.tipoafectacionigv.update')->middleware('auth');
     Route::delete('/configuracion/tipoafectacionigv/{id}',[App\Http\Controllers\TipoAfectacionIgvController::class, 'destroy'])->name('configuracion.tipoafectacionigv.destroy')->middleware('auth');
+
+    //Comprobantes pendientes - No enviados
+    Route::get('/admin/comprobantes/no-enviados', [App\Http\Controllers\ComprobanteNoEnviadoController::class, 'index'])->name('comprobantes.no_enviados')->middleware('auth');
+    Route::post('/admin/comprobantes/no-enviados/{comprobante}/enviar', [App\Http\Controllers\ComprobanteNoEnviadoController::class, 'enviar'])->name('comprobantes.no_enviados.enviar')->middleware('auth');
+
+    //Comprobantes pendientes - Pendientes de rectificación
+    Route::get('/admin/comprobantes/rectificacion', [App\Http\Controllers\ComprobanteRectificacionController::class, 'index'])->name('comprobantes.rectificacion')->middleware('auth');
+    Route::post('/admin/comprobantes/rectificacion/{comprobante}/enviar', [App\Http\Controllers\ComprobanteRectificacionController::class, 'enviar'])->name('comprobantes.rectificacion.enviar')->middleware('auth');
+
+    //Comprobantes pendientes - Resúmenes
+    Route::get('/admin/comprobantes/resumenes', [App\Http\Controllers\ResumenController::class, 'index'])->name('comprobantes.resumenes')->middleware('auth');
+    Route::get('/admin/comprobantes/resumenes/buscar', [App\Http\Controllers\ResumenController::class, 'buscar'])->name('comprobantes.resumenes.buscar')->middleware('auth');
+    Route::post('/admin/comprobantes/resumenes', [App\Http\Controllers\ResumenController::class, 'store'])->name('comprobantes.resumenes.store')->middleware('auth');
+    Route::post('/admin/comprobantes/resumenes/{resumen}/consultar', [App\Http\Controllers\ResumenController::class, 'consultar'])->name('comprobantes.resumenes.consultar')->middleware('auth');
+
+    //Comprobantes pendientes - Anulaciones
+    Route::get('/admin/comprobantes/anulaciones', [App\Http\Controllers\AnulacionController::class, 'index'])->name('comprobantes.anulaciones')->middleware('auth');
+    Route::get('/admin/comprobantes/anulaciones/buscar', [App\Http\Controllers\AnulacionController::class, 'buscar'])->name('comprobantes.anulaciones.buscar')->middleware('auth');
+    Route::post('/admin/comprobantes/anulaciones', [App\Http\Controllers\AnulacionController::class, 'store'])->name('comprobantes.anulaciones.store')->middleware('auth');
+    Route::post('/admin/comprobantes/anulaciones/{anulacion}/consultar', [App\Http\Controllers\AnulacionController::class, 'consultar'])->name('comprobantes.anulaciones.consultar')->middleware('auth');
+
     //Productos
     Route::get('/admin/producto', [App\Http\Controllers\ProductoController::class, 'index'])->name('producto')->middleware('auth');
     Route::post('/admin/producto', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.store')->middleware('auth');

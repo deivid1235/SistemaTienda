@@ -1,0 +1,1491 @@
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_24_231322_create_clientes_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('clientes', function (Blueprint $table) {
+            $table->id();
+            $table->string('tipo_documento', 20);
+            $table->string('numero_documento', 30);
+            $table->string('nombre', 100);
+            $table->string('nombre_comercial', 150)->nullable();
+            $table->string('codigo_interno', 50)->nullable();
+            $table->string('nacionalidad', 100)->nullable();
+            $table->foreignId('tipo_cliente_id')->constrained('tipo_clientes')->onDelete('restrict');
+            $table->string('codigo_barra', 100)->nullable();
+            $table->string('direccion', 255)->nullable();
+            $table->string('pais', 100)->nullable();
+            $table->string('codigo_sucursal', 50)->nullable();
+            $table->string('telefono', 30)->nullable();
+            $table->string('correo_electronico', 150)->nullable();
+            $table->string('sitio_web', 255)->nullable();
+            $table->integer('dias_credito')->default(0);
+            $table->text('observaciones')->nullable();
+            $table->boolean('estado')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('clientes');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_10_22_230543_create_productos_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('productos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre', 200);
+            $table->text('descripcion')->nullable();
+            $table->string('modelo', 150)->nullable();
+            $table->foreignId('categoria_productos_id')->constrained('categoria_productos');
+            $table->foreignId('marca_id')->nullable()->constrained('marcas');
+            $table->foreignId('unidad_id')->nullable()->constrained('unidads');
+            $table->foreignId('moneda_id')->constrained('monedas');
+            $table->foreignId('tipo_afectacion_igv_id')->nullable()->constrained('tipo_afectacion_igvs');
+            $table->decimal('precio_unitario', 12, 2);
+            $table->decimal('costo_unitario', 12, 2)->nullable();
+            $table->boolean('incluye_igv')->default(true);
+            $table->boolean('incluye_isc')->default(false);
+            $table->string('codigo_interno', 50)->nullable()->unique();
+            $table->string('codigo_barras', 100)->nullable()->unique();
+            $table->string('codigo_sunat', 20)->nullable();
+            $table->string('codigo_fabricante', 100)->nullable();
+            $table->string('imagen_qr', 255)->nullable();
+            $table->string('imagen', 255)->nullable();
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('productos');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_10_22_232826_create_inventarios_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('inventarios', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('producto_id')->constrained('productos');
+            $table->foreignId('almacen_id')->constrained('almacens');
+            $table->decimal('stock_inicial', 12, 3)->default(0);
+            $table->decimal('stock_actual', 12, 3)->default(0);
+            $table->decimal('stock_minimo', 12, 3)->default(0);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('inventarios');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_30_051624_create_series_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('series', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('tipo_documento_id')->constrained('tipo_documentos')->restrictOnDelete(); 
+            $table->foreignId('sucursal_id')->constrained('sucursals')->restrictOnDelete();
+            $table->string('serie', 10);
+            $table->enum('contingencia', ['SI', 'NO'])->default('NO');
+            $table->enum('estado', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('series');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_25_192758_create_sucursals_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('sucursals', function (Blueprint $table) {
+            $table->id();
+            $table->string('descripcion', 150);
+            $table->string('pais', 100);
+            $table->string('departamento', 100);
+            $table->string('provincia', 100);
+            $table->string('distrito', 100);
+            $table->string('direccion_fiscal', 255);
+            $table->string('telefono', 30)->nullable();
+            $table->string('direccion_comercial', 255)->nullable();
+            $table->string('correo_contacto', 150)->nullable();
+            $table->string('direccion_web', 255)->nullable();
+            $table->text('informacion_adicional')->nullable();
+            $table->string('codigo_sucursal', 20)->unique();
+            $table->enum('estado', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->foreignId('cliente_id')->nullable()->constrained('clientes')->onDelete('restrict');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('sucursals');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_08_31_011000_create_monedas_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('monedas', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo', 3);
+            $table->string('descripcion', 100);
+            $table->string('simbolo', 10);
+            $table->enum('estado', ['Si', 'No'])->default('Si');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('monedas');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_01_201225_create_metodo_pagos_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('metodo_pagos', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo', 10);
+            $table->string('descripcion', 150);
+            $table->enum('condicion_pago', ['Contado', 'Crédito']);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('metodo_pagos');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_08_31_030528_create_cuenta_bancarias_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('cuenta_bancarias', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('banco_id')->constrained('bancos')->cascadeOnDelete();
+            $table->foreignId('moneda_id')->constrained('monedas')->cascadeOnDelete();
+            $table->string('descripcion', 100);
+            $table->string('numero', 50);
+            $table->string('cci', 50);
+            $table->decimal('saldo_inicial', 15, 2)->default(0);
+            $table->enum('mostrar_comprobante', ['Si', 'No'])->default('No');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('cuenta_bancarias');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_15_214049_create_companias_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('companias', function (Blueprint $table) {
+            $table->id();
+            $table->string('ruc', 11); 
+            $table->string('nombre', 255); 
+            $table->string('nombre_comercial', 255);
+            $table->string('logo', 255)->nullable(); 
+            $table->string('cuenta_detraccion', 255)->nullable(); 
+            $table->string('rubrica', 255)->nullable(); 
+            $table->string('titulo_web', 255)->default('Facturación Electrónica'); 
+            $table->string('logo_app', 255)->nullable();
+            $table->enum('soap_tipo', ['demo', 'produccion']) ->default('demo'); 
+            $table->enum('soap_envio', ['sunat', 'ose', 'osesendfact']) ->default('sunat'); 
+            $table->string('soap_usuario', 255)->nullable(); 
+            $table->string('soap_password', 255)->nullable();
+            $table->string('cpe_client_id', 255)->nullable(); 
+            $table->string('cpe_client_secret', 255)->nullable();
+            $table->string('sire_client_id', 255)->nullable(); 
+            $table->string('sire_client_secret', 255)->nullable(); 
+            $table->string('sire_usuario', 255)->nullable(); 
+            $table->string('sire_password', 255)->nullable();
+            $table->boolean('qr_api')->default(false);
+            $table->string('digital_certificate_qztray', 255)->nullable(); 
+            $table->string('private_certificate_qztray', 255)->nullable();
+            $table->boolean('pse_habilitado')->default(false); 
+            $table->unsignedBigInteger('pse_proveedor_id')->nullable(); 
+            $table->string('pse_usuario', 255)->nullable(); 
+            $table->string('pse_password', 255)->nullable();
+            $table->string('guias_soap_usuario', 255)->nullable();
+            $table->string('guias_soap_password', 255)->nullable();
+            $table->string('guias_client_id', 255)->nullable();
+            $table->string('guias_client_secret', 255)->nullable();
+            $table->boolean('yape_habilitado')->default(false); 
+            $table->boolean('mercado_pago_habilitado')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('companias');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_29_232440_create_tipo_documentos_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tipo_documentos', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo', 10)->unique();
+            $table->string('nombre', 150);
+            $table->enum('estado', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tipo_documentos');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_10_22_210859_create_tipo_afectacion_igvs_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tipo_afectacion_igvs', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo')->unique();
+            $table->string('nombre', 100);
+            $table->text('descripcion')->nullable();
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tipo_afectacion_igvs');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_03_212755_create_unidads_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('unidads', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo', 10);
+            $table->string('descripcion', 100);
+            $table->string('simbolo', 10)->nullable();
+            $table->enum('estado', ['Si', 'No'])->default('Si');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('unidads');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_10_16_200815_create_almacens_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('almacens', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo', 20)->unique();
+            $table->string('nombre', 100);
+            $table->foreignId('sucursal_id')->constrained('sucursals')->onDelete('restrict');
+            $table->foreignId('serie_id')->constrained('series')->onDelete('restrict');
+            $table->foreignId('responsable_id')->constrained('usuarios')->onDelete('restrict');
+            $table->text('descripcion')->nullable();
+            $table->boolean('estado')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('almacens');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\database\migrations\2026_09_30_202208_create_users_table.php =====
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
+    }
+};
+
+===== C:\laragon\www\SistemaTienda\app\Models\Cliente.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cliente extends Model
+{
+    public function tipoCliente()
+    {
+        return $this->belongsTo(TipoCliente::class);
+    }
+
+    public function sucursals()
+    {
+        return $this->hasMany(Sucursal::class);
+    }
+
+   
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Producto.php =====
+<?php
+
+namespace App\Models;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
+
+class Producto extends Model
+{
+    public function categoria()
+    {
+        return $this->belongsTo(CategoriaProducto::class);
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class);
+    }
+
+    public function unidad()
+    {
+        return $this->belongsTo(Unidad::class);
+    }
+
+    public function moneda()
+    {
+        return $this->belongsTo(Moneda::class);
+    }
+
+    public function tipoAfectacionIgv()
+    {
+        return $this->belongsTo(TipoAfectacionIgv::class);
+    }
+
+    public function inventario(): HasMany
+    {
+        return $this->hasMany(Inventario::class, 'producto_id');
+    }
+
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Inventario.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Inventario extends Model
+{
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class);
+    }
+
+    public function almacen()
+    {
+        return $this->belongsTo(Almacen::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Serie.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Serie extends Model
+{
+    public function tipoDocumento()
+    {
+        return $this->belongsTo(TipoDocumento::class);
+    }
+
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+    
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class);
+    }
+
+    public function almacenes()
+    {
+        return $this->hasMany(Almacen::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Sucursal.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Sucursal extends Model
+{
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function series()
+    {
+        return $this->hasMany(Serie::class);
+    }
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class);
+    }
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+    public function almacenes()
+    {
+        return $this->hasMany(Almacen::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Moneda.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Moneda extends Model
+{
+    public function cuentasBancarias()
+    {
+        return $this->hasMany(CuentaBancaria::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\MetodoPago.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class MetodoPago extends Model
+{
+    //
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Unidad.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Unidad extends Model
+{
+    //
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Almacen.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Almacen extends Model
+{
+   
+    public function sucursal(): BelongsTo
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+
+   
+    public function serie(): BelongsTo
+    {
+        return $this->belongsTo(Serie::class);
+    }
+
+   
+    public function responsable(): BelongsTo
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\TipoAfectacionIgv.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class TipoAfectacionIgv extends Model
+{
+    //
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\Compania.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Compania extends Model
+{
+    public function login()
+    {
+        return $this->hasOne(Login::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\CuentaBancaria.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class CuentaBancaria extends Model
+{
+    public function banco()
+    {
+        return $this->belongsTo(Banco::class);
+    }
+
+    public function moneda()
+    {
+        return $this->belongsTo(Moneda::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\ComisionVendedor.php =====
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ComisionVendedor extends Model
+{
+    protected $table = 'comision_vendedores';
+
+    protected $fillable = [
+        'user_id',
+        'tipo',
+        'valor',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'valor' => 'decimal:2',
+        ];
+    }
+
+    public function vendedor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Models\User.php =====
+<?php
+
+namespace App\Models;
+
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+
+#[Fillable(['name', 'email', 'password'])]
+#[Hidden(['password', 'remember_token'])]
+class User extends Authenticatable
+{
+    /** @use HasFactory<UserFactory> */
+    use HasFactory, Notifiable, HasRoles;
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    public function usuario()
+    {
+        return $this->hasOne(Usuario::class);
+    }
+}
+
+===== C:\laragon\www\SistemaTienda\app\Http\Controllers\ProductoController.php =====
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Almacen;
+use App\Models\CategoriaProducto;
+use App\Models\Inventario;
+use App\Models\Marca;
+use App\Models\Moneda;
+use App\Models\Producto;
+use App\Models\TipoAfectacionIgv;
+use App\Models\Unidad;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Picqer\Barcode\BarcodeGeneratorSVG;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Http\Request;
+
+class ProductoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $productos = Producto::paginate(10);
+        $inventarios = Inventario::all();
+        $categorias = CategoriaProducto::all();
+        $marcas = Marca::all();
+        $unidades = Unidad::all();
+        $monedas  = Moneda::all();
+        $tiposAfectacionIgv = TipoAfectacionIgv::all();
+        $almacenes = Almacen::all();
+        return view('admin.producto.index', compact('categorias','marcas','unidades','monedas','tiposAfectacionIgv','almacenes','productos','inventarios'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:200',
+            'descripcion' => 'nullable|string',
+            'modelo' => 'nullable|string|max:150',
+            'categoria_id' => 'required|exists:categoria_productos,id',
+            'marca_id' => 'nullable|exists:marcas,id',
+            'unidad_id' => 'nullable|exists:unidads,id',
+            'moneda_id' => 'required|exists:monedas,id',
+            'tipo_afectacion_igv_id' => 'nullable|exists:tipo_afectacion_igvs,id',
+            'precio_unitario' => 'required|numeric|min:0',
+            'costo_unitario' => 'nullable|numeric|min:0',
+            'codigo_interno' => 'nullable|string|max:50|unique:productos,codigo_interno',
+            'codigo_barras' => 'nullable|string|max:100|unique:productos,codigo_barras',
+            'codigo_sunat' => 'nullable|string|max:20',
+            'codigo_fabricante' => 'nullable|string|max:100',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'almacen_id' => 'required|exists:almacens,id',
+            'stock_inicial' => 'required|numeric|min:0',
+            'stock_actual' => 'required|numeric|min:0',
+            'stock_minimo' => 'required|numeric|min:0',
+        ]);
+        $archivosGuardados = [];
+        try {
+            DB::transaction(function () use ($request, &$archivosGuardados) {
+                $producto = new Producto();
+                $producto->nombre = $request->nombre;
+                $producto->descripcion = $request->descripcion;
+                $producto->modelo = $request->modelo;
+                $producto->categoria_productos_id = $request->categoria_id;
+                $producto->marca_id = $request->marca_id;
+                $producto->unidad_id = $request->unidad_id;
+                $producto->moneda_id = $request->moneda_id;
+                $producto->tipo_afectacion_igv_id = $request->tipo_afectacion_igv_id;
+                $producto->precio_unitario = $request->precio_unitario;
+                $producto->costo_unitario = $request->costo_unitario;
+                $producto->incluye_igv = $request->boolean('incluye_igv');
+                $producto->incluye_isc = $request->boolean('incluye_isc');
+                $producto->codigo_interno = $request->codigo_interno;
+                $producto->codigo_barras = $request->codigo_barras;
+                $producto->codigo_sunat = $request->codigo_sunat;
+                $producto->codigo_fabricante = $request->codigo_fabricante;
+                $producto->activo = $request->boolean('activo');
+                if ($request->hasFile('imagen')) {
+                    $rutaImagen = $request->file('imagen')->store('productos', 'public');
+                    $archivosGuardados[] = $rutaImagen;
+                    $producto->imagen = $rutaImagen;
+                }
+                $producto->save();
+                $contenidoQr = implode("\n", [
+                    'PRODUCTO',
+                    'ID: ' . $producto->id,
+                    'Nombre: ' . $producto->nombre,
+                    'Código interno: ' . ($producto->codigo_interno ?? 'N/A'),
+                    'Código de barras: ' . ($producto->codigo_barras ?? 'N/A'),
+                ]);
+                $rutaQr = 'productos/qr/producto_' . $producto->id . '.svg';
+                $imagenQr = QrCode::format('svg')->size(300)->margin(2)->generate($contenidoQr);
+                Storage::disk('public')->put($rutaQr, $imagenQr);
+                $archivosGuardados[] = $rutaQr;
+                $producto->imagen_qr = $rutaQr;
+                $producto->save();
+                if (!empty($producto->codigo_barras)) {
+                    $generador = new BarcodeGeneratorSVG();
+                    $imagenBarras = $generador->getBarcode(
+                        $producto->codigo_barras,
+                        $generador::TYPE_CODE_128
+                    );
+                    $rutaBarras = 'productos/barras/producto_'. $producto->id . '.svg';
+                    Storage::disk('public')->put($rutaBarras,$imagenBarras);
+                    $archivosGuardados[] = $rutaBarras;
+                }
+                $inventario = new Inventario();
+                $inventario->producto_id = $producto->id;
+                $inventario->almacen_id = $request->almacen_id;
+                $inventario->stock_inicial = $request->stock_inicial;
+                $inventario->stock_actual = $request->stock_actual;
+                $inventario->stock_minimo = $request->stock_minimo;
+                $inventario->save();
+            });
+            return redirect()->back()->with( 'success','Producto registrado correctamente con su código QR y código de barras.');
+        } catch (\Throwable $e) {
+            foreach ($archivosGuardados as $archivo) {
+                Storage::disk('public')->delete($archivo);
+            }
+            throw $e;
+        }
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Producto $producto)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Producto $producto)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $producto = Producto::findOrFail($id);
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:200',
+            'descripcion' => 'nullable|string',
+            'modelo' => 'nullable|string|max:150',
+            'categoria_id' => 'required|exists:categoria_productos,id',
+            'marca_id' => 'nullable|exists:marcas,id',
+            'unidad_id' => 'nullable|exists:unidads,id',
+            'moneda_id' => 'required|exists:monedas,id',
+            'tipo_afectacion_igv_id' => 'nullable|exists:tipo_afectacion_igvs,id',
+            'precio_unitario' => 'required|numeric|min:0',
+            'costo_unitario' => 'nullable|numeric|min:0',
+            'codigo_interno' => 'nullable|string|max:50|unique:productos,codigo_interno,' . $producto->id,
+            'codigo_barras' => 'nullable|string|max:100|unique:productos,codigo_barras,' . $producto->id,
+            'codigo_sunat' => 'nullable|string|max:20',
+            'codigo_fabricante' => 'nullable|string|max:100',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'activo' => 'required|in:0,1',
+            'incluye_igv' => 'nullable',
+            'incluye_isc' => 'nullable',
+            'almacen_id' => 'required|exists:almacens,id',
+            'stock_inicial' => 'required|numeric|min:0',
+            'stock_actual' => 'required|numeric|min:0',
+            'stock_minimo' => 'required|numeric|min:0',
+        ]);
+        $archivosGuardados = [];
+        try {
+            DB::transaction(function () use ($request, $producto, $validated, &$archivosGuardados) {
+                $producto->nombre = $validated['nombre'];
+                $producto->descripcion = $validated['descripcion'] ?? null;
+                $producto->modelo = $validated['modelo'] ?? null;
+                $producto->categoria_productos_id = $validated['categoria_id'];
+                $producto->marca_id = $validated['marca_id'] ?? null;
+                $producto->unidad_id = $validated['unidad_id'] ?? null;
+                $producto->moneda_id = $validated['moneda_id'];
+                $producto->tipo_afectacion_igv_id = $validated['tipo_afectacion_igv_id'] ?? null;
+                $producto->precio_unitario = $validated['precio_unitario'];
+                $producto->costo_unitario = $validated['costo_unitario'] ?? null;
+                $producto->incluye_igv = $request->boolean('incluye_igv');
+                $producto->incluye_isc = $request->boolean('incluye_isc');
+                $producto->codigo_interno = $validated['codigo_interno'] ?? null;
+                $producto->codigo_barras = $validated['codigo_barras'] ?? null;
+                $producto->codigo_sunat = $validated['codigo_sunat'] ?? null;
+                $producto->codigo_fabricante = $validated['codigo_fabricante'] ?? null;
+                $producto->activo = (int) $validated['activo'];
+                if ($request->hasFile('imagen')) {
+                    if ($producto->imagen) {
+                        Storage::disk('public')->delete($producto->imagen);
+                    }
+                    $rutaImagen = $request->file('imagen')->store('productos', 'public');
+                    $archivosGuardados[] = $rutaImagen;
+                    $producto->imagen = $rutaImagen;
+                }
+                $producto->save();
+                $contenidoQr = implode("\n", [
+                    'PRODUCTO',
+                    'ID: ' . $producto->id,
+                    'Nombre: ' . $producto->nombre,
+                    'Código interno: ' . ($producto->codigo_interno ?? 'N/A'),
+                    'Código de barras: ' . ($producto->codigo_barras ?? 'N/A'),
+                ]);
+                $rutaQr = 'productos/qr/producto_' . $producto->id . '.svg';
+                $imagenQr = QrCode::format('svg')->size(300)->margin(2)->generate($contenidoQr);
+                Storage::disk('public')->put($rutaQr, $imagenQr);
+                $producto->imagen_qr = $rutaQr;
+                $producto->save();
+                $rutaBarras = 'productos/barras/producto_' . $producto->id . '.svg';
+                if (!empty($producto->codigo_barras)) {
+                    $generador = new BarcodeGeneratorSVG();
+                    $imagenBarras = $generador->getBarcode(
+                        $producto->codigo_barras,
+                        $generador::TYPE_CODE_128
+                    );
+                    Storage::disk('public')->put($rutaBarras, $imagenBarras);
+                } else {
+                    Storage::disk('public')->delete($rutaBarras);
+                }
+                $inventario = Inventario::where('producto_id', $producto->id)->first();
+                if (!$inventario) {
+                    $inventario = new Inventario();
+                    $inventario->producto_id = $producto->id;
+                }
+                $inventario->almacen_id = $validated['almacen_id'];
+                $inventario->stock_inicial = $validated['stock_inicial'];
+                $inventario->stock_actual = $validated['stock_actual'];
+                $inventario->stock_minimo = $validated['stock_minimo'];
+                $inventario->save();
+            });
+            return redirect()->route('producto')->with('success', 'Producto actualizado correctamente.');
+        } catch (\Throwable $e) {
+            foreach ($archivosGuardados as $archivo) {
+                Storage::disk('public')->delete($archivo);
+            }
+            throw $e;
+        }
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        try {
+            $producto = Producto::findOrFail($id);
+            DB::transaction(function () use ($producto) {
+                Inventario::where('producto_id', $producto->id)->delete();
+                if ($producto->imagen) {
+                    Storage::disk('public')->delete($producto->imagen);
+                }
+                if ($producto->imagen_qr) {
+                    Storage::disk('public')->delete($producto->imagen_qr);
+                }
+                $rutaBarras = 'productos/barras/producto_' . $producto->id . '.svg';
+                Storage::disk('public')->delete($rutaBarras);
+                $producto->delete();
+            });
+            return redirect()->route('producto')->with('success', 'Producto eliminado correctamente con sus imágenes y códigos.');
+        } catch (\Throwable $e) {
+
+            return redirect()->route('producto')->with('error', 'Error al eliminar el producto: ' . $e->getMessage());
+        }
+    }
+
+
+    public function publicos()
+{
+    $productos = Producto::where('activo', true)
+        ->select([
+            'id',
+            'nombre',
+            'descripcion',
+            'modelo',
+            'precio_unitario',
+            'moneda_id',
+            'imagen',
+        ])
+        ->latest()
+        ->get()
+        ->map(function ($producto) {
+            $producto->imagen_url = $producto->imagen
+                ? asset('storage/' . $producto->imagen)
+                : null;
+
+            return $producto;
+        });
+
+    return response()->json([
+        'success' => true,
+        'productos' => $productos,
+    ]);
+}
+}
+
+===== C:\laragon\www\SistemaTienda\app\Http\Controllers\ClienteController.php =====
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Http;
+use App\Models\Cliente;
+use App\Models\TipoCliente;
+use Illuminate\Http\Request;
+
+class ClienteController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $clientes = Cliente::all();
+        $tipoClientes = TipoCliente::where('estado', true)->get();
+        return view('admin.cliente.index',compact('tipoClientes','clientes'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'tipo_documento' => 'required|string|max:20',
+            'numero_documento' => 'required|string|max:30',
+            'nombre' => 'required|string|max:100',
+            'nombre_comercial' => 'nullable|string|max:150',
+            'codigo_interno' => 'nullable|string|max:50',
+            'nacionalidad' => 'nullable|string|max:100',
+            'tipo_cliente_id' => 'required|exists:tipo_clientes,id',
+            'codigo_barra' => 'nullable|string|max:100',
+            'direccion' => 'nullable|string|max:255',
+            'pais' => 'nullable|string|max:100',
+            'codigo_sucursal' => 'nullable|string|max:50',
+            'telefono' => 'nullable|string|max:30',
+            'correo_electronico' => 'nullable|email|max:150',
+            'sitio_web' => 'nullable|string|max:255',
+            'dias_credito' => 'nullable|integer|min:0',
+            'observaciones' => 'nullable|string',
+            'estado' => 'required|boolean',
+        ]);
+
+        $cliente = new Cliente();
+        $cliente->tipo_documento = $request->tipo_documento;
+        $cliente->numero_documento = $request->numero_documento;
+        $cliente->nombre = $request->nombre;
+        $cliente->nombre_comercial = $request->nombre_comercial;
+        $cliente->codigo_interno = $request->codigo_interno;
+        $cliente->nacionalidad = $request->nacionalidad;
+        $cliente->tipo_cliente_id = $request->tipo_cliente_id;
+        $cliente->codigo_barra = $request->codigo_barra;
+        $cliente->direccion = $request->direccion;
+        $cliente->pais = $request->pais;
+        $cliente->codigo_sucursal = $request->codigo_sucursal;
+        $cliente->telefono = $request->telefono;
+        $cliente->correo_electronico = $request->correo_electronico;
+        $cliente->sitio_web = $request->sitio_web;
+        $cliente->dias_credito = $request->dias_credito ?? 0;
+        $cliente->observaciones = $request->observaciones;
+        $cliente->estado = $request->estado;
+        $cliente->save();
+
+        return redirect()->route('cliente')
+            ->with('success', 'Cliente guardado correctamente.');
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function show(Cliente $cliente)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Cliente $cliente)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Cliente $cliente)
+    {
+        $request->validate([
+            'tipo_documento' => 'required|string|max:20',
+            'numero_documento' => 'required|string|max:30',
+            'nombre' => 'required|string|max:100',
+            'nombre_comercial' => 'nullable|string|max:150',
+            'codigo_interno' => 'nullable|string|max:50',
+            'nacionalidad' => 'nullable|string|max:100',
+            'tipo_cliente_id' => 'required|exists:tipo_clientes,id',
+            'codigo_barra' => 'nullable|string|max:100',
+            'direccion' => 'nullable|string|max:255',
+            'pais' => 'nullable|string|max:100',
+            'codigo_sucursal' => 'nullable|string|max:50',
+            'telefono' => 'nullable|string|max:30',
+            'correo_electronico' => 'nullable|email|max:150',
+            'sitio_web' => 'nullable|string|max:255',
+            'dias_credito' => 'nullable|integer|min:0',
+            'observaciones' => 'nullable|string',
+            'estado' => 'required|boolean',
+        ]);
+
+        $cliente->tipo_documento = $request->tipo_documento;
+        $cliente->numero_documento = $request->numero_documento;
+        $cliente->nombre = $request->nombre;
+        $cliente->nombre_comercial = $request->nombre_comercial;
+        $cliente->codigo_interno = $request->codigo_interno;
+        $cliente->nacionalidad = $request->nacionalidad;
+        $cliente->tipo_cliente_id = $request->tipo_cliente_id;
+        $cliente->codigo_barra = $request->codigo_barra;
+        $cliente->direccion = $request->direccion;
+        $cliente->pais = $request->pais;
+        $cliente->codigo_sucursal = $request->codigo_sucursal;
+        $cliente->telefono = $request->telefono;
+        $cliente->correo_electronico = $request->correo_electronico;
+        $cliente->sitio_web = $request->sitio_web;
+        $cliente->dias_credito = $request->dias_credito ?? 0;
+        $cliente->observaciones = $request->observaciones;
+        $cliente->estado = $request->estado;
+        $cliente->save();
+
+        return redirect()->route('cliente')
+            ->with('success', 'Cliente actualizado correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Cliente $cliente)
+    {
+        $cliente->delete();
+        return redirect()->route('cliente')
+            ->with('success', 'Cliente eliminado correctamente.');
+    }
+
+    public function consultaDocumento(Request $request)
+    {
+        $request->validate([
+            'tipo_documento' => 'required|in:DNI,RUC',
+            'numero_documento' => 'required|string',
+        ]);
+
+        $tipo = $request->tipo_documento;
+        $numero = $request->numero_documento;
+
+        if ($tipo === 'DNI' && strlen($numero) !== 8) {
+            return response()->json([
+                'success' => false,
+                'message' => 'El DNI debe tener 8 dígitos.'
+            ], 422);
+        }
+
+        if ($tipo === 'RUC' && strlen($numero) !== 11) {
+            return response()->json([
+                'success' => false,
+                'message' => 'El RUC debe tener 11 dígitos.'
+            ], 422);
+        }
+
+        $endpoint = $tipo === 'DNI' ? '/dni' : '/ruc';
+        $campo = $tipo === 'DNI' ? 'dni' : 'ruc';
+
+        $response = Http::timeout(10)
+            ->withToken(env('APIPERU_TOKEN'))
+            ->acceptJson()
+            ->post(env('APIPERU_URL') . $endpoint, [
+                $campo => $numero,
+            ]);
+
+        if (!$response->successful()) {
+            return response()->json([
+                'success' => false,
+                'message' => $response->json('message', 'Error al consultar API Perú.'),
+                'codigo' => $response->status()
+            ], $response->status());
+        }
+
+        return response()->json($response->json());
+    }
+
+}
+
+===== C:\laragon\www\SistemaTienda\app\Http\Controllers\SerieController.php =====
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Serie;
+use Illuminate\Http\Request;
+
+class SerieController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'tipo_documento_id' => 'required|exists:tipo_documentos,id',
+            'sucursal_id' => 'required|exists:sucursals,id',
+            'serie' => 'required|string|max:10',
+            'contingencia' => 'required|in:SI,NO',
+            'estado' => 'required|in:ACTIVO,INACTIVO',
+        ]);
+
+        $serie = new Serie();
+        $serie->tipo_documento_id = $request->tipo_documento_id;
+        $serie->sucursal_id = $request->sucursal_id;
+        $serie->serie = $request->serie;
+        $serie->contingencia = $request->contingencia;
+        $serie->estado = $request->estado;
+        $serie->save();
+
+        return redirect()
+            ->route('sucursal')
+            ->with('success', 'Serie registrada correctamente.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Serie $serie)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Serie $serie)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'tipo_documento_id' => 'required|exists:tipo_documentos,id',
+            'sucursal_id' => 'required|exists:sucursals,id',
+            'serie' => 'required|string|max:10',
+            'contingencia' => 'required|in:SI,NO',
+            'estado' => 'required|in:ACTIVO,INACTIVO',
+        ]);
+
+        $serie = Serie::findOrFail($id);
+
+        $serie->tipo_documento_id = $request->tipo_documento_id;
+        $serie->sucursal_id = $request->sucursal_id;
+        $serie->serie = $request->serie;
+        $serie->contingencia = $request->contingencia;
+        $serie->estado = $request->estado;
+
+        $serie->save();
+        return redirect()
+            ->route('sucursal')
+            ->with('success', 'Serie actualizada correctamente.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy( string $id)
+    {
+        $serie = Serie::findOrFail($id);
+        $serie->delete();
+        return redirect()
+            ->route('sucursal')
+            ->with('success', 'Serie eliminada correctamente.');
+    }
+}
