@@ -473,4 +473,23 @@ Table libro_reclamaciones {
 }
 
 
+Table clientes_externos {
+    id bigint [pk, increment, note: 'ID único autoincrementable']
+    correo varchar(150) [unique, note: 'Correo electrónico del cliente']
+    nombre varchar(100) [note: 'Nombres del cliente']
+    apellido varchar(100) [note: 'Apellidos del cliente']
+    tipo_documento varchar(20) [note: 'DNI, CE o Pasaporte']
+    numero_documento varchar(20) [unique, note: 'Número de documento']
+    celular varchar(15) [note: 'Número de celular']
+    contrasena varchar(255) [note: 'Contraseña cifrada mediante bcrypt']
+    acepta_terminos boolean [default: false, note: 'Aceptación de términos y condiciones']
+    declaracion_jurada boolean [default: false, note: 'Aceptación de declaración jurada']
+    fecha_registro datetime [note: 'Fecha de registro']
+    estado boolean [default: true, note: 'Estado de la cuenta']
+}
+
+
+
+
+
 

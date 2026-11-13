@@ -58,7 +58,7 @@
                 <li><a href="#" id="open-styles-2" class="text-gray-800 text-sm hover:underline">Estilos y temas</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Avanzado</a></li>
                 <li><a href="#" class="text-gray-800 text-sm hover:underline">Generador de link de pago</a></li>
-                <li><a href="#" class="text-gray-800 text-sm hover:underline">Tienda Virtual/Restaurante</a></li> 
+                <li><a href="{{ route('public.index') }}" class="text-gray-800 text-sm hover:underline">Tienda Virtual/Restaurante</a></li> 
             </ul>
         </div>
     </div>

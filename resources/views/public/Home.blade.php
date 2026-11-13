@@ -1,6 +1,6 @@
 @extends('public.app')
 @section('content')
-    <div class="bg-[#76FF03] text-gray-950 text-xs font-bold py-2 px-4 shadow-inner">
+    <div class="bg-[#d4af37] text-gray-950 text-xs font-bold py-2 px-4 shadow-inner">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 text-center">
             <span class="bg-red-600 text-white text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md tracking-wider">
                 Envío Gratis
@@ -15,22 +15,22 @@
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center">
                 <div class="max-w-xl text-center lg:text-left mx-auto lg:mx-0">
-                    <p class="text-[#0407e2] text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-3 sm:mb-4">Calidad y variedad garantizada</p>
+                    <p class="text-[#0F1D3A] text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-3 sm:mb-4">Calidad y variedad garantizada</p>
                     <h1 class="text-4xl sm:text-5xl lg:text-[4.5rem] font-black leading-[1.05] sm:leading-[0.95] tracking-tighter mb-4">
                         Todo lo que <br class="hidden sm:inline">
-                        necesitas en un <span class="text-[#0407e2]">solo lugar</span>
+                        necesitas en un <span class="text-[#0F1D3A]">solo lugar</span>
                     </h1>
                     <p class="text-gray-500 text-sm sm:text-base leading-relaxed mb-6 max-w-md mx-auto lg:mx-0">Encuentra una gran variedad de artículos y productos seleccionados para ti. Los mejores precios y calidad en cada compra.</p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                         <a href="#productos"
-                        class="w-full sm:w-auto bg-[#0407e2] hover:bg-blue-700 text-white px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-3 rounded-lg shadow-lg">
+                        class="w-full sm:w-auto bg-[#0F1D3A] hover:bg-[#1a2f59] text-white px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-3 rounded-lg shadow-lg">
                             Ver catálogo general
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                             </svg>
                         </a>
                         <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-500 font-medium">
-                            <span class="w-2 h-2 rounded-full bg-[#76FF03] shrink-0"></span>
+                            <span class="w-2 h-2 rounded-full bg-[#b8952d] shrink-0"></span>
                             Novedades y ofertas disponibles
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                 <!-- IMAGEN PRINCIPAL -->
                 <div class="relative w-full max-w-sm sm:max-w-md mx-auto aspect-square lg:aspect-auto lg:h-[450px] flex items-center justify-center">
                     <div class="absolute inset-0 bg-[#E8E8E3] rounded-full scale-90 blur-3xl opacity-50"></div>
-                    <div class="absolute inset-4 sm:inset-8 bg-[#0407e2] -rotate-6 shadow-2xl shadow-[#0407e2]/30 rounded-2xl"></div>
+                    <div class="absolute inset-4 sm:inset-8 bg-[#0F1D3A] -rotate-6 shadow-2xl shadow-[#0F1D3A]/30 rounded-2xl"></div>
                     <img
                         src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1000&auto=format&fit=crop"
                         alt="Productos destacados"
@@ -69,9 +69,9 @@
                 @if($loop->first)
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
                 @endif
-                        <article class="group relative bg-white border border-blue-200/70 rounded-3xl p-4 shadow-lg shadow-blue-500/5 hover:shadow-xl hover:border-[#0407e2] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between w-full max-w-xs overflow-hidden">
-                            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-[#0407e2]/5 rounded-full blur-2xl group-hover:bg-[#76FF03]/20 transition-all duration-500 pointer-events-none"></div>
-                            <div class="relative bg-gradient-to-b from-slate-50 to-blue-50/40 aspect-square overflow-hidden rounded-2xl border border-slate-100 group-hover:border-blue-200 transition-colors">
+                        <article class="group relative bg-white border border-slate-200 rounded-3xl p-4 shadow-lg shadow-slate-900/5 hover:shadow-xl hover:border-[#0F1D3A] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between w-full max-w-xs overflow-hidden">
+                            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-[#0F1D3A]/5 rounded-full blur-2xl group-hover:bg-[#b8952d]/20 transition-all duration-500 pointer-events-none"></div>
+                            <div class="relative bg-gradient-to-b from-slate-50 to-slate-100/60 aspect-square overflow-hidden rounded-2xl border border-slate-100 group-hover:border-[#b8952d]/30 transition-colors">
                                 @if($producto->imagen)
                                     <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500" loading="lazy">
                                 @else
@@ -94,18 +94,18 @@
                                 </div>
                             </div>
                             <div class="pt-3.5 flex flex-col flex-grow relative z-10">
-                                <p class="text-[10px] font-black text-[#0407e2] uppercase tracking-wider mb-0.5">{{ $producto->modelo ?: 'General' }}</p>
-                                <h3 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-[#0407e2] transition-colors line-clamp-2 leading-snug">{{ $producto->nombre }}</h3>
+                                <p class="text-[10px] font-black text-[#b8952d] uppercase tracking-wider mb-0.5">{{ $producto->modelo ?: 'General' }}</p>
+                                <h3 class="text-xs sm:text-sm font-black text-slate-900 group-hover:text-[#0F1D3A] transition-colors line-clamp-2 leading-snug">{{ $producto->nombre }}</h3>
                                 @if($producto->descripcion)
                                     <p class="text-[11px] text-slate-500 mt-1 line-clamp-1 leading-normal font-medium">{{ $producto->descripcion }}</p>
                                 @endif
                                 <div class="mt-3 flex items-baseline gap-2">
-                                    <span class="text-base sm:text-lg font-black text-[#D50000] tracking-tight">S/ {{ number_format($producto->precio_unitario, 2) }}</span>
+                                    <span class="text-base sm:text-lg font-black text-[#0F1D3A] tracking-tight">S/ {{ number_format($producto->precio_unitario, 2) }}</span>
                                 </div>
                                 <div class="mt-3 pt-2.5 border-t border-slate-100">
                                     <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="w-full py-2.5 px-4 bg-[#D50000] hover:bg-red-700 text-white font-extrabold text-xs rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 uppercase tracking-wider">
+                                        <button type="submit" class="w-full py-2.5 px-4 bg-[#b8952d] hover:bg-[#9e7d23] text-gray-950 font-extrabold text-xs rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 uppercase tracking-wider">
                                             <span>Agregar</span>
                                             <svg class="w-4 h-4 stroke-current" fill="none" stroke-width="2.5" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
@@ -129,15 +129,15 @@
     </section>
 
     <div id="panelCarrito" class="hidden fixed top-0 right-0 w-96 max-w-full h-screen bg-white shadow-2xl z-50 flex flex-col justify-between font-sans">
-        <div class="p-5 bg-[#0407e2] flex items-center justify-between sticky top-0 z-10 shadow-md">
+        <div class="p-5 flex items-center justify-between sticky top-0 z-10 shadow-md" style="background-color: #0F1D3A;">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-[#76FF03] text-gray-950 flex items-center justify-center font-bold shadow-inner">
+                <div class="w-10 h-10 rounded-xl bg-[#b8952d] text-gray-950 flex items-center justify-center font-bold shadow-inner">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                         <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
                     </svg>
                 </div>
                 <div>
-                    <h2 class="text-base font-bold text-[#76FF03] tracking-tight leading-tight">Mi Carrito</h2>
+                    <h2 class="text-base font-bold text-[#b8952d] tracking-tight leading-tight">Mi Carrito</h2>
                     <p class="text-xs text-blue-100 font-medium mt-0.5">Tus productos seleccionados</p>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                     $total += $subtotal;
                 @endphp
                 
-                <div class="group relative flex items-center justify-between gap-3 p-3.5 bg-white border border-slate-100 rounded-2xl shadow-xs hover:border-[#76FF03] transition-all">
+                <div class="group relative flex items-center justify-between gap-3 p-3.5 bg-white border border-slate-100 rounded-2xl shadow-xs hover:border-[#b8952d] transition-all">
                     <div class="w-16 h-16 shrink-0 flex items-center justify-center bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
                         @if(!empty($producto['imagen']))
                             <img src="{{ asset('storage/' . ltrim($producto['imagen'], '/')) }}" alt="{{ $producto['nombre'] ?? 'Producto' }}" class="w-full h-full object-contain p-1"
@@ -169,7 +169,7 @@
                         @endif
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-semibold text-xs sm:text-sm text-slate-800 line-clamp-1 group-hover:text-[#0407e2] transition-colors leading-snug">
+                        <h3 class="font-semibold text-xs sm:text-sm text-slate-800 line-clamp-1 group-hover:text-[#0F1D3A] transition-colors leading-snug">
                             {{ $producto['nombre'] }}
                         </h3>
                         
@@ -184,11 +184,11 @@
                                 <span class="font-bold text-slate-800 text-xs">{{ $producto['cantidad'] ?? 0 }}</span>
                                 <form action="{{ route('carrito.agregar', $producto['id']) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="w-6 h-6 bg-[#76FF03] hover:bg-[#64DD17] text-gray-950 font-bold rounded flex items-center justify-center transition-colors">+</button>
+                                    <button type="submit" class="w-6 h-6 bg-[#b8952d] hover:bg-[#9e7d23] text-gray-950 font-bold rounded flex items-center justify-center transition-colors">+</button>
                                 </form>
                             </div>
                         </div>
-                        <span class="font-bold text-xs text-[#0407e2] block mt-1.5">
+                        <span class="font-bold text-xs text-[#0F1D3A] block mt-1.5">
                             Subtotal: S/ {{ number_format($subtotal, 2) }}
                         </span>
                     </div>
@@ -202,8 +202,8 @@
                 </div>
             @empty
                 <div class="text-center py-20 px-4">
-                    <div class="w-16 h-16 bg-[#76FF03]/20 text-gray-950 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner">
-                        <svg class="w-8 h-8 fill-current text-[#0407e2]" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-[#b8952d]/20 text-gray-950 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner">
+                        <svg class="w-8 h-8 fill-current text-[#0F1D3A]" viewBox="0 0 24 24">
                             <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
                         </svg>
                     </div>
@@ -222,10 +222,10 @@
                 </div>
                 <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-sm font-bold">
                     <span class="text-slate-900">Total a pagar:</span>
-                    <span class="text-base font-black text-slate-900"><span class="text-rose-600">S/</span> {{ number_format($total, 2) }}</span>
+                    <span class="text-base font-black text-slate-900"><span class="text-[#0F1D3A]">S/</span> {{ number_format($total, 2) }}</span>
                 </div>
             </div>
-            <a href="#" class="w-full py-3.5 bg-[#76FF03] hover:bg-[#64DD17] text-gray-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 active:scale-95">
+            <a href="#" class="w-full py-3.5 bg-[#b8952d] hover:bg-[#9e7d23] text-gray-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 active:scale-95">
                 <span>Continuar compra</span>
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -245,12 +245,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($categorias as $categoria)
                     <a href="{{ route('home', ['categoria' => $categoria->id]) }}"
-                    class="group relative flex items-center gap-5 p-4 sm:p-5 bg-gradient-to-r from-white via-white to-lime-50/40 border border-blue-400/60 rounded-3xl shadow-lg shadow-blue-500/5 hover:border-[#0407e2] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full overflow-hidden">
-                        <div class="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-white flex items-center justify-center overflow-hidden border border-blue-200/70 p-2 shadow-sm group-hover:border-[#0407e2]/50 transition-colors">
+                    class="group relative flex items-center gap-5 p-4 sm:p-5 bg-gradient-to-r from-white via-white to-amber-50/30 border border-slate-200 rounded-3xl shadow-lg shadow-slate-900/5 hover:border-[#0F1D3A] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full overflow-hidden">
+                        <div class="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-white flex items-center justify-center overflow-hidden border border-slate-200 p-2 shadow-sm group-hover:border-[#b8952d]/50 transition-colors">
                             @if($categoria->imagen)
                                 <img src="{{ asset('storage/' . $categoria->imagen) }}" alt="{{ $categoria->nombre }}" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy">
                             @else
-                                <svg class="w-10 h-10 text-[#0407e2] group-hover:scale-105 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <svg class="w-10 h-10 text-[#0F1D3A] group-hover:scale-105 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <rect x="3" y="3" width="7" height="7" rx="1"/>
                                     <rect x="14" y="3" width="7" height="7" rx="1"/>
                                     <rect x="3" y="14" width="7" height="7" rx="1"/>
@@ -259,10 +259,10 @@
                             @endif
                         </div>
                         <div class="flex-1 min-w-0 relative z-10">
-                            <h3 class="font-black text-base sm:text-lg text-[#0407e2] tracking-wide uppercase group-hover:scale-105 origin-left transition-transform truncate">{{ $categoria->nombre }}</h3>
+                            <h3 class="font-black text-base sm:text-lg text-[#0F1D3A] tracking-wide uppercase group-hover:scale-105 origin-left transition-transform truncate">{{ $categoria->nombre }}</h3>
                             <p class="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium whitespace-nowrap transition-colors">Explorar productos</p>
                         </div>
-                        <div class="w-9 h-9 rounded-full bg-[#0407e2] flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 group-hover:bg-blue-700 relative z-10">
+                        <div class="w-9 h-9 rounded-full bg-[#0F1D3A] flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 group-hover:bg-[#1a2f59] relative z-10">
                             <svg class="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform duration-300"
                                 fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/>
@@ -280,7 +280,7 @@
         </div>
     </section>
 
-    <section id="panelMarcas" class="bg-white py-12 sm:py-16 font-sans">
+    <section id="panelMarcas" class="bg-white py-12 sm:py-16 font-sans scroll-mt-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8 text-left">
                 <p class="text-slate-600 text-xs sm:text-base md:text-lg lg:text-xl mt-2 font-medium max-w-none leading-relaxed tracking-normal whitespace-nowrap overflow-x-auto scrollbar-none">
@@ -290,23 +290,23 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 @forelse($marcas as $marca)
                     <a href="{{ route('home', ['marca' => $marca->id]) }}" 
-                    class="group relative flex items-center gap-4 p-4 bg-gradient-to-r from-white via-white to-lime-50/40 border border-blue-400/60 rounded-3xl shadow-lg shadow-blue-500/5 hover:border-[#0407e2] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full overflow-hidden">
-                        <div class="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-white flex items-center justify-center overflow-hidden border border-blue-200/70 p-2.5 shadow-sm group-hover:border-[#0407e2]/50 transition-colors">
+                    class="group relative flex items-center gap-4 p-4 bg-gradient-to-r from-white via-white to-amber-50/30 border border-slate-200 rounded-3xl shadow-lg shadow-slate-900/5 hover:border-[#0F1D3A] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full overflow-hidden">
+                        <div class="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-white flex items-center justify-center overflow-hidden border border-slate-200 p-2.5 shadow-sm group-hover:border-[#b8952d]/50 transition-colors">
                             @if($marca->logo)
                                 <img src="{{ asset('storage/' . $marca->logo) }}" alt="{{ $marca->nombre }}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy">
                             @elseif($marca->imagen)
                                 <img src="{{ asset('storage/' . $marca->imagen) }}" alt="{{ $marca->nombre }}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy">
                             @else
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#0407e2] group-hover:scale-105 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#0F1D3A] group-hover:scale-105 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M3 3h7l11 11-7 7L3 10V3z"/>
                                 </svg>
                             @endif
                         </div>
                         <div class="flex-1 min-w-0 relative z-10">
-                            <h3 class="font-black text-base sm:text-lg text-[#0407e2] tracking-wide uppercase group-hover:scale-105 origin-left transition-transform truncate">{{ $marca->nombre }}</h3>
+                            <h3 class="font-black text-base sm:text-lg text-[#0F1D3A] tracking-wide uppercase group-hover:scale-105 origin-left transition-transform truncate">{{ $marca->nombre }}</h3>
                             <p class="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium whitespace-nowrap transition-colors">Explorar productos</p>
                         </div>
-                        <div class="w-9 h-9 rounded-full bg-[#0407e2] flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 group-hover:bg-blue-700 relative z-10">
+                        <div class="w-9 h-9 rounded-full bg-[#0F1D3A] flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 group-hover:bg-[#1a2f59] relative z-10">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white group-hover:translate-x-0.5 transition-transform duration-300"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/>
