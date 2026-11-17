@@ -469,27 +469,71 @@ Table libro_reclamaciones {
     detalle_solicitud text
     pedido_concreto text
     acepto_politicas boolean [default: true]
-    clientes_id bigint [ref: > clientes.id]
+    clientes_id bigint [ref: > clientes_externos.id]
+    estado boolean
 }
 
 
 Table clientes_externos {
-    id bigint [pk, increment, note: 'ID único autoincrementable']
-    correo varchar(150) [unique, note: 'Correo electrónico del cliente']
-    nombre varchar(100) [note: 'Nombres del cliente']
-    apellido varchar(100) [note: 'Apellidos del cliente']
-    tipo_documento varchar(20) [note: 'DNI, CE o Pasaporte']
-    numero_documento varchar(20) [unique, note: 'Número de documento']
-    celular varchar(15) [note: 'Número de celular']
-    contrasena varchar(255) [note: 'Contraseña cifrada mediante bcrypt']
-    acepta_terminos boolean [default: false, note: 'Aceptación de términos y condiciones']
-    declaracion_jurada boolean [default: false, note: 'Aceptación de declaración jurada']
-    fecha_registro datetime [note: 'Fecha de registro']
-    estado boolean [default: true, note: 'Estado de la cuenta']
+    id bigint [pk, increment]
+    correo varchar(150) [unique]
+    nombre varchar(100)
+    apellido varchar(100)
+    tipo_documento varchar(20)
+    numero_documento varchar(20) [unique]
+    celular varchar(15)
+    acepta_terminos boolean [default: false]
+    declaracion_jurada boolean [default: false]
+    fecha_registro datetime
+    estado boolean [default: true]
 }
 
 
+Table comprobantes {
+    id bigint [pk, increment]
+    entorno varchar(20) [default: 'Demo']
+    user_id bigint [null, ref: > users.id]
+    fecha_emision date
+    cliente_nombre varchar(255)
+    cliente_documento varchar(20) [null]
+    tipo_comprobante varchar(2)
+    serie varchar(10)
+    numero int
+    total decimal(12,2) [default: 0]
+    estado_envio varchar(20) [default: 'pendiente']
+    fecha_envio timestamp [null]
+    mensaje_sunat text [null]
+    created_at timestamp
+    updated_at timestamp
+    indexes {(estado_envio, fecha_emision)}
+}
 
+Table anulacions {
+    id bigint [pk, increment]
+    fecha_emision date
+    fecha_comprobante date
+    identificador varchar(30) [unique]
+    estado varchar(20) [default: 'pendiente']
+    ticket varchar(30) [null]
+    motivo varchar(255)
+    cantidad_comprobantes int [default: 0]
+    user_id bigint [null, ref: > users.id]
+    created_at timestamp
+    updated_at timestamp
+    indexes {fecha_comprobante}
+}
 
-
-
+Table resumen_comprobantes {
+    id bigint [pk, increment]
+    fecha_emision date
+    fecha_referencia date
+    identificador varchar(30) [unique]
+    estado varchar(20) [default: 'pendiente']
+    ticket varchar(30) [null]
+    cantidad_comprobantes int [default: 0]
+    total decimal(12,2) [default: 0]
+    user_id bigint [null, ref: > users.id]
+    created_at timestamp
+    updated_at timestamp
+    indexes {fecha_referencia}
+}

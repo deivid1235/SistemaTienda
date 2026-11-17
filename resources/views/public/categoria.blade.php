@@ -4,17 +4,6 @@
 <section id="productos" class="relative bg-slate-50/70 py-12 sm:py-16 font-sans scroll-mt-24 overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none"></div>
     <div class="relative w-full pl-6 sm:pl-12 lg:pl-28 pr-4 sm:pr-8 lg:pr-12">
-        <div class="mb-8 sm:mb-10 border-b border-slate-200/80 pb-6">
-            <span class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#b8952d] mb-2">
-                <span class="w-2 h-2 rounded-full bg-[#b8952d]"></span>
-                Explora nuestra tienda
-            </span>
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <p class="text-slate-500 text-sm sm:whitespace-nowrap">
-                    Descubre nuestros productos disponibles con la mejor calidad y garantía.
-                </p>
-            </div>
-        </div>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
             <aside class="lg:col-span-3 xl:col-span-2">
                 <div class="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-sm sticky top-24">
@@ -31,8 +20,7 @@
                             @php
                                 $isActive = $categoria->id == $item->id;
                             @endphp
-                            <a href="{{ route('categorias', $item->id) }}"
-                                class="group/cat flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-2xl transition-all duration-200 shrink-0 lg:shrink
+                            <a href="{{ route('categorias', $item->id) }}" class="group/cat flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-2xl transition-all duration-200 shrink-0 lg:shrink
                                 {{ $isActive ? 'bg-[#0F1D3A] text-white shadow-md shadow-[#0F1D3A]/20' : 'text-slate-600 hover:bg-slate-50 hover:text-[#0F1D3A]' }}">
                                 <div class="flex items-center gap-2.5">
                                     <span class="w-4 h-4 rounded-md border flex items-center justify-center shrink-0 transition-colors

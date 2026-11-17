@@ -120,7 +120,7 @@
                 @endif
             @empty
                 <div class="text-center py-12">
-                    <div class="text-5xl mb-3">📦</div>
+                    <i class="fa-solid fa-box text-5xl mb-3 text-slate-400"></i>
                     <h3 class="text-xl font-bold text-slate-800">Próximamente nuevos productos</h3>
                     <p class="text-slate-500 text-xs mt-1 font-normal">No hay productos disponibles por el momento.</p>
                 </div>
@@ -166,7 +166,7 @@
                     </a>
                 @empty
                     <div class="col-span-full text-center py-12">
-                        <div class="text-4xl mb-2">📂</div>
+                        <i class="fa-solid fa-folder-open text-5xl text-slate-400"></i>
                         <h3 class="text-sm font-bold text-slate-800">No hay categorías disponibles</h3>
                         <p class="text-xs text-slate-400 mt-1">Pronto agregaremos nuevas secciones.</p>
                     </div>
@@ -210,7 +210,7 @@
                     </a>
                 @empty
                     <div class="col-span-full text-center py-12">
-                        <div class="text-4xl mb-2">🏷️</div>
+                        <i class="fa-solid fa-tags text-5xl text-slate-400"></i>
                         <h3 class="text-sm font-bold text-slate-800">No hay marcas disponibles</h3>
                         <p class="text-xs text-slate-400 mt-1">Pronto agregaremos nuevas marcas.</p>
                     </div>

@@ -39,22 +39,22 @@
     </div>
 
     <header class="sticky top-0 z-50 text-white shadow-md" style="background-color: #0f1d3a;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20 gap-2">
-                <button id="btn-menu-mobile" type="button" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none" aria-label="Abrir menú">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-3">
+                <button id="btn-menu-mobile" type="button" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none shrink-0" aria-label="Abrir menú">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
-                <a href="{{ route('home') }}#inicio" class="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+                <a href="{{ route('home') }}#inicio" class="flex items-center gap-2 sm:gap-3 shrink-0">
                     @if(isset($compania) && $compania?->logo)
-                        <img src="{{ asset('uploads/companias/' . $compania->logo) }}" alt="Logo de la empresa" class="h-9 sm:h-11 md:h-12 w-auto object-contain shrink-0">
+                        <img src="{{ asset('uploads/companias/' . $compania->logo) }}" alt="Logo de la empresa" class="h-8 sm:h-10 md:h-12 w-auto object-contain shrink-0">
                     @endif
-                    <span class="text-xs sm:text-sm md:text-base font-bold tracking-tight text-white truncate max-w-[120px] sm:max-w-[180px] md:max-w-none">
+                    <span class="text-xs sm:text-sm md:text-base font-bold tracking-tight text-white whitespace-nowrap">
                         {{ $compania?->nombre_comercial ?? 'GRUPO' }}
                     </span>
                 </a>
-                <nav class="hidden md:flex items-center gap-2 lg:gap-4 uppercase font-bold text-xs tracking-wider">
+                <nav class="hidden lg:flex items-center gap-2 xl:gap-4 uppercase font-bold text-xs tracking-wider">
                     <a href="{{ route('home') }}#inicio" class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-white border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
@@ -84,8 +84,8 @@
                         Productos
                     </a>
                 </nav>
-                <div class="flex items-center gap-2 sm:gap-4">
-                    <form action="" method="GET" class="relative hidden lg:block">
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <form action="" method="GET" class="relative hidden xl:block">
                         <input type="text" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar productos..." class="w-40 xl:w-48 pl-3 pr-8 py-1.5 bg-white/10 text-white placeholder-white/70 border border-white/20 rounded-full text-xs outline-none focus:bg-white focus:text-gray-800 focus:placeholder-gray-400 transition-all">
                         <button type="submit" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -93,13 +93,13 @@
                             </svg>
                         </button>
                     </form>
-                    <label for="modalLoginCheck" class="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg text-white border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors shrink-0 cursor-pointer">
+                    <label for="modalLoginCheck" class="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg text-white border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors cursor-pointer shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
-                        <span>Iniciar Sesión</span>
+                        <span class="hidden md:inline">Iniciar Sesión</span>
                     </label>
-                    <button type="button" onclick="document.getElementById('panelCarrito').classList.toggle('hidden')" class="bg-[#d4af37] hover:bg-[#b8952d] text-gray-950 px-3 sm:px-3.5 py-1.5 rounded-full flex items-center gap-1.5 sm:gap-2 font-black text-xs shadow-md transition-transform active:scale-95 shrink-0">
+                    <button type="button" onclick="document.getElementById('panelCarrito').classList.toggle('hidden')" class="bg-[#d4af37] hover:bg-[#b8952d] text-gray-950 px-2.5 sm:px-3.5 py-1.5 rounded-full flex items-center gap-1.5 font-black text-xs shadow-md transition-transform active:scale-95 shrink-0">
                         <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
                             <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 1.99-2-.9-2-2-2z"/>
                         </svg>
@@ -112,17 +112,22 @@
                             }
                         @endphp
                         <span>S/ {{ number_format($total, 2) }}</span>
-                        <i class="fas fa-shopping-cart text-xl"></i>
                         <span class="w-5 h-5 rounded-full bg-[#D50000] text-white flex items-center justify-center text-[10px] font-extrabold shrink-0 shadow-xs">
                             {{ collect(session('carrito', []))->sum('cantidad') }}
                         </span>
                     </button>
-                    <a href="" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-white whitespace-nowrap shrink-0 bg-white/5 border border-white/15 hover:border-[#d4af37] hover:bg-[#d4af37]/10 hover:text-[#d4af37] transition-all">
-                        <svg class="w-4 h-4 text-[#d4af37] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                        <span>Mi cuenta</span>
-                    </a>
+                    @auth
+                        <a href="{{ route('public.usuario') }}" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-white whitespace-nowrap shrink-0 bg-white/5 border border-white/15 hover:border-[#d4af37] hover:bg-[#d4af37]/10 hover:text-[#d4af37] transition-all">
+                            <svg class="w-4 h-4 text-[#d4af37] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                    @else
+                        <label for="modalLoginCheck" class="hidden md:inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-semibold text-white whitespace-nowrap shrink-0 bg-white/5 border border-white/15 hover:border-[#d4af37] hover:bg-[#d4af37]/10 hover:text-[#d4af37] transition-all cursor-pointer">
+                            <span>Mi cuenta</span>
+                        </label>
+                    @endauth
                 </div>
             </div>
             <div id="menu-desplegable-mobile" class="hidden md:hidden pb-5 pt-2 border-t border-white/20">
@@ -140,7 +145,7 @@
                             <rect x="3" y="14" width="7" height="7" rx="1"/>
                             <rect x="14" y="14" width="7" height="7" rx="1"/>
                         </svg>
-                        Categorias de Productos
+                        Categorías de Productos
                     </a>
                     <a href="{{ route('home') }}#panelMarcas" class="flex items-center gap-2 text-white px-3 py-2 rounded-lg border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors">
                         <svg class="w-4 h-4 text-[#d4af37]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -155,15 +160,21 @@
                         </svg>
                         Productos
                     </a>
-                    <a href="#" class="flex items-center gap-2 text-white px-3 py-2 rounded-lg border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors">
+                    <a href="" class="flex items-center gap-2 text-white px-3 py-2 rounded-lg border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors">
+                        <svg class="w-4 h-4 text-[#d4af37]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                        Mi cuenta
+                    </a>
+                    <label for="modalLoginCheck" class="flex items-center gap-2 text-white px-3 py-2 rounded-lg border border-transparent hover:border-[#d4af37] hover:text-[#d4af37] transition-colors cursor-pointer">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
                         Iniciar Sesión
-                    </a>
+                    </label>
                 </nav>
                 <form action="" method="GET" class="mt-3 relative">
-                    <input type="text" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar productos..." class="w-full pl-3 pr-8 py-2 bg-white/10 text-white placeholder-white/70 border border-white/20 rounded-lg text-xs outline-none focus:bg-white focus:text-gray-800 focus:placeholder-gray-400">
+                    <input type="text" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar productos..." class="w-full pl-3 pr-8 py2 bg-white/10 text-white placeholder-white/70 border border-white/20 rounded-lg text-xs outline-none focus:bg-white focus:text-gray-800 focus:placeholder-gray-400">
                     <button type="submit" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/80 hover:text-white">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -367,7 +378,7 @@
                     &times;
                 </label>
                 <h2 class="text-2xl sm:text-3xl font-black text-center text-[#0F1D3A] tracking-wider uppercase mb-8">INICIAR SESIÓN</h2>
-                <form action="#" method="POST" class="space-y-6">
+                <form action="{{ route('usuario.login') }}" method="POST" class="space-y-6">
                     @csrf
                     <div>
                         <label class="flex items-center gap-2 text-sm font-bold text-[#0F1D3A] mb-1">

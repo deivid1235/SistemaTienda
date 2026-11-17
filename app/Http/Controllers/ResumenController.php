@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comprobante;
 use App\Models\ResumenComprobante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ResumenController extends Controller
@@ -64,7 +65,7 @@ class ResumenController extends Controller
                 'ticket'                => (string) random_int(100000000000000, 999999999999999),
                 'cantidad_comprobantes' => $boletas->count(),
                 'total'                 => $boletas->sum('total'),
-                'user_id'               => auth()->id(),
+                'user_id' => Auth::id(),
             ]);
 
             Comprobante::whereIn('id', $boletas->pluck('id'))->update([

@@ -13,7 +13,6 @@ return new class extends Migration
             $table->date('fecha_emision');
             $table->date('fecha_comprobante');
             $table->string('identificador', 30)->unique();
-            // pendiente | aceptado | rechazado
             $table->string('estado', 20)->default('pendiente');
             $table->string('ticket', 30)->nullable();
             $table->string('motivo', 255);

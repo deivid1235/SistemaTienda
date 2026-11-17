@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Anulacion;
 use App\Models\Comprobante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AnulacionController extends Controller
@@ -75,7 +75,7 @@ class AnulacionController extends Controller
                 'ticket'                => (string) random_int(100000000000000, 999999999999999),
                 'motivo'                => $request->motivo,
                 'cantidad_comprobantes' => $documentos->count(),
-                'user_id'               => auth()->id(),
+                'user_id' => Auth::id(),
             ]);
 
             Comprobante::whereIn('id', $documentos->pluck('id'))->update([

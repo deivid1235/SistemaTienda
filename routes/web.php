@@ -3,18 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
+
+
 Route::get('/', function () {return view('public.Home');})->name('public.index');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// Tienda virtual
+Route::post('/usuario/login', [LoginController::class, 'loginUsuario'])->name('usuario.login');
+Route::get('/usuario', [LoginController::class, 'usuario'])->middleware('auth')->name('public.usuario');
+Route::post('/usuario/logout', [LoginController::class, 'logoutUsuario'])->name('usuario.logout');
+
 Route::get('/', [App\Http\Controllers\TiendaController::class, 'index'])->name('public.index');
 Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/registro-cliente', [App\Http\Controllers\ClienteExternoController::class, 'store'])->name('cliente_externo.store');
 Route::get('/categorias/{categoria}', [App\Http\Controllers\HomeController::class, 'categorias'])->name('categorias');
-Route::get('/carrito', [App\Http\Controllers\CarritoController::class, 'index'])
-    ->name('carrito.index');
+Route::get('/carrito', [App\Http\Controllers\CarritoController::class, 'index'])->name('carrito.index');
+//Libro Reclamacione
+Route::get('/libro_reclamaciones', function () {return view('public.libro_reclamacion');})->name('libro.reclamacion');
+Route::post('/libro_reclamaciones', [App\Http\Controllers\LibroReclamoController::class, 'store'])->name('libro.reclamacion.store');
+    
+
 
 Route::middleware('auth')->group(function () {
     //Ubigeo
@@ -26,11 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/carrito/eliminar/{id}', [App\Http\Controllers\CarritoController::class, 'eliminar'])->name('carrito.eliminar');
     Route::post('/carrito/agregar/{id}', [App\Http\Controllers\CarritoController::class, 'agregar'])->name('carrito.agregar');
     Route::post('/carrito/disminuir/{id}', [App\Http\Controllers\CarritoController::class, 'disminuir'])->name('carrito.disminuir');
-    //Libro Reclamacione
-    Route::get('/libro_reclamaciones', function () {return view('public.libro_reclamacion');})->name('libro.reclamacion');
-    Route::post('/libro_reclamaciones', [App\Http\Controllers\LibroReclamoController::class, 'store'])->name('libro.reclamacion.store');
-    
-    
 
     Route::get('/dashboard', function () {return view('admin.dashboard');})->name('dashboard')->middleware('auth', 'can:admin.dashboard.index');
     Route::get('/configuracion/menu', function () {
@@ -68,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/metodopago', [App\Http\Controllers\MetodoPagoController::class, 'store'])->name('configuracion.metodopago.store')->middleware('auth','can:configuracion.metodopago.store');
     Route::put('/configuracion/metodopago/{metodopago}', [App\Http\Controllers\MetodoPagoController::class, 'update'])->name('configuracion.metodopago.update')->middleware('auth','can:configuracion.metodopago.update');
     Route::delete('/configuracion/metodopago/{metodopago}', [App\Http\Controllers\MetodoPagoController::class, 'destroy'])->name('configuracion.metodopago.destroy')->middleware('auth','can:configuracion.metodopago.destroy');
-    //metodo gasto
+    //metodo gasto 
     Route::post('/configuracion/metodopago/gasto', [App\Http\Controllers\MetodoGastoController::class, 'store'])->name('configuracion.metodogasto.store')->middleware('auth','can:configuracion.metodogasto.store');
     Route::put('/configuracion/metodopago/gasto/{metodoGasto}', [App\Http\Controllers\MetodoGastoController::class, 'update']) ->name('configuracion.metodogasto.update')->middleware('auth','can:configuracion.metodogasto.update');
     Route::delete('/configuracion/metodopago/gasto/{metodoGasto}', [App\Http\Controllers\MetodoGastoController::class, 'destroy'])->name('configuracion.metodogasto.destroy')->middleware('auth','can:configuracion.metodogasto.destroy');
@@ -97,7 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/compania', [App\Http\Controllers\CompaniaController::class, 'store'])->name('configuracion.compania.store')->middleware('auth','can:configuracion.compania.store');
     Route::put('/configuracion/compania/{id}', [App\Http\Controllers\CompaniaController::class, 'update'])->name('configuracion.compania.update')->middleware('auth','can:configuracion.compania.update');
     Route::delete('/configuracion/compania/{id}/eliminar-logo', [App\Http\Controllers\CompaniaController::class, 'eliminarLogo'])->name('configuracion.compania.eliminar-logo')->middleware('auth','can');
-
+    
     //configuración de login
     Route::get('/configuracion/login', [App\Http\Controllers\LoginController::class, 'index'])->name('configuracion.login')->middleware('auth','can:configuracion.login.index');
     Route::put('/configuracion/login', [App\Http\Controllers\LoginController::class, 'update'])->name('configuracion.login.update')->middleware('auth','can:configuracion.login.update');
@@ -113,7 +117,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'update'])->name('configuracion.estilo.update')->middleware('auth','can:configuracion.estilo.update');
     Route::delete('/configuracion/estilo/{id}', [App\Http\Controllers\EstiloController::class, 'destroy'])->name('configuracion.estilo.eliminar')->middleware('auth','can:configuracion.estilo.eliminar');
     Route::put('/configuracion/estilo/{id}/activar', [App\Http\Controllers\EstiloController::class, 'activar'])->name('configuracion.estilo.activar')->middleware('auth','can:configuracion.estilo.activar');
-    //Motivo de gatos
+    //Motivo de gatos 
     Route::get('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'index'])->name('configuracion.motivogasto')->middleware('auth','can:configuracion.motivogasto.index');
     Route::post('/configuracion/motivogasto', [App\Http\Controllers\MotivoGastoController::class, 'store'])->name('configuracion.motivogasto.store')->middleware('auth','can:configuracion.motivogasto.store');
     Route::put('/configuracion/motivogasto/{id}', [App\Http\Controllers\MotivoGastoController::class, 'update'])->name('configuracion.motivogasto.update')->middleware('auth','can:configuracion.motivogasto.update');
@@ -156,7 +160,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/tipodocumento', [App\Http\Controllers\TipoDocumentoController::class, 'store'])->name('configuracion.tipodocumento.store')->middleware('auth','can:configuracion.tipodocumento.store');
     Route::put('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'update'])->name('configuracion.tipodocumento.update')->middleware('auth','can:configuracion.tipodocumento.update');
     Route::delete('/configuracion/tipodocumento/{id}', [App\Http\Controllers\TipoDocumentoController::class, 'destroy'])->name('configuracion.tipodocumento.destroy')->middleware('auth','can:configuracion.tipodocumento.destroy');
-    //Sucursal
+    //Sucursal    
     Route::get('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursal')->middleware('auth','can:admin.sucursal.index');
     Route::post('/admin/sucursal', [App\Http\Controllers\SucursalController::class, 'store'])->name('sucursal.store')->middleware('auth','can:admin.sucursal.store');
     Route::put('/admin/sucursal/{id}', [App\Http\Controllers\SucursalController::class, 'update'])->name('sucursal.update')->middleware('auth','can:admin.sucursal.update');
@@ -201,7 +205,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/configuracion/tipoafectacionigv',[App\Http\Controllers\TipoAfectacionIgvController::class, 'store'])->name('configuracion.tipoafectacionigv.store')->middleware('auth');
     Route::put('/configuracion/tipoafectacionigv/{id}',[App\Http\Controllers\TipoAfectacionIgvController::class, 'update'])->name('configuracion.tipoafectacionigv.update')->middleware('auth');
     Route::delete('/configuracion/tipoafectacionigv/{id}',[App\Http\Controllers\TipoAfectacionIgvController::class, 'destroy'])->name('configuracion.tipoafectacionigv.destroy')->middleware('auth');
-
     //Comprobantes pendientes - No enviados
     Route::get('/admin/comprobantes/no-enviados', [App\Http\Controllers\ComprobanteNoEnviadoController::class, 'index'])->name('comprobantes.no_enviados')->middleware('auth');
     Route::post('/admin/comprobantes/no-enviados/{comprobante}/enviar', [App\Http\Controllers\ComprobanteNoEnviadoController::class, 'enviar'])->name('comprobantes.no_enviados.enviar')->middleware('auth');
@@ -221,7 +224,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/comprobantes/anulaciones/buscar', [App\Http\Controllers\AnulacionController::class, 'buscar'])->name('comprobantes.anulaciones.buscar')->middleware('auth');
     Route::post('/admin/comprobantes/anulaciones', [App\Http\Controllers\AnulacionController::class, 'store'])->name('comprobantes.anulaciones.store')->middleware('auth');
     Route::post('/admin/comprobantes/anulaciones/{anulacion}/consultar', [App\Http\Controllers\AnulacionController::class, 'consultar'])->name('comprobantes.anulaciones.consultar')->middleware('auth');
-
     //Productos
     Route::get('/admin/producto', [App\Http\Controllers\ProductoController::class, 'index'])->name('producto')->middleware('auth');
     Route::post('/admin/producto', [App\Http\Controllers\ProductoController::class, 'store'])->name('producto.store')->middleware('auth');
@@ -229,6 +231,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/producto/{id}', [App\Http\Controllers\ProductoController::class, 'destroy'])->name('producto.destroy')->middleware('auth');
     //Cliente externo
     Route::get('/admin/cliente-externo', [App\Http\Controllers\ClienteExternoController::class, 'index'])->name('cliente_externo')->middleware('auth');
-
+    //Libro de reclamaciones
+    Route::get('/admin/tienda/libro-reclamacion', [App\Http\Controllers\Admin\LibroReclamoController::class, 'index'])->name('admin.libro_reclamacion.index');
+    Route::get('/admin/libro-reclamacion/{id}/pdf', [App\Http\Controllers\Admin\LibroReclamoController::class, 'pdf'])->name('admin.libro-reclamacion.pdf');
+    Route::get('/admin/libro-reclamacion/{id}/visualizar',[App\Http\Controllers\Admin\LibroReclamoController:: class, 'visualizarPdf'])->name('admin.libro-reclamacion.visualizar');
+    Route::post('/admin/libro-reclamacion/{id}/responder',[App\Http\Controllers\Admin\LibroReclamoController::class, 'responder'])->name('admin.libro-reclamacion.responder');
+    Route::delete('/admin/libro-reclamacion/{id}',[App\Http\Controllers\Admin\LibroReclamoController::class, 'destroy'])->name('admin.libro_reclamacion.destroy');
 
 });

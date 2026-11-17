@@ -199,7 +199,7 @@
                                 </ul>
                             </li>
 
-                                                        {{-- COMPROBANTES PENDIENTES --}}
+                            {{-- COMPROBANTES PENDIENTES --}}
                             <li class="nav-parent {{ request()->routeIs('comprobantes.*') ? 'nav-expanded' : '' }}"
                                 style="{{ request()->routeIs('comprobantes.*') ? 'display: block;' : '' }}">
                                 <a class="nav-link" href="#">
@@ -280,20 +280,27 @@
                             </li>
 
                             {{-- TIENDA --}}
-                            <li class="nav-parent {{ request()->routeIs('cliente_externo') ? 'nav-expanded' : '' }}"
-                                style="{{ request()->routeIs('cliente_externo') ? 'display: block;' : '' }}">
+                            <li class="nav-parent {{ request()->routeIs('cliente_externo','admin.libro_reclamacion.index') ? 'nav-expanded' : '' }}"
+                                style="{{ request()->routeIs('cliente_externo','admin.libro_reclamacion.index') ? 'display: block;' : '' }}">
 
                                 <a class="nav-link" href="#">
                                     <i class="fa-solid fa-store"></i>
                                     <span>Tienda</span>
                                     <i class="fas fa-chevron-down chevron"></i>
                                 </a>
-                                <ul class="nav-children"
-                                    style="{{ request()->routeIs('cliente_externo') ? 'display: block !important;' : '' }}">
+                                <ul class="nav-children" style="{{ request()->routeIs('cliente_externo') ? 'display: block !important;' : '' }}">
                                     <li class="{{ request()->routeIs('cliente_externo') ? 'nav-active' : '' }}">
                                         <a class="nav-link" href="{{ route('cliente_externo') }}">
                                             <i class="fa-solid fa-circle text-[8px]"></i>
                                             <span>Clientes Externos</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="nav-children" style="{{ request()->routeIs('admin.libro_reclamacion.index') ? 'display: block !important;' : '' }}">
+                                    <li class="{{ request()->routeIs('admin.libro_reclamacion.index') ? 'nav-active' : '' }}">
+                                        <a class="nav-link" href="{{ route('admin.libro_reclamacion.index') }}">
+                                            <i class="fa-solid fa-circle text-[8px]"></i>
+                                            <span>Libro de Reclamaciones</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -435,11 +442,111 @@
     </main>
 
     @yield('js')
+    {{-- ================= MENSAJE FLOTANTE DE ÉXITO ================= --}}
+    @if (session('success'))
+        <div id="alertaExito"
+            class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
+            <div class="flex items-center gap-2 bg-green-50 border border-green-100
+                        text-green-600 text-sm font-medium px-5 py-2.5
+                        rounded-lg shadow-sm">
+                <i class="fa-solid fa-circle-check text-green-500"></i>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
+
+    {{-- ================= MENSAJE FLOTANTE DE ERROR ================= --}}
+    @if (session('error'))
+        <div id="alertaError"
+            class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
+            <div class="flex items-center gap-2 bg-red-50 border border-red-100
+                        text-red-600 text-sm font-medium px-5 py-2.5
+                        rounded-lg shadow-sm">
+                <i class="fa-solid fa-circle-exclamation text-red-500"></i>
+                <span>{{ session('error') }}</span>
+            </div>
+        </div>
+    @endif
+
+    {{-- ================= MODAL DE ELIMINACIÓN ================= --}}
+    <div id="modalEliminar"
+        class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-24">
+
+        <div class="absolute inset-0 bg-black/20"
+            onclick="cerrarModalEliminar()"></div>
+
+        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-lg font-semibold text-slate-800">Eliminar</h2>
+
+                <button type="button" onclick="cerrarModalEliminar()"
+                    class="text-slate-400 hover:text-slate-600">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-3 mb-8">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-lg"></i>
+                <p class="text-sm text-slate-600">
+                    ¿Desea eliminar el registro?
+                </p>
+            </div>
+
+            <form id="formEliminar" action="#" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="cerrarModalEliminar()"
+                        class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
+                        Cancelar
+                    </button>
+
+                    <button type="submit"
+                        class="px-4 py-2 rounded-md bg-[#D50000] hover:bg-red-700 text-white text-sm font-semibold">
+                        Eliminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- ================= FUNCIONES JAVASCRIPT ================= --}}
     <script>
-        function confirmarEliminar(url) {
-            document.getElementById('formEliminar').action = url;
-            document.getElementById('modalEliminar').classList.remove('hidden');
-        }
+        window.confirmarEliminar = function(url) {
+            const modal = document.getElementById('modalEliminar');
+            const formulario = document.getElementById('formEliminar');
+
+            if (modal && formulario) {
+                formulario.action = url;
+                modal.classList.remove('hidden');
+            }
+        };
+
+        window.cerrarModalEliminar = function() {
+            const modal = document.getElementById('modalEliminar');
+
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            ['alertaExito', 'alertaError'].forEach(function(id) {
+                const alerta = document.getElementById(id);
+
+                if (alerta) {
+                    setTimeout(function() {
+                        alerta.style.transition = 'opacity .4s ease';
+                        alerta.style.opacity = '0';
+
+                        setTimeout(function() {
+                            alerta.remove();
+                        }, 400);
+                    }, 3000);
+                }
+            });
+        });
     </script>
 
     <script>
@@ -471,87 +578,6 @@
             });
         })();
     </script>
-    {{-- ================= MENSAJE FLOTANTE DE ÉXITO ================= --}}
-    {{-- Colócalo dentro de tu layout principal (justo después de abrir <body> o
-        dentro del topbar), y en tus controladores usa:
-        return redirect()->back()->with('success', 'Banco editado con éxito'); --}}
-
-    @if (session('success'))
-
-    <div id="alertaExito"
-        class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
-
-        <div class="flex items-center gap-2 bg-green-50 border border-green-100
-                    text-green-600 text-sm font-medium px-5 py-2.5
-                    rounded-lg shadow-sm">
-            <i class="fa-solid fa-circle-check text-green-500"></i>
-            <span>{{ session('success') }}</span>
-
-        <div id="alertaExito"
-            class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999]">
-            <div class="flex items-center gap-2 bg-green-50 border border-green-100
-                        text-green-600 text-sm font-medium px-5 py-2.5
-                        rounded-lg shadow-sm">
-                <i class="fa-solid fa-circle-check text-green-500"></i>
-                <span>{{ session('success') }}</span>
-            </div>
-
-        </div>
-        <script>
-            setTimeout(function () {
-                const alerta = document.getElementById('alertaExito');
-                if (alerta) {
-                    alerta.style.transition = 'opacity .4s ease';
-                    alerta.style.opacity = '0';
-                    setTimeout(function () {
-                        alerta.remove();
-                    }, 400);
-                }
-            }, 3000);
-        </script>
-    @endif
-    {{-- ================= MODAL DE CONFIRMACIÓN: ELIMINAR ================= --}}
-    {{-- Inclúyelo una vez dentro de tu vista (o layout) y usa la función JS
-     confirmarEliminar('URL_DEL_REGISTRO') en el onclick de cada botón "Eliminar". --}}
-    <div id="modalEliminar" class="hidden fixed inset-0 z-[99999] flex items-start justify-center pt-24">
-        {{-- fondo sutil --}}
-        <div class="absolute inset-0 bg-black/10"
-            onclick="document.getElementById('modalEliminar').classList.add('hidden')"></div>
-        {{-- contenido --}}
-        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
-            <div class="flex items-center justify-between mb-5">
-                <h2 class="text-lg font-semibold text-slate-800">Eliminar</h2>
-                <button type="button"
-                        onclick="document.getElementById('modalEliminar').classList.add('hidden')"
-                        class="text-slate-400 hover:text-slate-600">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-lg"></i>
-                <p class="text-sm text-slate-600">¿Desea eliminar el registro?</p>
-            </div>
-
-            <form id="formEliminar" action="#" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="flex justify-end gap-3">
-                    <button type="button"
-                            onclick="document.getElementById('modalEliminar').classList.add('hidden')"
-                            class="px-4 py-2 rounded-md border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="px-4 py-2 rounded-md bg-[#D50000] hover:bg-[#D50000] text-white text-sm font-semibold">
-                        Eliminar
-                    </button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-
-
-
 
 </body>
 </html>

@@ -16,8 +16,7 @@
         </div>
 
         {{-- FILTROS --}}
-        <div id="panelFiltros"
-            class="{{ request()->filled('buscar') || request()->filled('tipo') || request()->filled('fecha') ? '' : 'hidden' }} mt-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+        <div id="panelFiltros" class="{{ request()->filled('buscar') || request()->filled('tipo') || request()->filled('fecha') ? '' : 'hidden' }} mt-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
             <form action="{{ route('comprobantes.no_enviados') }}" method="GET">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
                     <div class="md:col-span-2">

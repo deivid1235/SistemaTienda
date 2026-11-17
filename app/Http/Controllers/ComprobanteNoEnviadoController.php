@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Comprobante;
 use Illuminate\Http\Request;
 
@@ -9,8 +8,7 @@ class ComprobanteNoEnviadoController extends Controller
 {
     public function index(Request $request)
     {
-        $comprobantes = Comprobante::with('usuario')
-            ->where('estado_envio', 'pendiente')
+        $comprobantes = Comprobante::with('usuario')->where('estado_envio', 'pendiente')
             ->when($request->filled('buscar'), function ($query) use ($request) {
                 $buscar = $request->buscar;
                 $query->where(function ($q) use ($buscar) {
@@ -30,7 +28,6 @@ class ComprobanteNoEnviadoController extends Controller
         return view('admin.comprobantes_pendientes.no_enviados', compact('comprobantes'));
     }
 
-    // Envío simulado. Aquí se conectará el servicio de SUNAT/OSE más adelante.
     public function enviar(Comprobante $comprobante)
     {
         $comprobante->estado_envio  = 'enviado';

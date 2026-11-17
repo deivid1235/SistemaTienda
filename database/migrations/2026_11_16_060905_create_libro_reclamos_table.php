@@ -34,7 +34,8 @@ return new class extends Migration
             $table->text('detalle_solicitud');
             $table->text('pedido_concreto');
             $table->boolean('acepto_politicas')->default(true);
-            $table->foreignId('clientes_id')->nullable()->constrained('clientes')->nullOnDelete();
+            $table->foreignId('cliente_externos_id')->nullable()->constrained('cliente_externos')->nullOnDelete();
+            $table->string('estado', 30)->default('Pendiente');
             $table->timestamps();
         });
     }

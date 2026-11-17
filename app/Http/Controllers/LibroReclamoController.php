@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\ClienteExterno;
+use Illuminate\Support\Facades\Auth;
 use App\Models\LibroReclamo;
 use Illuminate\Http\Request;
 
@@ -15,19 +17,12 @@ class LibroReclamoController extends Controller
         return view('public.libro_reclamacion');       
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->route('libro.reclamacion')
+                ->with('error', 'Debes iniciar sesión para registrar una reclamación.');
+        }
         $datos = $request->validate([
             'tipo_documento'          => 'required|string|max:20',
             'numero_documento'        => 'required|string|max:20',
@@ -50,8 +45,11 @@ class LibroReclamoController extends Controller
             'detalle_solicitud'       => 'required|string',
             'pedido_concreto'         => 'required|string',
             'acepto_politicas'        => 'required|accepted',
-            'clientes_id'             => 'nullable|exists:clientes,id',
         ]);
+        $clienteExterno = ClienteExterno::where('user_id', Auth::id())->first();
+        if (!$clienteExterno) {
+            return redirect()->back()->with('error', 'No se encontró el perfil de cliente asociado a tu cuenta.');
+        }
         $reclamacion = new LibroReclamo();
 
         $reclamacion->tipo_documento = $datos['tipo_documento'];
@@ -75,41 +73,17 @@ class LibroReclamoController extends Controller
         $reclamacion->detalle_solicitud = $datos['detalle_solicitud'];
         $reclamacion->pedido_concreto = $datos['pedido_concreto'];
         $reclamacion->acepto_politicas = true;
-        $reclamacion->clientes_id = $datos['clientes_id'] ?? null;
+        $reclamacion->cliente_externos_id = $clienteExterno->id;
+        $reclamacion->estado = 'Pendiente';
         $reclamacion->save();
-        return redirect()->back()->with('success', 'Tu reclamación ha sido registrada correctamente.');
+        return redirect()->back() ->with('success', 'Tu reclamación ha sido registrada correctamente.');
     }
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(LibroReclamo $libroReclamo)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(LibroReclamo $libroReclamo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, LibroReclamo $libroReclamo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(LibroReclamo $libroReclamo)
     {
         //
     }
+
 }

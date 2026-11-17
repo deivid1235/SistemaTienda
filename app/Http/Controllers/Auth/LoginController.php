@@ -12,16 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function showLoginForm()
-{
-    $login = Login::with('compania')->first();
-    $compania = $login?->compania ?? Compania::find(1);
-    $imagenes = LoginImagen::where('estado', true)->get();
-    return view('auth.login', compact(
-        'login',
-        'compania',
-        'imagenes'
-    ));
-}
+    {
+        $login = Login::with('compania')->first();
+        $compania = $login?->compania ?? Compania::find(1);
+        $imagenes = LoginImagen::where('estado', true)->get();
+        return view('auth.login', compact( 'login','compania','imagenes'));
+    }
 
     public function login(Request $request)
     {
@@ -29,17 +25,14 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('dashboard'));
         }
-
         return back()->withErrors([
             'email' => 'El correo o la contraseña son incorrectos.',
         ])->onlyInput('email');
     }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -47,6 +40,33 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+    // Mostrar vista de perfil externo
+    public function loginUsuario(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        if (Auth::guard('web')->attempt($credentials)) {
+
+            $request->session()->regenerate();
+            return redirect()->route('public.usuario')
+                ->with('success', 'Bienvenido a nuestra tienda.');
+        }
+        return back()->with('error', 'Correo o contraseña incorrectos.');
+    }
+
+    public function usuario()
+    {
+        return view('public.usuario.index');
+    }
+    public function logoutUsuario(Request $request)
+    {
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 
    

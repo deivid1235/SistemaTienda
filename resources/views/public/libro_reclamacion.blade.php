@@ -1,5 +1,4 @@
 @extends('public.app')
-
 @section('content')
 <section class="bg-slate-50/50 py-6 sm:py-10 font-sans">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,7 +18,7 @@
         <div class="bg-white border border-blue-300/90 rounded-3xl p-6 sm:p-10 shadow-xl shadow-blue-900/5 relative overflow-hidden">
             <form action="{{ route('libro.reclamacion.store') }}" method="POST" class="space-y-8 relative z-10">
                 @csrf
-                <input type="hidden" name="clientes_id" value="{{ auth()->id() }}">
+               <input type="hidden" name="cliente_externos_id" value="{{ auth()->id() }}">
                 
                 <div class="space-y-5">
                     <h3 class="text-base sm:text-lg font-black text-[#000000] uppercase tracking-wide border-b border-slate-100 pb-3 flex items-center gap-2.5">
